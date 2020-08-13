@@ -8,7 +8,7 @@
   <nav aria-label="breadcrumb">
     <ul class="breadcrumb">
       <li class="breadcrumb-item active" aria-current="page">
-        <span></span>Overview
+        <span></span>Ticket Status
         <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
       </li>
     </ul>
@@ -19,11 +19,11 @@
     <div class="card bg-gradient-danger card-img-holder text-white">
       <div class="card-body">
         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-        <h4 class="font-weight-normal mb-3">Weekly Sales
-          <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        <h4 class="font-weight-normal mb-3">Open
+          <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
         </h4>
-        <h2 class="mb-5">$ 15,0000</h2>
-        <h6 class="card-text">Increased by 60%</h6>
+        <h2 class="mb-5">10</h2>
+        <h6 class="card-text">last 24 hours</h6>
       </div>
     </div>
   </div>
@@ -31,11 +31,11 @@
     <div class="card bg-gradient-info card-img-holder text-white">
       <div class="card-body">
         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
-        <h4 class="font-weight-normal mb-3">Weekly Orders
+        <h4 class="font-weight-normal mb-3">Close
           <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
         </h4>
-        <h2 class="mb-5">45,6334</h2>
-        <h6 class="card-text">Decreased by 10%</h6>
+        <h2 class="mb-5">2</h2>
+        <h6 class="card-text">last 24 hours</h6>
       </div>
     </div>
   </div>
@@ -43,11 +43,11 @@
     <div class="card bg-gradient-success card-img-holder text-white">
       <div class="card-body">
         <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                                    
-        <h4 class="font-weight-normal mb-3">Visitors Online
-          <i class="mdi mdi-diamond mdi-24px float-right"></i>
+        <h4 class="font-weight-normal mb-3">Reopen
+          <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
         </h4>
-        <h2 class="mb-5">95,5741</h2>
-        <h6 class="card-text">Increased by 5%</h6>
+        <h2 class="mb-5">0</h2>
+        <h6 class="card-text">last 24 hours</h6>
       </div>
     </div>
   </div>
@@ -57,17 +57,17 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="card-title">Visit And Sales Statistics</h4>
+          <h4 class="card-title">Tickets Statistics</h4>
           <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal">
             <ul>
               <li>
-                <span class="legend-dots"></span>CHN
+                <span class="legend-dots"></span>Open
               </li>
               <li>
-                <span class="legend-dots"></span>USA
+                <span class="legend-dots"></span>Closed
               </li>
               <li class="mr-0">
-                <span class="legend-dots"></span>UK
+                <span class="legend-dots"></span>Reopen
               </li>
             </ul>
           </div>
@@ -76,7 +76,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-5 grid-margin stretch-card">
+  <!-- <div class="col-lg-5 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Traffic Sources</h4>
@@ -99,7 +99,60 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>   -->
+  <div class="col-lg-5 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Agents</h4>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  User
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-1">
+                  <img src="assets/images/faces/face1.jpg" alt="image"/>
+                </td>
+                <td>
+                  Herman Beck
+                </td>
+                <td><label class="badge badge-info">Online</label></td>
+              </tr>
+              <tr>
+                <td class="py-1">
+                  <img src="assets/images/faces/face2.jpg" alt="image"/>
+                </td>
+                <td>
+                  Messsy Adam
+                </td>
+                <td><label class="badge badge-success">Offline</label></td>
+              </tr>
+              <tr>
+                <td class="py-1">
+                  <img src="assets/images/faces/face3.jpg" alt="image"/>
+                </td>
+                <td>
+                  John Richards
+                </td>
+                <td><label class="badge badge-success">Offline</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="col-12 grid-margin">
@@ -207,7 +260,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-5 grid-margin stretch-card">
     <div class="card">
         <ngb-datepicker #dp [(ngModel)]="date" (navigate)="date = $event.next" class="w-100 border-0"></ngb-datepicker>
@@ -251,8 +304,8 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row">
+</div> -->
+<!-- <div class="row">
   <div class="col-md-7 grid-margin grid-margin-md-0 stretch-card">
     <div class="card">
       <div class="card-body">
@@ -386,4 +439,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

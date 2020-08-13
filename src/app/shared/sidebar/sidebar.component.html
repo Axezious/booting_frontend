@@ -19,7 +19,7 @@
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive || breadcrumbs.isActive || dropdowns.isActive || modals.isActive || notifications.isActive || progressbar.isActive || pagination.isActive || tabs.isActive || typography.isActive || tooltips.isActive }">
+    <!-- <li class="nav-item" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive || breadcrumbs.isActive || dropdowns.isActive || modals.isActive || notifications.isActive || progressbar.isActive || pagination.isActive || tabs.isActive || typography.isActive || tooltips.isActive }">
       <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
         <span class="menu-title">Basic UI Elements</span>
         <i class="menu-arrow"></i>
@@ -41,20 +41,20 @@
           <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/tooltips" routerLinkActive="active" #tooltips="routerLinkActive">Tooltips</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
     <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="forms/basic-elements" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">Form elements</span>
-        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+        <span class="menu-title">Views</span>
+        <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>
     <li class="nav-item" [ngClass]="{ 'active': charts.isActive }">
       <a class="nav-link" routerLink="charts/chartjs" routerLinkActive #charts="routerLinkActive">
-        <span class="menu-title">Charts</span>
-        <i class="mdi mdi-chart-bar menu-icon"></i>
+        <span class="menu-title">Log</span>
+        <i class="mdi mdi-login-variant menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active': tables.isActive }">
+    <!-- <li class="nav-item" [ngClass]="{ 'active': tables.isActive }">
       <a class="nav-link" routerLink="tables/basic-table" routerLinkActive #tables="routerLinkActive">
         <span class="menu-title">Tables</span>
         <i class="mdi mdi-table-large menu-icon"></i>
@@ -81,6 +81,6 @@
           <li class="nav-item"> <a class="nav-link" routerLink="error-pages/500" routerLinkActive="active" #error500="routerLinkActive"> 500 </a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
   </ul>
 </nav>
