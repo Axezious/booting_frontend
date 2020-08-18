@@ -53,6 +53,13 @@
         <span class="menu-title">Tickets</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+      <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
+        <span class="menu-title">Tickets Admin</span>
+        <i class="mdi mdi-ticket-confirmation menu-icon"></i>
+      </a>
+    </li>
     <li class="nav-item" [ngClass]="{ 'active': charts.isActive }">
       <a class="nav-link" routerLink="charts/chartjs" routerLinkActive #charts="routerLinkActive">
         <span class="menu-title">Log</span>
