@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { CommonModule } from '@angular/common';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { AccountsComponent } from './master/accounts/accounts.component';
 import { ProductsComponent } from './master/products/products.component';
 import { ClassificationsComponent } from './master/classifications/classifications.component';
 import { PrioritiesComponent } from './master/priorities/priorities.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusComponent } from './master/status/status.component';
 import { CompaniesComponent } from './master/companies/companies.component';
 
@@ -27,6 +30,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
+    NgbModule,
     RouterModule.forChild(routes)
   ]
 })
