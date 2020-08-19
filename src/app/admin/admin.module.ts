@@ -9,7 +9,7 @@ import { PrioritiesComponent } from './master/priorities/priorities.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusComponent } from './master/status/status.component';
 import { CompaniesComponent } from './master/companies/companies.component';
-
+ 
 const routes: Routes = [
   {path: 'view-ticket', component: ViewTicketComponent},
   {path: 'master/accounts', component: AccountsComponent},
