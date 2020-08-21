@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-insert-ticket',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsertTicketComponent implements OnInit {
 
-  constructor() { }
+  constructor(private elem: ElementRef) { }
 
   ngOnInit() {
   }

@@ -46,7 +46,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputName1">Description</label>
-                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                                <quill-editor></quill-editor>
+                                <!-- <quill-editor [(ngModel)]="editorContent" [options]="editorOptions"
+                                    (ready)="onEditorCreated($event)" (change)="onContentChanged($event)">
+                                </quill-editor> -->
+                                <!-- <quill-editor [styles]="editorStyle" placeholder="Enter Text" [modules]="config"
+                                    formControlName="yourCtrlname" required>
+                                </quill-editor> -->
                             </div>
                         </div>
                     </div>
