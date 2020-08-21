@@ -12,7 +12,7 @@ import { ClassificationsComponent } from './master/classifications/classificatio
 import { PrioritiesComponent } from './master/priorities/priorities.component';
 import { StatusComponent } from './master/status/status.component';
 import { CompaniesComponent } from './master/companies/companies.component';
-
+ 
 const routes: Routes = [
   {path: 'view-ticket', component: ViewTicketComponent},
   {path: 'master/accounts', component: AccountsComponent},
