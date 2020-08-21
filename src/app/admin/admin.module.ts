@@ -12,21 +12,21 @@ import { ClassificationsComponent } from './master/classifications/classificatio
 import { PrioritiesComponent } from './master/priorities/priorities.component';
 import { StatusComponent } from './master/status/status.component';
 import { CompaniesComponent } from './master/companies/companies.component';
- 
+
 const routes: Routes = [
-  {path: 'view-ticket', component: ViewTicketComponent},
-  {path: 'master/accounts', component: AccountsComponent},
-  {path: 'master/products', component: ProductsComponent},
-  {path: 'master/classifications', component: ClassificationsComponent},
-  {path: 'master/priorities', component: PrioritiesComponent},
-  {path: 'master/companies', component: CompaniesComponent},
-  {path: 'master/status', component: StatusComponent},
+  { path: 'view-ticket', component: ViewTicketComponent },
+  { path: 'master/accounts', component: AccountsComponent },
+  { path: 'master/products', component: ProductsComponent },
+  { path: 'master/classifications', component: ClassificationsComponent },
+  { path: 'master/priorities', component: PrioritiesComponent },
+  { path: 'master/companies', component: CompaniesComponent },
+  { path: 'master/status', component: StatusComponent },
 ]
 
 @NgModule({
   declarations: [
-  	ViewTicketComponent, AccountsComponent, ProductsComponent, 
-  	ClassificationsComponent, PrioritiesComponent, StatusComponent, CompaniesComponent
+    ViewTicketComponent, AccountsComponent, ProductsComponent,
+    ClassificationsComponent, PrioritiesComponent, StatusComponent, CompaniesComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
