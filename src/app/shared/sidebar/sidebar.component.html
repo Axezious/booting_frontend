@@ -48,7 +48,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive }">  
+    <li class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive || buyproduct.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
         <i class="menu-arrow"></i>
@@ -57,6 +57,8 @@
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed2">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="client/buy-product" routerLinkActive="active" #buyproduct="routerLinkActive">Buy Product</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li>
         </ul>
       </div>
