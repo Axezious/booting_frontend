@@ -46,9 +46,38 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputName1">Description</label>
-                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                                <!-- <quill-editor></quill-editor> -->
+                                <quill-editor [(ngModel)]="editorContent" [ngModelOptions]="{standalone: true}">
+                                </quill-editor>
+                                <!-- <quill-editor [styles]="editorStyle" placeholder="Enter Text" [modules]="config"
+                                    formControlName="yourCtrlname" required>
+                                </quill-editor> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Status</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Status">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Products</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Products">
                             </div>
                         </div>
+                        <h4 class="card-title">Additional Information</h4>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputName1">Priority</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Classifications</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">File input</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                              </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
                     </div>
                 </form>
             </div>
