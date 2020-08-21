@@ -11,6 +11,7 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
 import { QuillModule } from 'ngx-quill';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'dtl-ticket', component: DtlTicketComponent },
@@ -30,7 +31,7 @@ const routes: Routes = [
     InsertTicketComponent,
     BuyProductComponent],
   imports: [
-    CommonModule, NgbModule,
+    CommonModule, NgbModule, FormsModule,
     RouterModule.forChild(routes),
     QuillModule.forRoot({
       modules: {

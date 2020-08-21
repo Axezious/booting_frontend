@@ -7,9 +7,17 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class InsertTicketComponent implements OnInit {
 
+  public editorContent 
+
   constructor(private elem: ElementRef) { }
 
   ngOnInit() {
   }
+
+  readQuill() {
+    console.log(this.editorContent);
+  }
+  
+  
 
 }
