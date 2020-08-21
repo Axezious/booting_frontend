@@ -128,5 +128,12 @@
       }
     }
   },
+<<<<<<< HEAD
   "defaultProject": "demo1"
+=======
+  "defaultProject": "demo1",
+  "cli": {
+    "analytics": "70b2f975-a1cd-47eb-8897-e3044330b0a2"
+  }
+>>>>>>> 6eaf1be1bbcde521a6c46b26ae9f9c7a2a454b76
 }
