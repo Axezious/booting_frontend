@@ -12,6 +12,8 @@ import { ClassificationsComponent } from './master/classifications/classificatio
 import { PrioritiesComponent } from './master/priorities/priorities.component';
 import { StatusComponent } from './master/status/status.component';
 import { CompaniesComponent } from './master/companies/companies.component';
+import { RolesComponent } from './master/roles/roles.component';
+import { UsersComponent } from './master/users/users.component';
 
 const routes: Routes = [
   { path: 'view-ticket', component: ViewTicketComponent },
@@ -21,12 +23,14 @@ const routes: Routes = [
   { path: 'master/priorities', component: PrioritiesComponent },
   { path: 'master/companies', component: CompaniesComponent },
   { path: 'master/status', component: StatusComponent },
+  { path: 'master/roles', component: RolesComponent },
+  { path: 'master/users', component: UsersComponent },
 ]
 
 @NgModule({
   declarations: [
     ViewTicketComponent, AccountsComponent, ProductsComponent,
-    ClassificationsComponent, PrioritiesComponent, StatusComponent, CompaniesComponent
+    ClassificationsComponent, PrioritiesComponent, StatusComponent, CompaniesComponent, RolesComponent, UsersComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
