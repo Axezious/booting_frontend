@@ -6,8 +6,19 @@ import { Component, OnInit, ElementRef } from '@angular/core';
   styleUrls: ['./insert-ticket.component.scss']
 })
 export class InsertTicketComponent implements OnInit {
+  files: File[] = []
 
-  public editorContent 
+  upload(event) {
+    const multiFile = (event.target as HTMLInputElement).files;
+    for (let index = 0; index < multiFile.length; index++) {
+      this.files.push(multiFile[index]);
+    }
+  }
+
+  uploadFiles() {
+    console.log(this.files);
+  }
+  public editorContent
 
   constructor(private elem: ElementRef) { }
 
@@ -17,7 +28,4 @@ export class InsertTicketComponent implements OnInit {
   readQuill() {
     console.log(this.editorContent);
   }
-  
-  
-
 }

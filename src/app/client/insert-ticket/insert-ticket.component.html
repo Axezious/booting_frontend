@@ -74,10 +74,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">File input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                              </div>
+                                <input type="file" (change)="upload($event)" class="form-control-file"
+                                    id="exampleFormControlFile1" multiple="multiple">
+                                    <li *ngFor="let element of files">{{element.name}}</li>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                        <button type="submit" (click)="uploadFiles()" class="btn btn-primary mb-2">Submit</button>
                     </div>
                 </form>
             </div>
