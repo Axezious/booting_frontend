@@ -24,7 +24,6 @@
       <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
         <span class="menu-title">Admin Table Master</span>
         <i class="menu-arrow"></i>
-        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
         <ul class="nav flex-column sub-menu">
@@ -51,16 +50,16 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive || buyproduct.isActive }">  
+    <li class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive || buyproduct.isActive || dtlticket.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
         <i class="menu-arrow"></i>
-        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed2">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="client/dtl-ticket" routerLinkActive="active" #dtlticket="routerLinkActive">Dtl Ticket</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/buy-product" routerLinkActive="active" #buyproduct="routerLinkActive">Buy Product</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li>
         </ul>
@@ -70,7 +69,6 @@
       <a class="nav-link" (click)="uiBasicCollapsed3 = !uiBasicCollapsed3" [attr.aria-expanded]="uiBasicCollapsed3" aria-controls="ui-basic">
         <span class="menu-title">User Pages</span>
         <i class="menu-arrow"></i>
-        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed3">
         <ul class="nav flex-column sub-menu">
@@ -78,12 +76,6 @@
           <li class="nav-item"><a class="nav-link" routerLink="user-pages/register" routerLinkActive="active" #registrasi="routerLinkActive">Registrasi</a></li>
         </ul>
       </div>
-    </li>
-    <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
-      <a class="nav-link" routerLink="forms/basic-elements" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">Views</span>
-        <i class="mdi mdi-table-large menu-icon"></i>
-      </a>
     </li>
     <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="client/list-ticket" routerLinkActive #forms="routerLinkActive">
