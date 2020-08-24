@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tickets List</h4>
+                <div class="d-flex">
+                    <span class="align-self-center">Search</span><input class="form-control col-sm-4" type="text"
+                        placeholder="Search" aria-label="Search" [formControl]="filter" />
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-outline-primary btn-sm">Insert</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped align-self-center">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products$ | async; index as i">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>
+                                    <ngb-highlight [result]="product.name" [term]="filter.value"></ngb-highlight>
+                                    <!-- {{product.name}} -->
+                                </td>
+                                <td>
+                                    <ngb-highlight [result]="product.code" [term]="filter.value">
+                                    </ngb-highlight>
+                                    <!-- {{product.code}} -->
+                                </td>
+                                <td>
+                                    <ngb-highlight [result]="product.descriptions " [term]="filter.value">
+                                    </ngb-highlight>
+                                    <!-- {{product.descriptions}} -->
+                                </td>
+                                <td>
+                                    <button type="submit">Update</button>
+                                    <button type="submit">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
