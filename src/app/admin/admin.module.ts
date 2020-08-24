@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminRoutingModule } from "./admin-routing.module";
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,29 +14,30 @@ import { PrioritiesComponent } from './master/priorities/priorities.component';
 import { StatusComponent } from './master/status/status.component';
 import { CompaniesComponent } from './master/companies/companies.component';
 import { RolesComponent } from './master/roles/roles.component';
-import { UsersComponent } from './master/users/users.component';
 
-const routes: Routes = [
-  { path: 'view-ticket', component: ViewTicketComponent },
-  { path: 'master/accounts', component: AccountsComponent },
-  { path: 'master/products', component: ProductsComponent },
-  { path: 'master/classifications', component: ClassificationsComponent },
-  { path: 'master/priorities', component: PrioritiesComponent },
-  { path: 'master/companies', component: CompaniesComponent },
-  { path: 'master/status', component: StatusComponent },
-  { path: 'master/roles', component: RolesComponent },
-  { path: 'master/users', component: UsersComponent },
-]
+// const routes: Routes = [
+//   { path: 'view-ticket', component: ViewTicketComponent },
+//   { path: 'master/accounts', component: AccountsComponent },
+//   { path: 'master/products', component: ProductsComponent },
+//   { path: 'master/classifications', component: ClassificationsComponent },
+//   { path: 'master/priorities', component: PrioritiesComponent },
+//   { path: 'master/companies', component: CompaniesComponent },
+//   { path: 'master/status', component: StatusComponent },
+//   { path: 'master/roles', component: RolesComponent },
+  
+// ]
 
 @NgModule({
   declarations: [
     ViewTicketComponent, AccountsComponent, ProductsComponent,
-    ClassificationsComponent, PrioritiesComponent, StatusComponent, CompaniesComponent, RolesComponent, UsersComponent
+    ClassificationsComponent, PrioritiesComponent, StatusComponent, CompaniesComponent, RolesComponent, 
   ],
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule,
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule,
     NgbModule,
-    RouterModule.forChild(routes)
+    AdminRoutingModule
   ]
 })
 export class AdminModule { }
