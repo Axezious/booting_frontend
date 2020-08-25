@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {} from 'rxjs';
 import { AuthService } from '../service/auth.service'
 import { Users } from '../model/users';
+import { Accounts } from '../model/accounts';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  async getToken(user: Users) {
+  async getToken(user: Accounts) {
     return await this.http.post<any>(`${this.base_url}/api/login`,
     user).toPromise()
   }
