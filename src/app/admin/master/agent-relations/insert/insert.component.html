@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title" style="text-align: center;">AGENT RELATIONS</h4>
+            <form class="forms-sample mt-5">
+              <div class="form-group">
+                <label for="inputIDCompany">ID Agent</label>
+                <select id="inputIDCompany" class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputIDProduct">ID Client</label>
+                <select id="inputIDProduct" class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <!-- <div class="form-group">
+                
+                <input type="text" class="form-control" id="totalUrgent" placeholder="insert value..">
+              </div> -->
+              <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <div class="input-group">
+                  <input id="startDate" class="form-control" placeholder="yyyy-mm-dd"
+                         name="dp" [(ngModel)]="startDate" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="endDate">End Date</label>
+                  <div class="input-group">
+                    <input id="endDate" class="form-control" placeholder="yyyy-mm-dd"
+                         name="dd" [(ngModel)]="endDate" ngbDatepicker #d2="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                    </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-gradient-primary mt-3">Submit</button>
+              <p>{{startDate}}</p>
+              <p>{{endDate}}</p>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
