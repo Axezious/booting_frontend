@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.api.getToken(this.user)
+    // this.api.getToken(this.user)
     this.auth.setToken('ini token');
     console.log(this.auth.getToken());
     this.router.navigateByUrl('client/insert-ticket')
