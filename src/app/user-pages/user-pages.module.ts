@@ -13,8 +13,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
   imports: [
-    CommonModule, FormsModule,
-    RouterModule.forChild(routes)
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule
   ]
 })
 export class UserPagesModule { }
