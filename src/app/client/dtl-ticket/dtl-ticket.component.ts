@@ -24,7 +24,7 @@ export class DtlTicketComponent implements OnInit {
     this.ticket.idCustomer.name = 'Mamang Garox';
     this.ticket.idAgent = this.user;
     this.ticket.idAgent.name = 'Avogadro';
-    this.ticket.idPriority = 'Medium';
+    this.ticket.idPriority.name = 'Medium';
     this.ticket.subject = 'Subject Ticket';
 
     this.ticketDtl.idTickets = this.ticket;

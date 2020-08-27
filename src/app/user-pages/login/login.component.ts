@@ -12,17 +12,24 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user : Accounts = new Accounts()
+  account : Accounts = new Accounts();
 
-  constructor(public auth : AuthService,public api : ApiService, private router: Router) { }
+  constructor(public auth : AuthService,public api : ApiService, private router: Router) {
+
+  }
 
   ngOnInit() {
   }
 
-  login() {
-    // this.api.getToken(this.user)
-    this.auth.setToken('ini token');
-    console.log(this.auth.getToken());
-    this.router.navigateByUrl('client/insert-ticket')
+  async login() {
+    let loginHelper = await this.api.getToken(this.account);
+    console.log(loginHelper);
+
+    if(loginHelper != null && loginHelper != undefined) {
+      this.auth.setToken(loginHelper.token)
+      this.router.navigateByUrl('/')
+    } else {
+      this.router.navigateByUrl('/user-pages/login')
+    }
   }
 }
