@@ -43,6 +43,8 @@ export class PrioritiesService {
   };
 
   constructor(private apiService: ApiService) {
+    this.viewPriorities();
+    
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
