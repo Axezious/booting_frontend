@@ -66,12 +66,6 @@ export class UsersViewComponent implements OnInit {
 	  });
   }
 
- refreshCountries() {
-    this.countries$ = this.COUNTRIES
-      .map((country) => ({...country}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
- }
-
   ngOnInit() {
   }
 
