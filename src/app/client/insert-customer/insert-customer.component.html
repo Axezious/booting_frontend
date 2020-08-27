@@ -3,14 +3,14 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Insert Customer</h4>
-                <form class="forms-sample mt-5">
+                <div class="forms-sample mt-5">
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="inputClassificationCode">Name</label>
-                                    <input type="text" class="form-control" id="inputClassificationCode"
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="account.idUser.name"
                                         placeholder="Insert Full Name">
                                 </div>
                             </div>
@@ -18,8 +18,8 @@
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="inputClassificationCode">Contanct</label>
-                                    <input type="text" class="form-control" id="inputClassificationCode"
+                                    <label for="contact">Contanct</label>
+                                    <input type="text" class="form-control" id="contact" [(ngModel)]="account.idUser.contact"
                                         placeholder="Contact">
                                 </div>
                             </div>
@@ -27,27 +27,39 @@
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="inputClassificationCode">Username</label>
-                        <input type="text" class="form-control" id="inputClassificationCode" placeholder="Username">
+                                    <label for="nip">NIP</label>
+                        <input type="text" class="form-control" id="nip" placeholder="NIP" [(ngModel)]="account.idUser.nip">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="inputClassificationName">Password</label>
-                        <input type="text" class="form-control" id="inputClassificationName" placeholder="Password">
+                                    <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="Address" [(ngModel)]="account.idUser.address">
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                        <input type="text" class="form-control" id="email" placeholder="E-mail" [(ngModel)]="account.email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="pass">Password</label>
+                        <input type="text" class="form-control" id="pass" placeholder="Password" [(ngModel)]="account.pass">
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <div class="form-group">
-                        <label for="inputClassificationCode">E-mail</label>
-                        <input type="text" class="form-control" id="inputClassificationCode"
-                            placeholder="asdsadsada@asdsa.com">
-                    </div>
-                    <button type="submit" class="btn btn-gradient-primary mt-3">Submit</button>
-                </form>
+                    <button type="submit" class="btn btn-gradient-primary mt-3" (click)="submit()">Submit</button>
+                </div>
             </div>
         </div>
     </div>
