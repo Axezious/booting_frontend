@@ -12,8 +12,8 @@ export class ActivateService implements CanActivate {
     if(this.auth.isAuthenticate()) {
       return true;
     } else {
-      // this.router.navigateByUrl('/user-pages/login')
-      return true;
+      this.router.navigateByUrl('/user-pages/login')
+      return false;
     }
   }
 }

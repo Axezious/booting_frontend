@@ -8,9 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes :Routes = [
-  {path : 'insert-products', component: ProductsInsertComponent},
-  {path : 'update-products', component: ProductsUpdateComponent},
-  {path : 'view-products', component: ProductsViewComponent},
+  {path : 'insert', component: ProductsInsertComponent},
+  {path : 'update', component: ProductsUpdateComponent},
+  {path : 'view', component: ProductsViewComponent},
 ]
 
 @NgModule({

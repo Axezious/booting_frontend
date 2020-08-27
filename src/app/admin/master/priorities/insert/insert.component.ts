@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../../../service/api.service';
+import { Priorities } from '../../../../model/priorities';
 
 @Component({
   selector: 'app-insert',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsertComponent implements OnInit {
 
-  constructor() { }
+  priorities:Priorities;
+
+  constructor(private apiService:ApiService) { 
+  	this.priorities = new Priorities();
+  }
 
   ngOnInit() {
+  }
+
+  async insertPriorities() {
+  	this.apiService.insertPriorities(this.priorities).subscribe(priorities => {
+  		console.log(priorities);
+  	})
   }
 
 }
