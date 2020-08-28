@@ -30,57 +30,7 @@ export class AgentRelationsService {
   idAgent:Users = new Users();
   idClient:Users = new Users();
 
-  AGENTRELATIONS: AgentRelations[] = [
-  {
-    id: '1',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-  {
-    id: '2',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-  {
-    id: '3',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-  {
-    id: '4',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-  {
-    id: '5',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-  {
-    id: '6',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-  {
-    id: '7',
-    idAgent: this.idAgent,
-    idClient: this.idClient,
-    startDate: new Date(Date.now()),
-    endDate: new Date(Date.now())
-  },
-];
+  AGENTRELATIONS: AgentRelations[]
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();

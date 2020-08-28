@@ -5,6 +5,7 @@ import { ClientProducts } from 'src/app/model/client-products';
 import { Products } from 'src/app/model/products';
 import { Users } from 'src/app/model/users';
 import { tick } from '@angular/core/testing';
+import { Priorities } from 'src/app/model/priorities';
 
 @Component({
   selector: 'app-dtl-ticket',
@@ -24,6 +25,7 @@ export class DtlTicketComponent implements OnInit {
     this.ticket.idCustomer.name = 'Mamang Garox';
     this.ticket.idAgent = this.user;
     this.ticket.idAgent.name = 'Avogadro';
+    this.ticket.idPriority = new Priorities()
     this.ticket.idPriority.name = 'Medium';
     this.ticket.subject = 'Subject Ticket';
 
