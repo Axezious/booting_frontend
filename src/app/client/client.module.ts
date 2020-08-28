@@ -19,7 +19,6 @@ const routes: Routes = [
   { path: 'insert-ticket', component: InsertTicketComponent },
   { path: 'email-registrasi', component: EmailRegistrasiComponent },
   { path: 'insert-customer', component: InsertCustomerComponent },
-  { path: 'buy-product', component: BuyProductComponent },
   { path: 'insert-header-trial', component: InsertHeaderTrialComponent }
 ]
 
@@ -30,7 +29,6 @@ const routes: Routes = [
     EmailRegistrasiComponent,
     InsertCustomerComponent,
     InsertTicketComponent,
-    BuyProductComponent,
     InsertHeaderTrialComponent],
   imports: [
     CommonModule, NgbModule, FormsModule,

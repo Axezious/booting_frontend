@@ -45,7 +45,7 @@ export class AuthService {
     this.account.idUser.idCompany.name = localStorage.getItem('company');
     this.account.email = localStorage.getItem('email');
     this.account.idUser.contact = localStorage.getItem('contact');
-
+    
     return this.account;
 
   }

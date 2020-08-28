@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { Optional, Self, Input, ViewChild } from '@angular/core';
 import { NgControl, FormGroup } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill';
+import { Priorities } from 'src/app/model/priorities';
 
 @Component({
   selector: 'app-dtl-ticket',
@@ -41,9 +42,10 @@ export class DtlTicketComponent implements OnInit {
     this.ticket.idCustomer.name = 'Mamang Garox';
     this.ticket.idAgent = this.user;
     this.ticket.idAgent.name = 'Avogadro';
+    this.ticket.idPriority = new Priorities();
     this.ticket.idPriority.name = 'Medium';
     this.ticket.subject = 'Subject Ticket';
-
+    
     this.ticketDtl.idTickets = this.ticket;
     this.items = db.list('items').valueChanges();
   }

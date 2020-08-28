@@ -17,11 +17,13 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Name" value="{{account.idUser.name}}" disabled>
+                                    <input type="text" class="form-control" id="name" placeholder="Name"
+                                        value="{{account.idUser.name}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Email" value="{{account.email}}" disabled>
+                                    <input type="text" class="form-control" id="email" placeholder="Email"
+                                        value="{{account.email}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -29,11 +31,13 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="company">Company</label>
-                                    <input type="text" class="form-control" id="company" placeholder="Company" value="{{account.idUser.idCompany.name}}" disabled>
+                                    <input type="text" class="form-control" id="company" placeholder="Company"
+                                        value="{{account.idUser.idCompany.name}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="Phone" value="{{account.idUser.contact}}" disabled>
+                                    <input type="text" class="form-control" id="phone" placeholder="Phone"
+                                        value="{{account.idUser.contact}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -52,27 +56,32 @@
                             </div>
                             <div class="form-group">
                                 <label for="products">Products</label>
-                                <input type="text" class="form-control" id="products" placeholder="Products"
-                                >
+                                <input type="text" class="form-control" id="products" placeholder="Products">
                             </div>
                         </div>
                         <h4 class="card-title">Additional Information</h4>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="priority">Priority</label>
-                                <input type="text" class="form-control" id="priority" placeholder="Priority"
-                                >
+                                <input type="text" class="form-control" id="priority" placeholder="Priority">
                             </div>
                             <div class="form-group">
                                 <label for="classifications">Classifications</label>
-                                <input type="text" class="form-control" id="classifications" placeholder="Classifications"
-                                >
+                                <input type="text" class="form-control" id="classifications"
+                                    placeholder="Classifications">
                             </div>
-                            <div class="form-group">
-                                <label for="file">File input</label>
-                                <input type="file" (change)="upload($event)" class="form-control-file"
-                                    id="file" multiple="multiple">
-                                <li *ngFor="let element of files">{{element.name}}</li>
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-10">
+                                    <button class="file-upload-browse btn btn-outline-primary" type="button"
+                                        (click)="fileInput.click()">Upload file</button>
+                                    <input #fileInput style="display: none;" #attachments type="file"
+                                        (change)="onFileChanged($event)" multiple="true">
+                                    <li *ngFor="let selected of listOfFiles;let index = index"
+                                        style="margin-top: 10px;">
+                                        {{selected}}
+                                        <button (click)="removeSelectedFile(index)">x</button>
+                                    </li>
+                                </div>
                             </div>
                         </div>
                         <button type="submit" (click)="uploadFiles()" class="btn btn-primary mb-2">Submit</button>
