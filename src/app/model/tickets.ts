@@ -14,4 +14,6 @@ export class Tickets {
     idClassification: Classifications;
     subject: string;
     idStatus: Status;
+    createdBy : String;
+    updatedBy : String;
 }

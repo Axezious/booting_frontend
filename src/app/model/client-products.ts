@@ -7,4 +7,6 @@ export class ClientProducts {
     idProduct: Products;
     ticketUrgent: number;
     ticketMedium: number;
+    createdBy : String;
+    updatedBy : String;
 }

@@ -3,4 +3,6 @@ export class Companies {
     code: string;
     address: string;
     name: string;
+    createdBy : String;
+    updatedBy : String;
 }

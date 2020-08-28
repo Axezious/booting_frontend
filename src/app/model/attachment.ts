@@ -5,4 +5,6 @@ export class Attachment {
     idDetail: TicketsDtl;
     attach: File;
     extension: string;
+    createdBy : String;
+    updatedBy : String;
 }

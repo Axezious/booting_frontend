@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 
     if(loginHelper != null && loginHelper != undefined) {
       this.auth.setToken(loginHelper.token)
+      this.auth.setAccount(loginHelper.account)
       this.router.navigateByUrl('/')
     } else {
       this.router.navigateByUrl('/user-pages/login')
