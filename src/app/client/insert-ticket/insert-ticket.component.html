@@ -11,33 +11,29 @@
                 <p class="card-description">
 
                 </p>
-                <div class="forms-sample mt-5">
+                <form class="forms-sample mt-5">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Name"
-                                    [(ngModel)] = "account.idUser.name">
+                                    <input type="text" class="form-control" id="name" placeholder="Name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Email"
-                                    [(ngModel)] = "account.email">
+                                    <label for="name">Email</label>
+                                    <input type="text" class="form-control" id="email" placeholder="Email">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="company">Company</label>
-                                    <input type="text" class="form-control" id="company" placeholder="Company"
-                                    [(ngModel)] = "account.idUser.idCompany.code">
+                                    <label for="name">Company</label>
+                                    <input type="text" class="form-control" id="company" placeholder="Company">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="Phone"
-                                    [(ngModel)] = "account.idUser.contact">
+                                    <label for="name">Phone</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Phone">
                                 </div>
                             </div>
                         </div>
@@ -45,44 +41,50 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                [(ngModel)] = "ticketDtl.idTickets.subject">
+                                <label for="exampleInputName1">Subject</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <label for="description`">Description</label>
-                                <quill-editor [(ngModel)]="editorContent" [ngModelOptions]="{standalone: true}"
-                                    (onEditorChanged)="changedEditor($event)">
+                                <label for="exampleInputName1">Description</label>
+                                <!-- <quill-editor></quill-editor> -->
+                                <quill-editor [(ngModel)]="editorContent" [ngModelOptions]="{standalone: true}">
                                 </quill-editor>
                             </div>
                             <div class="form-group">
-                                <label for="products">Products</label>
-                                <input type="text" class="form-control" id="products" placeholder="Products"
-                                >
+                                <label for="exampleInputName1">Status</label>
+                                <input type="text"  [(ngModel)] = "ticketM.subject" class="form-control" id="exampleInputName1" placeholder="Status" name="subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Products</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Products">
                             </div>
                         </div>
                         <h4 class="card-title">Additional Information</h4>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="priority">Priority</label>
-                                <input type="text" class="form-control" id="priority" placeholder="Priority"
-                                >
+                                <label for="exampleInputName1">Priority</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <label for="classifications">Classifications</label>
-                                <input type="text" class="form-control" id="classifications" placeholder="Classifications"
-                                >
+                                <label for="exampleInputName1">Classifications</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
                             </div>
-                            <div class="form-group">
-                                <label for="file">File input</label>
-                                <input type="file" (change)="upload($event)" class="form-control-file"
-                                    id="file" multiple="multiple">
-                                <li *ngFor="let element of files">{{element.name}}</li>
+                            <div class="row">
+                                <div class="form-group col-xs-5 col-lg-10">
+                                    <button class="file-upload-browse btn btn-outline-primary" type="button"
+                                        (click)="fileInput.click()">Upload file</button>
+                                    <input #fileInput style="display: none;" #attachments type="file"
+                                        (change)="onFileChanged($event)" multiple="true">
+                                    <li *ngFor="let selected of listOfFiles;let index = index" style="margin-top: 10px;">
+                                        {{selected}}
+                                        <button (click)="removeSelectedFile(index)">x</button>
+                                    </li>
+                                </div>
                             </div>
                         </div>
                         <button type="submit" (click)="uploadFiles()" class="btn btn-primary mb-2">Submit</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
