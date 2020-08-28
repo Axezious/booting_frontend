@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Accounts } from '../model/accounts';
+import { Users } from '../model/users';
+import { Companies } from '../model/companies';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  account: Accounts = new Accounts();
+
+  constructor() {
+    this.account.idUser = new Users();
+    this.account.idUser.idCompany = new Companies();
+  }
 
   setToken(token: string) {
     localStorage.setItem('token', token);
@@ -33,13 +40,12 @@ export class AuthService {
   }
 
   getAccount(): Accounts {
-    let account: Accounts = new Accounts();
-    localStorage.getItem('name');
-    localStorage.getItem('codeCompany');
-    localStorage.getItem('company');
-    localStorage.getItem('email');
-    localStorage.getItem('contact');
+    this.account.idUser.name = localStorage.getItem('name');
+    this.account.idUser.idCompany.code = localStorage.getItem('codeCompany');
+    this.account.idUser.idCompany.name = localStorage.getItem('company');
+    this.account.email = localStorage.getItem('email');
+    this.account.idUser.contact = localStorage.getItem('contact');
 
-    return account;
+    return this.account;
   }
 }
