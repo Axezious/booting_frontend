@@ -109,10 +109,8 @@
                                 </p>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -147,10 +145,42 @@
                                 </p>
                             </div>
                         </div>
-
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="row" *ngFor="let data of items | async">
+    <div class="col-md-12 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img class="rounded-circle" src="assets/images/faces/Kekeyi.jpg" style="height: 50px;">
+                    </div>
+                    <div class="col-md-11 mt-2">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <span class="card-title">Kekeyi</span>
+                                <div class="text-muted" style="font-size: small;">17 Agustus 2:45 PM
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <h3 class="page-title">
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pt-3">
+                                <!-- <div *ngFor="let data of items | async">{{data.content}}</div> -->
+                                <!-- <div>{{data.issues}}</div> -->
+                                <div [innerHTML]="data.issues"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -160,17 +190,27 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <div class="form-group">
-                    <label for="exampleInputName1">Description</label>
-                    <!-- <quill-editor></quill-editor> -->
-                    <quill-editor [(ngModel)]="editorContent" [ngModelOptions]="{standalone: true}">
-                    </quill-editor>
-                    <!-- <quill-editor [styles]="editorStyle" placeholder="Enter Text" [modules]="config"
-                        formControlName="yourCtrlname" required>
-                    </quill-editor> -->
-                </div>
-                <button type="button" class="btn btn-dark btn-fw justify-self-end">Post</button>
+                <form (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Description</label>
+                        <!-- <quill-editor></quill-editor> -->
+                        <quill-editor [(ngModel)]="itemValue" [ngModelOptions]="{standalone: true}">
+                        </quill-editor>
+                        <!-- <quill-editor [styles]="editorStyle" placeholder="Enter Text" [modules]="config"
+                            formControlName="yourCtrlname" required>
+                        </quill-editor> -->
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-dark btn-fw justify-self-end">Post</button>
+                    </div>
+                </form>
+                <!-- <button type="submit" class="btn btn-dark btn-fw justify-self-end">Post</button> -->
             </div>
         </div>
     </div>
 </div>
+
+<!-- <div class="col-md-6">
+    <h3>Content from Firebase</h3>
+    <pre *ngFor="let data of items | async">{{data.content}}</pre>
+</div> -->

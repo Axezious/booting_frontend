@@ -11,13 +11,16 @@ import { QuillModule } from 'ngx-quill';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { InsertHeaderTrialComponent } from './insert-header-trial/insert-header-trial.component';
 
 const routes: Routes = [
   { path: 'dtl-ticket', component: DtlTicketComponent },
   { path: 'list-ticket', component: ListTicketComponent },
   { path: 'insert-ticket', component: InsertTicketComponent },
   { path: 'email-registrasi', component: EmailRegistrasiComponent },
-  { path: 'insert-customer', component: InsertCustomerComponent }
+  { path: 'insert-customer', component: InsertCustomerComponent },
+  { path: 'buy-product', component: BuyProductComponent },
+  { path: 'insert-header-trial', component: InsertHeaderTrialComponent }
 ]
 
 @NgModule({
@@ -26,7 +29,9 @@ const routes: Routes = [
     ListTicketComponent,
     EmailRegistrasiComponent,
     InsertCustomerComponent,
-    InsertTicketComponent],
+    InsertTicketComponent,
+    BuyProductComponent,
+    InsertHeaderTrialComponent],
   imports: [
     CommonModule, NgbModule, FormsModule,
     RouterModule.forChild(routes),
