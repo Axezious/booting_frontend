@@ -1,10 +1,15 @@
+
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { LoginComponent } from 'src/app/user-pages/login/login.component';
-import { Tickets } from 'src/app/model/tickets';
+import { QuillEditorComponent, EditorChangeContent, EditorChangeSelection } from "ngx-quill";
+import Quill from 'quill'
+import { Accounts } from 'src/app/model/accounts';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
-import { Status } from 'src/app/model/status';
-import { Priorities } from 'src/app/model/priorities';
-import { QuillModule } from 'ngx-quill'
+import { Companies } from 'src/app/model/companies';
+import { Tickets } from 'src/app/model/tickets';
+import { Users } from 'src/app/model/users';
+import { Products } from 'src/app/model/products';
+import { AuthService } from 'src/app/service/auth.service';
+
 
 @Component({
   selector: 'app-insert-ticket',
@@ -14,22 +19,17 @@ import { QuillModule } from 'ngx-quill'
 
 
 export class InsertTicketComponent implements OnInit {
+  
+  @ViewChild('attachments', { static: false }) attachment: any;
+  blurred = false
+  focused = false
+  account: Accounts = new Accounts();
+  ticketDtl: TicketsDtl = new TicketsDtl();
   insertTickeT = []
   ticketM = new Tickets();
-  ticketDtl = new TicketsDtl();
-  constructor(private elem: ElementRef) {
-    this.insertTickeT = []
-    this.ticketDtl = new TicketsDtl();
-    this.ticketM = new Tickets();
-  }
-  @ViewChild('attachments', { static: false }) attachment: any;
-  files: File[] = []
-  upload(event) {
-    const multiFile = (event.target as HTMLInputElement).files;
-    for (let index = 0; index < multiFile.length; index++) {
-      this.files.push(multiFile[index]);
-    }
-  }
+  selectedFile: File;
+  fileList: File[] = [];
+  listOfFiles: any[] = [];
 
   uploadFiles() {
     console.log(this.fileList);
@@ -38,10 +38,6 @@ export class InsertTicketComponent implements OnInit {
     this.fileList = []
     this.listOfFiles = []
   }
-
-  selectedFile: File;
-  fileList: File[] = [];
-  listOfFiles: any[] = [];
 
   onFileChanged(event: any) {
     let totalSize = 0;
@@ -78,17 +74,31 @@ export class InsertTicketComponent implements OnInit {
     this.fileList.splice(index, 1);
   }
 
-  removeAllFiles() {
-    this.files = [];
-  }
   public editorContent
+  editor : string
 
-
+  constructor(private auth: AuthService) {
+    this.account = this.auth.getAccount();
+    console.log(this.account);
+    this.insertTickeT = []
+    this.ticketDtl = new TicketsDtl();
+    this.ticketM = new Tickets();
+  }
 
   ngOnInit() {
+    
   }
 
   readQuill() {
     console.log(this.editorContent);
+  }
+
+  changedEditor(editorQuill: EditorChangeContent ) {    
+    this.editor = editorQuill.html
+    console.log(this.editor);
+  }
+  
+  submit() {
+
   }
 }

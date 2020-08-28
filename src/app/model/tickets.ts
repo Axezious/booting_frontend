@@ -1,13 +1,19 @@
 import { Users } from './users';
+import { Products } from './products';
+import { Priorities } from './priorities';
+import { Status } from './status';
+import { Classifications } from './classifications';
 
 export class Tickets {
     id: string;
     idCustomer: Users;
     idAgent: Users;
-    idProduct: string;
-    idPriority: string;
+    idProduct: Products;
+    idPriority: Priorities;
     code: string;
-    idClassification: string;
+    idClassification: Classifications;
     subject: string;
-    idStatus: string;
+    idStatus: Status;
+    createdBy : String;
+    updatedBy : String;
 }

@@ -1,0 +1,73 @@
+<div class="row">
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title mb-4" style="text-align: center;">AGENT RELATIONS</h4>
+				<div class="row">
+					<div class="col-lg-12 grid-margin">
+						<form>
+						  <!-- <div class="d-flex justify-content-between"> -->
+							  <div class="form-group form-inline">
+								 Search: <input class="form-control ml-2" name="searchTerm" type="text" [(ngModel)]="service.searchTerm"/>
+								 <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+								 <button type="button" routerLink="../insert" id="insertaccounts1" class="ml-auto btn btn-gradient-success btn-sm">insert</button>
+							  </div>
+
+							  <!-- <div></div> -->
+						  <!-- </div> -->
+						</form>
+						<div class="table-responsive">
+							<table class="table table-striped" style="text-align: center;">
+							  <thead>
+							  <tr>
+							    <th scope="col">No</th>
+							    <th scope="col">Agent</th>
+							    <th scope="col">Client</th>
+							    <th scope="col">Start Date</th>
+							    <th scope="col">End Date</th>
+							    <th scope="col">Actions</th>
+							  </tr>
+							  </thead>
+							  <tbody>
+							  <tr *ngFor="let agentRelation of agentRelations$ | async; index as i">
+							    <th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
+							    <td>
+							    	<ngb-highlight [result]="agentRelation.idAgent.name" [term]="service.searchTerm"></ngb-highlight>
+							    </td>
+    							<td>
+    								<ngb-highlight [result]="agentRelation.idClient.name" [term]="service.searchTerm"></ngb-highlight>
+    							</td>
+    							<td>
+    								<ngb-highlight [result]="agentRelation.startDate | date:'mediumDate'" [term]="service.searchTerm"></ngb-highlight>
+    							</td>
+    							<td>
+    								<ngb-highlight [result]="agentRelation.endDate | date:'mediumDate'" [term]="service.searchTerm"></ngb-highlight>
+    							</td>
+    							<td>
+    							  <div class="btn-group" role="group">
+					                <button type="button" routerLink="../update" class="btn btn-outline-primary btn-sm">Update</button>
+					                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+					              </div>
+    							</td>
+							  </tr>
+							  </tbody>
+							</table>
+						</div>
+
+						<div id="pagination" class="d-flex flex-wrap justify-content-between p-2">
+						    <ngb-pagination
+						      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+						    </ngb-pagination>
+
+						    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+						      <option [ngValue]="5">5 items per page</option>
+						      <option [ngValue]="10">10 items per page</option>
+						      <option [ngValue]="15">15 items per page</option>
+						    </select>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

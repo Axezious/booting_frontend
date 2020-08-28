@@ -6,4 +6,6 @@ export class AgentRelations {
     idClient: Users;
     startDate: Date;
     endDate: Date;
+    createdBy : String;
+    updatedBy : String;
 }

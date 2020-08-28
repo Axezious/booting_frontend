@@ -3,4 +3,6 @@ export class TemplateEmail {
     code: string;
     name: string;
     template: string;
+    createdBy : String;
+    updatedBy : String;
 }

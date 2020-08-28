@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/service/auth.service';
+import { ApiService } from 'src/app/service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +14,7 @@ export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
   
-  constructor(config: NgbDropdownConfig) {
+  constructor(config: NgbDropdownConfig,private auth: AuthService, private api: ApiService, private router: Router) {
     config.placement = 'bottom-right';
   }
 
@@ -46,6 +49,11 @@ export class NavbarComponent implements OnInit {
   // toggle right sidebar
   toggleRightSidebar() {
     document.querySelector('#right-sidebar').classList.toggle('open');
+  }
+
+  logout() {
+    this.auth.removeToken('token');
+    this.router.navigateByUrl('/user-pages/login')
   }
 
 }

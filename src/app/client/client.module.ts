@@ -7,7 +7,6 @@ import { ListTicketComponent } from './list-ticket/list-ticket.component';
 import { InsertTicketComponent } from './insert-ticket/insert-ticket.component'
 import { EmailRegistrasiComponent } from './email-registrasi/email-registrasi.component';
 import { InsertCustomerComponent } from './insert-customer/insert-customer.component';
-import { BuyProductComponent } from './buy-product/buy-product.component';
 import { QuillModule } from 'ngx-quill';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -18,8 +17,7 @@ const routes: Routes = [
   { path: 'list-ticket', component: ListTicketComponent },
   { path: 'insert-ticket', component: InsertTicketComponent },
   { path: 'email-registrasi', component: EmailRegistrasiComponent },
-  { path: 'insert-customer', component: InsertCustomerComponent },
-  { path: 'buy-product', component: BuyProductComponent },
+  { path: 'insert-customer', component: InsertCustomerComponent }
 ]
 
 @NgModule({
@@ -28,8 +26,7 @@ const routes: Routes = [
     ListTicketComponent,
     EmailRegistrasiComponent,
     InsertCustomerComponent,
-    InsertTicketComponent,
-    BuyProductComponent],
+    InsertTicketComponent],
   imports: [
     CommonModule, NgbModule, FormsModule,
     RouterModule.forChild(routes),

@@ -20,21 +20,23 @@
       </a>
     </li>
     <!-- <li class="nav-item" [ngClass]="{'active' : products.isActive || accordions.isActive || buttons.isActive || badges.isActive || breadcrumbs.isActive || dropdowns.isActive || modals.isActive || notifications.isActive || progressbar.isActive || pagination.isActive || tabs.isActive || typography.isActive || tooltips.isActive }"> -->
-    <li class="nav-item" [ngClass]="{'active' : products.isActive || classifications.isActive || priorities.isActive || companies.isActive || statusmaster.isActive }">  
+    <li class="nav-item" [ngClass]="{'active' : products.isActive || classifications.isActive || priorities.isActive || statusmaster.isActive || companies.isActive || accounts.isActive || roles.isActive || users.isActive || agentrelations.isActive || clientproducts.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
         <span class="menu-title">Admin Table Master</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/products" routerLinkActive="active" #products="routerLinkActive">Products</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/classifications" routerLinkActive="active" #classifications="routerLinkActive">Classifications</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/priorities" routerLinkActive="active" #priorities="routerLinkActive">Priorities</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/status" routerLinkActive="active" #statusmaster="routerLinkActive">Status</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/companies" routerLinkActive="active" #companies="routerLinkActive">Companies</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/accounts" routerLinkActive="active" #companies="routerLinkActive">Accounts</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/roles" routerLinkActive="active" #companies="routerLinkActive">Roles</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/master/users" routerLinkActive="active" #companies="routerLinkActive">Users</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/products/view" routerLinkActive="active" #products="routerLinkActive">Products</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/classifications/view" routerLinkActive="active" #classifications="routerLinkActive">Classifications</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/priorities/view" routerLinkActive="active" #priorities="routerLinkActive">Priorities</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/status/view" routerLinkActive="active" #statusmaster="routerLinkActive">Status</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/companies/view" routerLinkActive="active" #companies="routerLinkActive">Companies</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/accounts/view" routerLinkActive="active" #accounts="routerLinkActive">Accounts</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/roles/view" routerLinkActive="active" #roles="routerLinkActive">Roles</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/users/view" routerLinkActive="active" #users="routerLinkActive">Users</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/agent-relations/view" routerLinkActive="active" #agentrelations="routerLinkActive">Agent Relations</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/client-products/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Products</a></li>
           <!-- <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/accordions" routerLinkActive="active" #accordions="routerLinkActive">Accordions</a></li>
           <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/buttons" routerLinkActive="active" #buttons="routerLinkActive">Buttons</a></li>
           <li class="nav-item"> <a class="nav-link" routerLink="basic-ui/badges" routerLinkActive="active" #badges="routerLinkActive">Badges</a></li>
@@ -50,7 +52,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive || buyproduct.isActive || dtlticket.isActive }">  
+    <li class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive || dtlticket.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
         <i class="menu-arrow"></i>
@@ -60,7 +62,6 @@
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/dtl-ticket" routerLinkActive="active" #dtlticket="routerLinkActive">Dtl Ticket</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="client/buy-product" routerLinkActive="active" #buyproduct="routerLinkActive">Buy Product</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li>
         </ul>
       </div>

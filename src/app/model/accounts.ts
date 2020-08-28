@@ -5,4 +5,6 @@ export class Accounts {
     email: string;
     pass: string;
     idUser: Users;
+    createdBy : String;
+    updatedBy : String;
 }

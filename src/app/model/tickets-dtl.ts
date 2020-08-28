@@ -7,4 +7,6 @@ export class TicketsDtl {
     statusAfter: string;
     date: Date;
     description: string;
+    createdBy : String;
+    updatedBy : String;
 }

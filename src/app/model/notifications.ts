@@ -6,4 +6,6 @@ export class Notifications {
     notif: string;
     link: string;
     status: boolean;
+    createdBy : String;
+    updatedBy : String;
 }
