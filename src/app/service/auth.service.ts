@@ -47,5 +47,6 @@ export class AuthService {
     this.account.idUser.contact = localStorage.getItem('contact');
 
     return this.account;
+
   }
 }

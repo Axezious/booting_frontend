@@ -1,3 +1,11 @@
+<div class="page-header">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="../view">Roles</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Insert</li>
+    </ol>
+  </nav>
+</div>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card mx-auto">
         <div class="card">
@@ -6,13 +14,13 @@
                 <form class="forms-sample mt-5">
                     <div class="form-group">
                         <label for="inputCode">Code</label>
-                        <input type="text" class="form-control" id="inputCode" placeholder="Code">
+                        <input type="text" name="code" [(ngModel)]="roles.code" class="form-control" id="inputCode" placeholder="Code">
                     </div>
                     <div class="form-group">
                         <label for="inputName">Name</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="Name">
+                        <input type="text" name="name" [(ngModel)]="roles.name" class="form-control" id="inputName" placeholder="Name">
                     </div>
-                    <button type="submit" class="btn btn-gradient-primary mt-3">Submit</button>
+                    <button type="Insert" (click)="insertRoles()" class="btn btn-gradient-primary mt-3">Submit</button>
                 </form>
             </div>
         </div>

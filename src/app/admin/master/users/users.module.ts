@@ -9,9 +9,9 @@ import { UsersInsertComponent } from './users-insert/users-insert.component';
 import { UsersUpdateComponent } from './users-update/users-update.component';
 
 const routes :Routes = [
-  {path : 'insert-users', component: UsersInsertComponent},
-  {path : 'update-users', component: UsersUpdateComponent},
-  {path : 'view-users', component: UsersViewComponent},
+  {path : 'insert', component: UsersInsertComponent},
+  {path : 'update', component: UsersUpdateComponent},
+  {path : 'view', component: UsersViewComponent},
 ]
 
 @NgModule({

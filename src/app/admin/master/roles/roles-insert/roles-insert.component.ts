@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../../../service/api.service';
+import { Roles } from '../../../../model/roles';
 
 @Component({
   selector: 'app-roles-insert',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RolesInsertComponent implements OnInit {
 
-  constructor() { }
+  roles:Roles;
+
+  constructor(private apiService:ApiService) { 
+  	this.roles = new Roles();
+  }
 
   ngOnInit() {
+  }
+
+  async insertRoles() {
+  	this.apiService.insertRoles(this.roles).subscribe(roles => {
+  		console.log(roles);
+  	})
   }
 
 }
