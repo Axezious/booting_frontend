@@ -12,8 +12,8 @@ import { Priorities } from '../model/priorities';
 })
 export class ApiService {
 
-  // readonly base_url = 'http://147.139.130.49:8080'
-  readonly base_url = 'http://localhost:8080'
+  readonly base_url = 'http://147.139.130.49:8080'
+  // readonly base_url = 'http://localhost:8080'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -28,8 +28,8 @@ export class ApiService {
   }
 
   insertPriorities(data: Priorities) {
-    return this.http.post<Priorities>(`${this.base_url}/priorities/insert`,
+    return this.http.post<Priorities>(`${this.base_url}/priorities/insert`, data,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
-  
+
 }
