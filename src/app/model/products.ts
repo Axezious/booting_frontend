@@ -3,4 +3,6 @@ export class Products {
     code: string;
     name: string;  
     description: string;
+    createdBy : String;
+    updatedBy : String;
 }
