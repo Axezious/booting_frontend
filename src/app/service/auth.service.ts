@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Accounts } from '../model/accounts';
+import { Users } from '../model/users';
+import { Companies } from '../model/companies';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +36,14 @@ export class AuthService {
 
   getAccount(): Accounts {
     let account: Accounts = new Accounts();
-    localStorage.getItem('name');
-    localStorage.getItem('codeCompany');
-    localStorage.getItem('company');
-    localStorage.getItem('email');
-    localStorage.getItem('contact');
+    account.idUser = new Users();
+    account.idUser.idCompany = new Companies();
+
+    account.idUser.name = localStorage.getItem('name');
+    account.idUser.idCompany.code = localStorage.getItem('codeCompany');
+    account.idUser.idCompany.name = localStorage.getItem('company');
+    account.email = localStorage.getItem('email');
+    account.idUser.contact = localStorage.getItem('contact');
 
     return account;
   }
