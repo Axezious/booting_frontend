@@ -7,6 +7,8 @@ import { Companies } from 'src/app/model/companies';
 import { Tickets } from 'src/app/model/tickets';
 import { Users } from 'src/app/model/users';
 import { Products } from 'src/app/model/products';
+import { AuthService } from 'src/app/service/auth.service';
+
 
 @Component({
   selector: 'app-insert-ticket',
@@ -33,14 +35,13 @@ export class InsertTicketComponent implements OnInit {
   public editorContent
   editor : string
 
-  constructor(private elem: ElementRef) {
-    this.account.idUser = new Users();
-    this.account.idUser.idCompany = new Companies();
-    this.ticketDtl.idTickets = new Tickets();
-    this.ticketDtl.idTickets.idProduct = new Products();
+  constructor(private auth: AuthService) {
+    this.account = this.auth.getAccount();
+    console.log(this.account);
   }
 
   ngOnInit() {
+    
   }
 
   readQuill() {
@@ -52,4 +53,7 @@ export class InsertTicketComponent implements OnInit {
     console.log(this.editor);
   }
   
+  submit() {
+
+  }
 }

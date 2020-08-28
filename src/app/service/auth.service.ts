@@ -8,7 +8,12 @@ import { Companies } from '../model/companies';
 })
 export class AuthService {
 
-  constructor() { }
+  account: Accounts = new Accounts();
+
+  constructor() {
+    this.account.idUser = new Users();
+    this.account.idUser.idCompany = new Companies();
+  }
 
   setToken(token: string) {
     localStorage.setItem('token', token);
@@ -35,16 +40,13 @@ export class AuthService {
   }
 
   getAccount(): Accounts {
-    let account: Accounts = new Accounts();
-    account.idUser = new Users();
-    account.idUser.idCompany = new Companies();
+    this.account.idUser.name = localStorage.getItem('name');
+    this.account.idUser.idCompany.code = localStorage.getItem('codeCompany');
+    this.account.idUser.idCompany.name = localStorage.getItem('company');
+    this.account.email = localStorage.getItem('email');
+    this.account.idUser.contact = localStorage.getItem('contact');
 
-    account.idUser.name = localStorage.getItem('name');
-    account.idUser.idCompany.code = localStorage.getItem('codeCompany');
-    account.idUser.idCompany.name = localStorage.getItem('company');
-    account.email = localStorage.getItem('email');
-    account.idUser.contact = localStorage.getItem('contact');
+    return this.account;
 
-    return account;
   }
 }
