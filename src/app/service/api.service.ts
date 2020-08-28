@@ -6,6 +6,7 @@ import { AuthService } from '../service/auth.service'
 import { Users } from '../model/users';
 import { Accounts } from '../model/accounts';
 import { Priorities } from '../model/priorities';
+import { Roles } from '../model/roles';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,16 @@ export class ApiService {
 
   insertPriorities(data: Priorities) {
     return this.http.post<Priorities>(`${this.base_url}/priorities/insert`,data,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  viewRoles() :Observable<Roles[]> {
+    return this.http.get<Roles[]>(`${this.base_url}/roles/all`,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  insertRoles(data:Roles) {
+    return this.http.post<Roles>(`${this.base_url}/roles/insert`, data,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
