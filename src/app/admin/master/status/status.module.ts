@@ -9,9 +9,9 @@ import { StatusUpdateComponent } from './status-update/status-update.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes :Routes = [
-  {path : 'insert-status', component: StatusInsertComponent},
-  {path : 'update-status', component: StatusUpdateComponent},
-  {path : 'view-status', component: StatusViewComponent},
+  {path : 'insert', component: StatusInsertComponent},
+  {path : 'update', component: StatusUpdateComponent},
+  {path : 'view', component: StatusViewComponent},
 ]
 
 @NgModule({

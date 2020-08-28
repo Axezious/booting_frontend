@@ -8,9 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes :Routes = [
-  {path : 'insert-roles', component: RolesInsertComponent},
-  {path : 'update-roles', component: RolesUpdateComponent},
-  {path : 'view-roles', component: RolesViewComponent},
+  {path : 'insert', component: RolesInsertComponent},
+  {path : 'update', component: RolesUpdateComponent},
+  {path : 'view', component: RolesViewComponent},
 ]
 
 @NgModule({
