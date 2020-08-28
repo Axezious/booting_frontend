@@ -28,7 +28,7 @@ export class ApiService {
   }
 
   insertPriorities(data: Priorities) {
-    return this.http.post<Priorities>(`${this.base_url}/priorities/insert`, data,
+    return this.http.post<Priorities>(`${this.base_url}/priorities/insert`,data,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
