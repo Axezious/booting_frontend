@@ -1,69 +1,26 @@
-import { Component, OnInit, PipeTransform } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { FormControl } from '@angular/forms';
-
+import { Component, QueryList, ViewChildren, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
-interface Country {
-  name: string;
-  area: number;
-  population: number;
-}
+import { Users } from '../../../../model/users';
+import { UsersService } from '../../../../service/master/users.service';
 
 @Component({
   selector: 'app-users-view',
   templateUrl: './users-view.component.html',
   styleUrls: ['./users-view.component.scss'],
-  providers: [DecimalPipe]
+  providers: [
+    UsersService
+  ]
 })
 
 export class UsersViewComponent implements OnInit {
-  
-  COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    area: 9596960,
-    population: 1409517397
-  }
-];
 
-  countries$: Observable<Country[]>;
-  filter = new FormControl('');
+  users$:Observable<Users[]>;
+  total$:Observable<number>;
 
-  page = 1;
-  pageSize = 5;
-  collectionSize = this.COUNTRIES.length;
-
-  constructor(pipe: DecimalPipe) {
-    this.countries$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text, pipe))
-    );
-  }
-
-  search(text: string, pipe: PipeTransform): Country[] {
-	  return this.COUNTRIES.filter(country => {
-	    const term = text.toLowerCase();
-	    return country.name.toLowerCase().includes(term)
-	        || pipe.transform(country.area).includes(term)
-	        || pipe.transform(country.population).includes(term);
-	  });
+  constructor(private service: UsersService) {
+    this.users$ = service.users$;
+    this.total$ = service.total$;
   }
 
   ngOnInit() {

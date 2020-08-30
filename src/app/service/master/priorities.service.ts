@@ -17,8 +17,6 @@ interface State {
   page: number;
   pageSize: number;
   searchTerm: string;
-  // sortColumn: SortColumn;
-  // sortDirection: SortDirection;
 }
 
 @Injectable({
@@ -43,9 +41,18 @@ export class PrioritiesService {
   };
 
   constructor(private apiService: ApiService) {
+
     this.viewPriorities();
-    
-    this._search$.pipe(
+
+  }
+
+  async viewPriorities() {
+
+    this.apiService.viewPriorities().subscribe(priorities => {
+      console.log(priorities);
+      this.priorities = priorities;
+
+      this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
       switchMap(() => this._search()),
@@ -57,13 +64,7 @@ export class PrioritiesService {
     });
 
     this._search$.next();
-  }
 
-  async viewPriorities() {
-
-    this.apiService.viewPriorities().subscribe(priorities => {
-      console.log(priorities);
-      this.priorities = priorities;
     })
   }
 
@@ -99,7 +100,7 @@ export class PrioritiesService {
 
     // 2. filter
     let priorities = this.priorities;
-    priorities = priorities.filter(priority => this.matches(priority, searchTerm,));
+    priorities = priorities.filter(priority => this.matches(priority, searchTerm));
     const total = priorities.length;
 
     // 3. paginate

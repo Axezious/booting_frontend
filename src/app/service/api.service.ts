@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {} from 'rxjs';
 import { AuthService } from '../service/auth.service'
+
 import { Users } from '../model/users';
 import { Accounts } from '../model/accounts';
 import { Priorities } from '../model/priorities';
 import { Roles } from '../model/roles';
+import { Companies } from '../model/companies';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +30,13 @@ export class ApiService {
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
-  insertPriorities(data: Priorities) {
+  insertPriorities(data: Priorities) :Observable<Priorities>{
     return this.http.post<Priorities>(`${this.base_url}/priorities/insert`,data,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  deletePriorities(priority:Priorities){
+    return this.http.post<Priorities>(`${this.base_url}/priorities/delete`, priority,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
@@ -38,9 +45,30 @@ export class ApiService {
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
-  insertRoles(data:Roles) {
+  insertRoles(data:Roles) :Observable<Roles> {
     return this.http.post<Roles>(`${this.base_url}/roles/insert`, data,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
+  viewCompanies() :Observable<Companies[]> {
+    return this.http.get<Companies[]>(`${this.base_url}/companies/all`,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  insertCompanies(data:Companies) :Observable<Companies>{
+    return this.http.post<Companies>(`${this.base_url}/companies/insert`, data,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  viewUsers():Observable<Users[]> {
+    return this.http.get<Users[]>(`${this.base_url}/users/all`,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  insertUsers(data:Users):Observable<Users> {
+    return this.http.post<Users>(`${this.base_url}/users/insert`, data,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
 }
+

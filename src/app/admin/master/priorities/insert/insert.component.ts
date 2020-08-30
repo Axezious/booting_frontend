@@ -16,7 +16,6 @@ export class InsertComponent implements OnInit {
 
   priorities:Priorities;
 
-
   constructor(private apiService:ApiService, private authService:AuthService) { 
   	this.priorities = new Priorities();
 
@@ -28,7 +27,6 @@ export class InsertComponent implements OnInit {
   async insertPriorities() {
   	this.priorities.createdBy = this.authService.getAccount().idUser.name;
   	this.apiService.insertPriorities(this.priorities).subscribe(priorities => {
-
   		console.log(priorities);
   	})
   }

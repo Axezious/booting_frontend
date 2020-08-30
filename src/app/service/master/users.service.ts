@@ -2,13 +2,14 @@ import {Injectable, PipeTransform} from '@angular/core';
 
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 
+import {Users} from '../../model/users';
 import {Roles} from '../../model/roles';
 import {ApiService} from '../api.service';
 
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 
 interface SearchResult {
-  roles: Roles[];
+  users: Users[];
   total: number;
 }
 
@@ -22,13 +23,13 @@ interface State {
   providedIn: 'root'
 })
 
-export class RolesService {
+export class UsersService {
   
-  roles: Roles[] = [];
+  users: Users[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _roles$ = new BehaviorSubject<Roles[]>([]);
+  private _users$ = new BehaviorSubject<Users[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -38,15 +39,16 @@ export class RolesService {
   };
 
   constructor(private apiService: ApiService) {
-    this.viewRoles();
+    this.viewUsers();
     
   }
 
-  async viewRoles() {
+  async viewUsers() {
 
-    this.apiService.viewRoles().subscribe(roles => {
-      console.log(roles);
-      this.roles = roles;
+    this.apiService.viewUsers().subscribe(users => {
+      console.log(users);
+      this.users = users;
+      
 
       this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -55,7 +57,7 @@ export class RolesService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      this._roles$.next(result.roles);
+      this._users$.next(result.users);
       this._total$.next(result.total);
     });
 
@@ -63,12 +65,16 @@ export class RolesService {
     })
   }
 
-  matches(role: Roles, term: string) {
-  return role.code.toLowerCase().includes(term.toLowerCase())
-    || role.name.toLowerCase().includes(term.toLowerCase());
+  matches(user: Users, term: string) {
+  return user.nip.toLowerCase().includes(term.toLowerCase())
+    || user.name.toLowerCase().includes(term.toLowerCase())
+    || user.idCompany.name.toLowerCase().includes(term.toLowerCase())
+    || user.idRole.name.toLowerCase().includes(term.toLowerCase())
+    || user.contact.toLowerCase().includes(term.toLowerCase())
+    || user.address.toLowerCase().includes(term.toLowerCase());
   }
 
-  get roles$() { return this._roles$.asObservable(); }
+  get users$() { return this._users$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -88,13 +94,13 @@ export class RolesService {
     const {pageSize, page, searchTerm} = this._state;
 
     // 1. filter
-    let roles = this.roles;
-    roles = roles.filter(role => this.matches(role, searchTerm,));
-    const total = roles.length;
+    let users = this.users;
+    users = users.filter(user => this.matches(user, searchTerm,));
+    const total = users.length;
 
     // 2. paginate
-    roles = roles.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({roles, total});
+    users = users.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    return of({users, total});
   }
 
 
