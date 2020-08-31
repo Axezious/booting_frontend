@@ -40,7 +40,16 @@ export class CompaniesService {
   constructor(private apiService: ApiService) {
     this.viewCompanies();
     
-    this._search$.pipe(
+    
+  }
+
+  async viewCompanies() {
+
+    this.apiService.viewCompanies().subscribe(companies => {
+      console.log(companies);
+      this.companies = companies;
+
+      this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
       switchMap(() => this._search()),
@@ -52,20 +61,14 @@ export class CompaniesService {
     });
 
     this._search$.next();
-  }
-
-  async viewCompanies() {
-
-    this.apiService.viewCompanies().subscribe(companies => {
-      console.log(companies);
-      this.companies = companies;
+    
     })
   }
 
   matches(company: Companies, term: string) {
-  return company.code.toLowerCase().includes(term.toLowerCase())
-  	|| company.address.toLowerCase().includes(term.toLowerCase())
-    || company.name.toLowerCase().includes(term.toLowerCase());
+  return company.name.toLowerCase().includes(term.toLowerCase());
+  	// || company.address.toLowerCase().includes(term.toLowerCase())
+   //  || company.name.toLowerCase().includes(term.toLowerCase());
   }
 
   get companies$() { return this._companies$.asObservable(); }

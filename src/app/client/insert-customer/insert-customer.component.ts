@@ -12,6 +12,7 @@ import { Companies } from 'src/app/model/companies';
 export class InsertCustomerComponent implements OnInit {
 
   account: Accounts = new Accounts();
+  cPassword: String;
 
   constructor() {
     this.account.idUser = new Users();
@@ -23,13 +24,14 @@ export class InsertCustomerComponent implements OnInit {
   }
 
   submit() {
-    
-    this.account.idUser.idRole.code = 'CUS01';
-    this.account.idUser.idCompany.code = 'KUMPENI01';
     console.log(this.account);
+    console.log(this.cPassword);
+    
+    this.account = new Accounts();
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
+    // this.cPassword = '';
   }
 
 }

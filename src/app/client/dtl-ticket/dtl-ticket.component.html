@@ -174,8 +174,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 pt-3">
-                                <!-- <div *ngFor="let data of items | async">{{data.content}}</div> -->
-                                <!-- <div>{{data.issues}}</div> -->
                                 <div [innerHTML]="data.issues"></div>
                             </div>
                         </div>
@@ -193,24 +191,14 @@
                 <form (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="exampleInputName1">Description</label>
-                        <!-- <quill-editor></quill-editor> -->
                         <quill-editor [(ngModel)]="itemValue" [ngModelOptions]="{standalone: true}">
                         </quill-editor>
-                        <!-- <quill-editor [styles]="editorStyle" placeholder="Enter Text" [modules]="config"
-                            formControlName="yourCtrlname" required>
-                        </quill-editor> -->
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn btn-dark btn-fw justify-self-end">Post</button>
                     </div>
                 </form>
-                <!-- <button type="submit" class="btn btn-dark btn-fw justify-self-end">Post</button> -->
             </div>
         </div>
     </div>
 </div>
-
-<!-- <div class="col-md-6">
-    <h3>Content from Firebase</h3>
-    <pre *ngFor="let data of items | async">{{data.content}}</pre>
-</div> -->

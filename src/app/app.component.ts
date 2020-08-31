@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
+import { AuthService } from './service/auth.service';
+import { Users } from './model/users';
+import { Accounts } from './model/accounts';
+import { Roles } from './model/roles';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +12,17 @@ import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConf
 })
 export class AppComponent implements OnInit{
   title = 'demo1';
+  accounts:Accounts;
+  role:String;
 
   showSidebar: boolean = true;
   showNavbar: boolean = true;
   showFooter: boolean = true;
   isLoading: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, authService:AuthService) {
+      
+    this.role = authService.getAccount().idUser.idRole.code;
     
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => { 

@@ -9,6 +9,7 @@ export class Users {
     idRole: Roles;
     contact: string;
     address: string;
-    createdBy : String;
-    updatedBy : String;
+    createdBy: String;
+    updatedBy: String;
+    // profilePicture: 
 }
