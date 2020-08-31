@@ -1,13 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { QuillEditorComponent, EditorChangeContent, EditorChangeSelection } from "ngx-quill";
-import Quill from 'quill'
+import { EditorChangeContent } from "ngx-quill";
 import { Accounts } from 'src/app/model/accounts';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
-import { Companies } from 'src/app/model/companies';
-import { Tickets } from 'src/app/model/tickets';
-import { Users } from 'src/app/model/users';
-import { Products } from 'src/app/model/products';
 import { AuthService } from 'src/app/service/auth.service';
+import { Users } from 'src/app/model/users';
+import { Companies } from 'src/app/model/companies';
+import { Roles } from 'src/app/model/roles';
+import { Tickets } from 'src/app/model/tickets';
 
 
 @Component({
@@ -26,6 +25,7 @@ export class InsertTicketComponent implements OnInit {
   selectedFile: File;
   fileList: File[] = [];
   listOfFiles: any[] = [];
+  itemValue = '';
 
 
   uploadFiles() {
@@ -64,32 +64,23 @@ export class InsertTicketComponent implements OnInit {
     this.fileList.splice(index, 1);
   }
 
-
-
-
-
-  public editorContent
-  editor: string
-
   constructor(private auth: AuthService) {
+    this.account.idUser = new Users();
+    this.account.idUser.idCompany = new Companies();
+    this.account.idUser.idRole = new Roles();
+    this.ticketDtl.idTickets = new Tickets();
+    this.ticketDtl.idTickets.idCustomer = new Users();
     this.account = this.auth.getAccount();
-    console.log(this.account);
   }
 
   ngOnInit() {
 
   }
 
-  readQuill() {
-    console.log(this.editorContent);
-  }
-
-  changedEditor(editorQuill: EditorChangeContent) {
-    this.editor = editorQuill.html
-    console.log(this.editor);
-  }
-
   submit() {
-
+    this.ticketDtl.idTickets.idCustomer = this.account.idUser;
+    this.uploadFiles();
+    console.log(this.ticketDtl);
+    
   }
 }

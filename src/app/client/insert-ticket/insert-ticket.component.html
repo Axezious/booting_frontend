@@ -46,12 +46,12 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject"
+                                [(ngModel)] = "ticketDtl.idTickets.subject">
                             </div>
                             <div class="form-group">
                                 <label for="description`">Description</label>
-                                <quill-editor [(ngModel)]="editorContent" [ngModelOptions]="{standalone: true}"
-                                    (onEditorChanged)="changedEditor($event)">
+                                <quill-editor [(ngModel)] = "itemValue" [ngModelOptions]="{standalone: true}">
                                 </quill-editor>
                             </div>
                             <div class="form-group">
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" (click)="uploadFiles()" class="btn btn-primary mb-2">Submit</button>
+                        <button type="submit" (click)="submit()" class="btn btn-primary mb-2">Submit</button>
                     </div>
                 </div>
             </div>

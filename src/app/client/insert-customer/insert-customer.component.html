@@ -19,8 +19,8 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="contact">Contanct</label>
-                                    <input type="text" class="form-control" id="contact" [(ngModel)]="account.idUser.contact"
-                                        placeholder="Contact">
+                                    <input type="text" class="form-control" id="contact"
+                                        [(ngModel)]="account.idUser.contact" placeholder="Contact">
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,8 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="nip">NIP</label>
-                        <input type="text" class="form-control" id="nip" placeholder="NIP" [(ngModel)]="account.idUser.nip">
+                                    <input type="text" class="form-control" id="nip" placeholder="NIP"
+                                        [(ngModel)]="account.idUser.nip">
                                 </div>
                             </div>
                         </div>
@@ -36,23 +37,36 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="Address" [(ngModel)]="account.idUser.address">
+                                    <input type="text" class="form-control" id="address" placeholder="Address"
+                                        [(ngModel)]="account.idUser.address">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group-row">
-                                <div class="form-group">
-                                    <label for="pass">Password</label>
-                        <input type="password" class="form-control" id="pass" placeholder="Password" [(ngModel)]="account.pass">
+                                <div class="form-group" [class.has-error]="password.touched && password.invalid">
+                                    <label for="password">Password</label>
+                                    <input name="password" required type="password" class="form-control" id="pass"
+                                        placeholder="Password" [(ngModel)]="account.pass" #password="ngModel">
+                                        <span class="help-block" *ngIf="password.touched && password.errors?.required" style="color: red; font-size: 12px;">
+                                            Password is required
+                                        </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group-row">
-                                <div class="form-group">
-                                    <label for="cPass">Confirm Password</label>
-                        <input type="password" class="form-control" id="cPass" placeholder="Re-enter your password" [(ngModel)]="cPassword">
+                                <div class="form-group"
+                                    [class.has-error]="confirmPassword.touched && confirmPassword.invalid">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input name="confirmPassword" appConfirmEqualValidator="password" required type="password" class="form-control" id="confirmPassword"
+                                        placeholder="Re-enter your password" [(ngModel)]="cPassword" #confirmPassword="ngModel">
+                                        <span class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.required" style="color: red; font-size: 12px;">
+                                            Confirm password is required
+                                        </span>
+                                        <span class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual && !confirmPassword.errors?.required" style="color: red; font-size: 12px;">
+                                            Password and Confirm password doesn't match
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -60,12 +74,13 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
-                        <input type="text" class="form-control" id="email" placeholder="E-mail" [(ngModel)]="account.email">
+                                    <input type="text" class="form-control" id="email" placeholder="E-mail"
+                                        [(ngModel)]="account.email">
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mt-3" (click)="submit()">Submit</button>
                 </div>
