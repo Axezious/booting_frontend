@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Accounts } from '../model/accounts';
 import { Users } from '../model/users';
 import { Companies } from '../model/companies';
+import { Roles } from '../model/roles';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
   constructor() {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
+    this.account.idUser.idRole = new Roles();
   }
 
   setToken(token: string) {
@@ -23,8 +25,8 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-  removeToken(key: string) {
-    localStorage.removeItem(key);
+  removeToken() {
+    localStorage.removeItem('token');
   }
 
   isAuthenticate(): boolean {
@@ -32,21 +34,35 @@ export class AuthService {
   }
 
   setAccount(account: Accounts) {
+    localStorage.setItem('email', account.email);
+    localStorage.setItem('nip', account.idUser.nip);
     localStorage.setItem('name', account.idUser.name);
     localStorage.setItem('codeCompany', account.idUser.idCompany.code);
-    localStorage.setItem('company', account.idUser.idCompany.name);
-    localStorage.setItem('email', account.email);
+    localStorage.setItem('addressCompany', account.idUser.idCompany.address);
+    localStorage.setItem('companyName', account.idUser.idCompany.name);
+    localStorage.setItem('roleCode', account.idUser.idRole.code);
+    localStorage.setItem('roleName', account.idUser.idRole.name);
     localStorage.setItem('contact', account.idUser.contact);
+    localStorage.setItem('address', account.idUser.address);
   }
 
   getAccount(): Accounts {
-    this.account.idUser.name = localStorage.getItem('name');
-    this.account.idUser.idCompany.code = localStorage.getItem('codeCompany');
-    this.account.idUser.idCompany.name = localStorage.getItem('company');
-    this.account.email = localStorage.getItem('email');
-    this.account.idUser.contact = localStorage.getItem('contact');
-    
-    return this.account;
+    let account = new Accounts();
+    account.idUser = new Users();
+    account.idUser.idCompany = new Companies();
+    account.idUser.idRole = new Roles();
 
+    account.email = localStorage.getItem('email');
+    account.idUser.nip = localStorage.getItem('nip');
+    account.idUser.name = localStorage.getItem('name');
+    account.idUser.idCompany.code = localStorage.getItem('codeCompany');
+    account.idUser.idCompany.address = localStorage.getItem('addressCompany');
+    account.idUser.idCompany.name = localStorage.getItem('companyName');
+    account.idUser.idRole.code = localStorage.getItem('roleCode');
+    account.idUser.idRole.name = localStorage.getItem('roleName');
+    account.idUser.contact = localStorage.getItem('contact');
+    account.idUser.address = localStorage.getItem('address');
+    
+    return account;
   }
 }

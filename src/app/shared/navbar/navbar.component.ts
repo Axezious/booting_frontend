@@ -3,6 +3,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/service/auth.service';
 import { ApiService } from 'src/app/service/api.service';
 import { Router } from '@angular/router';
+import { Accounts } from 'src/app/model/accounts';
 
 @Component({
   selector: 'app-navbar',
@@ -13,9 +14,11 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
+  account: Accounts = new Accounts();
   
   constructor(config: NgbDropdownConfig,private auth: AuthService, private api: ApiService, private router: Router) {
     config.placement = 'bottom-right';
+    this.account = auth.getAccount();
   }
 
   ngOnInit() {
@@ -52,7 +55,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.auth.removeToken('token');
+    this.auth.removeToken();
     this.router.navigateByUrl('/user-pages/login')
   }
 

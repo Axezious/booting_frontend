@@ -43,19 +43,28 @@
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="email">E-mail</label>
-                        <input type="text" class="form-control" id="email" placeholder="E-mail" [(ngModel)]="account.email">
+                                    <label for="pass">Password</label>
+                        <input type="password" class="form-control" id="pass" placeholder="Password" [(ngModel)]="account.pass">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group-row">
                                 <div class="form-group">
-                                    <label for="pass">Password</label>
-                        <input type="text" class="form-control" id="pass" placeholder="Password" [(ngModel)]="account.pass">
+                                    <label for="cPass">Confirm Password</label>
+                        <input type="password" class="form-control" id="cPass" placeholder="Re-enter your password" [(ngModel)]="cPassword">
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                        <input type="text" class="form-control" id="email" placeholder="E-mail" [(ngModel)]="account.email">
+                                </div>
+                            </div>
+                        </div>
+                        
                         
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mt-3" (click)="submit()">Submit</button>

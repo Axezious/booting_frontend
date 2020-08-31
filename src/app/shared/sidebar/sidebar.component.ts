@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Accounts } from 'src/app/model/accounts';
+import { AuthService } from 'src/app/service/auth.service';
+import { Users } from 'src/app/model/users';
+import { Roles } from 'src/app/model/roles';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,12 +12,20 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
   public uiBasicCollapsed = false;
   public samplePagesCollapsed = false;
+  account: Accounts = new Accounts();
   
-  constructor() { }
+  constructor(private auth: AuthService) {
+    // this.account = auth.getAccount();
+    this.account.idUser = new Users();
+    this.account.idUser.idRole = new Roles();
+    
+  }
+
+
 
   ngOnInit() {
     const body = document.querySelector('body');
-
+    this.account = this.auth.getAccount()
     // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
     document.querySelectorAll('.sidebar .nav-item').forEach(function (el) {
       el.addEventListener('mouseover', function() {
