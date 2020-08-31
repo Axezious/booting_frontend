@@ -25,7 +25,30 @@ interface State {
 
 export class PrioritiesService {
   
-  priorities: Priorities[] = [];
+  priorities: Priorities[] = [
+    // {
+    //   id:'1',
+    //   code:'code 1',
+    //   name:'name 1',
+    //   createdBy: 'admin 1',
+    //   updatedBy: 'admin 1'
+    // },
+    // {
+    //   id:'2',
+    //   code:'code 2',
+    //   name:'name 2',
+    //   createdBy: 'admin 1',
+    //   updatedBy: 'admin 1'
+    // },
+    // {
+    //   id:'3',
+    //   code:'code 3',
+    //   name:'name 3',
+    //   createdBy: 'admin 1',
+    //   updatedBy: 'admin 1'
+    // }
+  ];
+  updatePriority:Priorities = new Priorities();
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
@@ -42,6 +65,7 @@ export class PrioritiesService {
 
   constructor(private apiService: ApiService) {
 
+    // this.updatePriority = new Priorities();
     this.viewPriorities();
 
   }
@@ -80,10 +104,12 @@ export class PrioritiesService {
   get page() { return this._state.page; }
   get pageSize() { return this._state.pageSize; }
   get searchTerm() { return this._state.searchTerm; }
+  get getUpdatePriority():Priorities { return this.updatePriority; }
 
   set page(page: number) { this._set({page}); }
   set pageSize(pageSize: number) { this._set({pageSize}); }
   set searchTerm(searchTerm: string) { this._set({searchTerm}); }
+  set setUpdatePriority(priority:Priorities) { this.updatePriority = priority; }
   // set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
   // set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
 

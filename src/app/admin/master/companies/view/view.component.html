@@ -21,8 +21,6 @@
 							  <thead>
 							  <tr>
 							    <th scope="col">No</th>
-							    <th scope="col">Code</th>
-							    <th scope="col">Address</th>
 							    <th scope="col">Name</th>
 							    <th scope="col">Actions</th>
 							  </tr>
@@ -30,19 +28,13 @@
 							  <tbody>
 							  <tr *ngFor="let company of companies$ | async; index as i">
 							    <th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
-							    <td>
-							    	<ngb-highlight [result]="company.code" [term]="service.searchTerm"></ngb-highlight>
-							    </td>
-							    <td>
-							    	<ngb-highlight [result]="company.address" [term]="service.searchTerm"></ngb-highlight>
-							    </td>
     							<td>
     								<ngb-highlight [result]="company.name" [term]="service.searchTerm"></ngb-highlight>
     							</td>
     							<td>
     							  <div class="btn-group" role="group" style="align-content: center;">
 					                <button type="button" routerLink="../update" class="btn btn-outline-primary btn-sm">Update</button>
-					                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+					                <button type="button" (click)="deleteCompany(company)" class="btn btn-outline-danger btn-sm">Delete</button>
 					              </div>
     							</td>
 							  </tr>

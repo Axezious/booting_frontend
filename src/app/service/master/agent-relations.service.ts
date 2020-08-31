@@ -30,7 +30,7 @@ export class AgentRelationsService {
   idAgent:Users = new Users();
   idClient:Users = new Users();
 
-  AGENTRELATIONS: AgentRelations[]
+  AGENTRELATIONS: AgentRelations[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();

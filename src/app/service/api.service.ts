@@ -36,7 +36,7 @@ export class ApiService {
   }
 
   deletePriorities(priority:Priorities){
-    return this.http.post<Priorities>(`${this.base_url}/priorities/delete`, priority,
+    return this.http.delete<Priorities>(`${this.base_url}/priorities/delete/${priority.id}`,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
@@ -51,12 +51,17 @@ export class ApiService {
   }
 
   viewCompanies() :Observable<Companies[]> {
-    return this.http.get<Companies[]>(`${this.base_url}/companies/all`,
+    return this.http.get<Companies[]>(`${this.base_url}/companies/all-active`,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
   insertCompanies(data:Companies) :Observable<Companies>{
     return this.http.post<Companies>(`${this.base_url}/companies/insert`, data,
+      { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
+  }
+
+  deleteCompanies(company:Companies){
+    return this.http.delete<Companies>(`${this.base_url}/companies/delete/${company.id}`,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
@@ -69,6 +74,8 @@ export class ApiService {
     return this.http.post<Users>(`${this.base_url}/users/insert`, data,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
+
+
 
 }
 

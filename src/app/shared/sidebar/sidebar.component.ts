@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   public uiBasicCollapsed = false;
   public samplePagesCollapsed = false;
   account: Accounts = new Accounts();
+  role:string;
   
   constructor(private auth: AuthService) {
     // this.account = auth.getAccount();
@@ -26,6 +27,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     const body = document.querySelector('body');
     this.account = this.auth.getAccount()
+    this.role = this.auth.getAccount().idUser.idRole.code;
     // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
     document.querySelectorAll('.sidebar .nav-item').forEach(function (el) {
       el.addEventListener('mouseover', function() {

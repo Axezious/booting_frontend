@@ -18,7 +18,7 @@ export class InsertComponent implements OnInit {
 
   constructor(private apiService:ApiService, private authService:AuthService) { 
   	this.priorities = new Priorities();
-
+    console.log('walah dalah ini insert')
   }
 
   ngOnInit() {

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ApiService } from '../../../../service/api.service';
+import { AuthService } from '../../../../service/auth.service';
+
+import { Companies } from '../../../../model/companies';
+
 @Component({
   selector: 'app-insert',
   templateUrl: './insert.component.html',
@@ -7,7 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsertComponent implements OnInit {
 
-  constructor() { }
+  company:Companies;	
+
+  constructor() { 
+  	this.company = new Companies();
+  }
 
   ngOnInit() {
   }
