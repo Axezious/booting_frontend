@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Tickets } from 'src/app/model/tickets';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
-import { ClientProducts } from 'src/app/model/client-products';
-import { Products } from 'src/app/model/products';
-import { Users } from 'src/app/model/users';
-import { tick } from '@angular/core/testing';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-
-import { Optional, Self, Input, ViewChild } from '@angular/core';
-import { NgControl, FormGroup } from '@angular/forms';
-import { QuillEditorComponent } from 'ngx-quill';
-import { Priorities } from 'src/app/model/priorities';
+import { AuthService } from 'src/app/service/auth.service';
+import { Accounts } from 'src/app/model/accounts';
+import { Users } from 'src/app/model/users';
+import { Companies } from 'src/app/model/companies';
+import { Roles } from 'src/app/model/roles';
 
 @Component({
   selector: 'app-dtl-ticket',
@@ -19,34 +14,20 @@ import { Priorities } from 'src/app/model/priorities';
   styleUrls: ['./dtl-ticket.component.scss']
 })
 
-// @Component({
-//   selector: 'forms-rich-text',
-//   templateUrl: './rich-text.component.html',
-//   styleUrls: ['./rich-text.component.css']
-// })
-
 export class DtlTicketComponent implements OnInit {
-
-  ticket: Tickets = new Tickets();
+  account: Accounts = new Accounts();
   ticketDtl: TicketsDtl = new TicketsDtl();
-  user: Users = new Users();
-  product: Products = new Products();
-  clientProduct: ClientProducts = new ClientProducts();
-
-  // By me:
+  
   itemValue = '';
   items: Observable<any[]>;
 
-  constructor(public db: AngularFireDatabase) {
-    this.ticket.idCustomer = this.user;
-    this.ticket.idCustomer.name = 'Mamang Garox';
-    this.ticket.idAgent = this.user;
-    this.ticket.idAgent.name = 'Avogadro';
-    this.ticket.idPriority = new Priorities();
-    this.ticket.idPriority.name = 'Medium';
-    this.ticket.subject = 'Subject Ticket';
-    
-    this.ticketDtl.idTickets = this.ticket;
+
+  constructor(public db: AngularFireDatabase, private auth: AuthService) {
+    this.account.idUser = new Users();
+    this.account.idUser.idCompany = new Companies();
+    this.account.idUser.idRole = new Roles();
+    this.account = auth.getAccount();
+
     this.items = db.list('items').valueChanges();
   }
 
@@ -57,15 +38,4 @@ export class DtlTicketComponent implements OnInit {
     this.db.list('items').push({issues: this.itemValue});
     this.itemValue = '';
   }
-
 }
-
-// export class RichTextComponent {
-//   //// -------------------------------- ////
-//   //// Api
-//   //// -------------------------------- ////
-//   @Input() form: FormGroup;
-//   @Input() control: string;
-
-//   htmlString = '<h1>ping</h1>';
-// }

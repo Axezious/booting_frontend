@@ -2,7 +2,7 @@ import { TicketsDtl } from './tickets-dtl';
 
 export class Attachment {
     id: string;
-    idDetail: TicketsDtl;
+    idTicketDtl: TicketsDtl;
     attach: File;
     extension: string;
     createdBy : String;

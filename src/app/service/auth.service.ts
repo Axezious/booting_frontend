@@ -25,8 +25,9 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-  removeToken() {
+  removeStorage() {
     localStorage.removeItem('token');
+    localStorage.removeItem('');
   }
 
   isAuthenticate(): boolean {
@@ -37,8 +38,6 @@ export class AuthService {
     localStorage.setItem('email', account.email);
     localStorage.setItem('nip', account.idUser.nip);
     localStorage.setItem('name', account.idUser.name);
-    localStorage.setItem('codeCompany', account.idUser.idCompany.code);
-    localStorage.setItem('addressCompany', account.idUser.idCompany.address);
     localStorage.setItem('companyName', account.idUser.idCompany.name);
     localStorage.setItem('roleCode', account.idUser.idRole.code);
     localStorage.setItem('roleName', account.idUser.idRole.name);
@@ -55,8 +54,6 @@ export class AuthService {
     account.email = localStorage.getItem('email');
     account.idUser.nip = localStorage.getItem('nip');
     account.idUser.name = localStorage.getItem('name');
-    account.idUser.idCompany.code = localStorage.getItem('codeCompany');
-    account.idUser.idCompany.address = localStorage.getItem('addressCompany');
     account.idUser.idCompany.name = localStorage.getItem('companyName');
     account.idUser.idRole.code = localStorage.getItem('roleCode');
     account.idUser.idRole.name = localStorage.getItem('roleName');
