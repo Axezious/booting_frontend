@@ -19,21 +19,13 @@ import { Priorities } from 'src/app/model/priorities';
   styleUrls: ['./dtl-ticket.component.scss']
 })
 
-// @Component({
-//   selector: 'forms-rich-text',
-//   templateUrl: './rich-text.component.html',
-//   styleUrls: ['./rich-text.component.css']
-// })
-
 export class DtlTicketComponent implements OnInit {
-
   ticket: Tickets = new Tickets();
   ticketDtl: TicketsDtl = new TicketsDtl();
   user: Users = new Users();
   product: Products = new Products();
   clientProduct: ClientProducts = new ClientProducts();
 
-  // By me:
   itemValue = '';
   items: Observable<any[]>;
 
@@ -57,15 +49,4 @@ export class DtlTicketComponent implements OnInit {
     this.db.list('items').push({issues: this.itemValue});
     this.itemValue = '';
   }
-
 }
-
-// export class RichTextComponent {
-//   //// -------------------------------- ////
-//   //// Api
-//   //// -------------------------------- ////
-//   @Input() form: FormGroup;
-//   @Input() control: string;
-
-//   htmlString = '<h1>ping</h1>';
-// }

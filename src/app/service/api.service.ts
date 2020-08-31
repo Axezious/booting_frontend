@@ -16,7 +16,7 @@ import { Companies } from '../model/companies';
 export class ApiService {
 
   readonly base_url = 'http://147.139.130.49:8080'
-  //readonly base_url = 'http://localhost:8080'
+  // readonly base_url = 'http://localhost:8080'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -35,7 +35,7 @@ export class ApiService {
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }
 
-  deletePriorities(priority:Priorities){
+  deletePriorities(priority:Priorities):Observable<Priorities>{
     return this.http.post<Priorities>(`${this.base_url}/priorities/delete`, priority,
       { headers : {Authorization : `Bearer ${this.authService.getToken()}`} })
   }

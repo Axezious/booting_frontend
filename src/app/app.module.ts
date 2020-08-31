@@ -22,6 +22,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { DropZoneDirective } from './drop-zone.directive';
+import { ImagesComponent } from './images/images.component';
+import { ImageComponent } from './images/image/image.component';
+import { ImageListComponent } from './images/image-list/image-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +39,11 @@ import { environment } from '../environments/environment';
     TodoListComponent,
     TodoComponent,
     SpinnerComponent,
-    ContentAnimateDirective
+    ContentAnimateDirective,
+    DropZoneDirective,
+    ImagesComponent,
+    ImageComponent,
+    ImageListComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +55,9 @@ import { environment } from '../environments/environment';
     ChartsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

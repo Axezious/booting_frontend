@@ -31,6 +31,7 @@ export class ViewComponent implements OnInit {
   async deletePriority(priority:Priorities) {
     this.apiService.deletePriorities(priority).subscribe(priority =>{
       console.log(priority);
+      this.priorities$ = this.service.priorities$;
     })
   }
 
