@@ -11,8 +11,7 @@ import { QuillModule } from 'ngx-quill';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { UploaderComponent } from './uploader/uploader.component';
-import { UploadTaskComponent } from './upload-task/upload-task.component';
+import { InsertHeaderTrialComponent } from './insert-header-trial/insert-header-trial.component';
 
 const routes: Routes = [
   { path: 'dtl-ticket', component: DtlTicketComponent },
@@ -20,8 +19,7 @@ const routes: Routes = [
   { path: 'insert-ticket', component: InsertTicketComponent },
   { path: 'email-registrasi', component: EmailRegistrasiComponent },
   { path: 'insert-customer', component: InsertCustomerComponent },
-  // { path: 'uploader', component: UploaderComponent },
-  // { path: 'upload-task', component: UploadTaskComponent },
+  { path: 'insert-header-trial', component: InsertHeaderTrialComponent }
 ]
 
 @NgModule({
@@ -31,10 +29,7 @@ const routes: Routes = [
     EmailRegistrasiComponent,
     InsertCustomerComponent,
     InsertTicketComponent,
-    UploaderComponent,
-    UploadTaskComponent,
-    ],
-
+    InsertHeaderTrialComponent],
   imports: [
     CommonModule, NgbModule, FormsModule,
     RouterModule.forChild(routes),
