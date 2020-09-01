@@ -22,8 +22,6 @@ export class ViewComponent implements OnInit {
   constructor(private service:PrioritiesService, private apiService:ApiService) { 
   	this.priorities$ = service.priorities$;
   	this.total$ = service.total$;
-    console.log('walah dalah');
-
   }
 
   ngOnInit() {
@@ -32,12 +30,8 @@ export class ViewComponent implements OnInit {
   async deletePriority(priority:Priorities) {
     this.apiService.deletePriorities(priority).subscribe(priority =>{
       console.log(priority);
+      this.service.viewPriorities();
     })
-  }
-
-  async updatePriority(priority:Priorities) {
-    this.service.setUpdatePriority = priority;
-    console.log(this.service.getUpdatePriority);
   }
 
 }

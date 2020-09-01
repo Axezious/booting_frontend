@@ -1,3 +1,11 @@
+<div class="page-header">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="../view">Users</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Update</li>
+    </ol>
+  </nav>
+</div>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card mx-auto">
         <div class="card">
@@ -6,27 +14,34 @@
             <form class="forms-sample mt-5">
               <div class="form-group">
                 <label for="inputNIP">NIP</label>
-                <input type="text" class="form-control" id="inputNIP" placeholder="NIP">
+                <input type="text" name="nip" [(ngModel)]="users.nip" class="form-control" id="inputNIP" placeholder="NIP">
               </div>
               <div class="form-group">
                 <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                <input type="text" name="name" [(ngModel)]="users.name" class="form-control" id="inputName" placeholder="Name">
               </div>
               <div class="form-group">
                 <label for="inputIDCompanies">ID Companies</label>
-                <select id="inputIDCompanies" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                <select id="inputIDCompanies" class="form-control" name="idCompany" [(ngModel)]="users.idCompany">
+                  <option [ngValue]="null">Choose...</option>
+                  <option *ngFor="let company of companies" [ngValue]="company">{{company.name}}</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputIDRoles">ID Roles</label>
-                <select id="inputIDRoles" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                <select id="inputIDRoles" class="form-control" name="idRole" [(ngModel)]="users.idRole" >
+                  <option *ngFor="let role of roles" [selected]="roles[1]" [ngValue]="role">{{role.name}}</option>
                 </select>
               </div>
-              <button type="submit" class="btn btn-gradient-primary mt-3">Update</button>
+              <div class="form-group">
+                <label for="inputContact">Contact</label>
+                <input type="text" name="contact" [(ngModel)]="users.contact" class="form-control" id="inputContact" placeholder="Contact">
+              </div>
+              <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <textarea type="text" name="address" [(ngModel)]="users.address" class="form-control" rows="4" id="inputAddress"></textarea> 
+              </div>
+              <button type="submit" (click)="insertUsers()" class="btn btn-gradient-primary mt-3">Update</button>
               <!-- <button class="btn btn-light">Cancel</button> -->
             </form>
           </div>
