@@ -48,7 +48,6 @@ export class UsersService {
     this.apiService.viewUsers().subscribe(users => {
       console.log(users);
       this.users = users;
-      
 
       this._search$.pipe(
       tap(() => this._loading$.next(true)),

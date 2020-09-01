@@ -40,7 +40,6 @@ export class CompaniesService {
   constructor(private apiService: ApiService) {
     this.viewCompanies();
     
-    
   }
 
   async viewCompanies() {
@@ -61,7 +60,7 @@ export class CompaniesService {
     });
 
     this._search$.next();
-    
+
     })
   }
 
