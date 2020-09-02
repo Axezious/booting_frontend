@@ -20,7 +20,6 @@ export class StatusInsertComponent implements OnInit {
   }
 
   async insertStatus() {
-    console.log(this.status);
     this.status.createdBy = this.authService.getAccount().idUser.name;
     this.apiService.insertStatus(this.status).subscribe(status => {
       console.log(status);
