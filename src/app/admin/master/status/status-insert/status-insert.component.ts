@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Status } from 'src/app/model/status';
+import { ApiService } from 'src/app/service/api.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-status-insert',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusInsertComponent implements OnInit {
 
-  constructor() { }
+  status: Status;
+
+  constructor(private apiService: ApiService, private authService: AuthService) {
+    this.status = new Status();
+  }
 
   ngOnInit() {
   }
 
+  async insertStatus() {
+    console.log(this.status);
+    this.status.createdBy = this.authService.getAccount().idUser.name;
+    this.apiService.insertStatus(this.status).subscribe(status => {
+      console.log(status);
+    })
+  }
 }

@@ -24,8 +24,8 @@ export class UsersUpdateComponent implements OnInit {
 
   constructor(private apiService:ApiService, private authService:AuthService, private activatedRoute:ActivatedRoute) { 
   	this.user = new Users();
-  	this.users.idRole = new Roles();
-  	this.users.idCompany = new Companies();
+  	this.user.idRole = new Roles();
+  	this.user.idCompany = new Companies();
   	this.temp = new Users();
   	this.getRoles();
   	this.getCompanies();
