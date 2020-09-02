@@ -33,5 +33,5 @@ export class ViewComponent implements OnInit {
       this.service.viewCompanies();
     })
   }
-
+  
 }

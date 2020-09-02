@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ApiService } from '../../../../service/api.service';
+import { AuthService } from '../../../../service/auth.service';
+
+import { Classifications } from '../../../../model/classifications';
+
 @Component({
   selector: 'app-insert',
   templateUrl: './insert.component.html',
@@ -7,9 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsertComponent implements OnInit {
 
-  constructor() { }
+  classification:Classifications;	
+
+  constructor(private apiService:ApiService, private authService:AuthService) { 
+  	this.classification = new Classifications();
+  }
 
   ngOnInit() {
+  }
+
+  async insertClassification() {
+  	this.classification.createdBy = this.authService.getAccount().idUser.name;
+  	this.apiService.insertClassifications(this.classification).subscribe(classification =>{
+  		console.log(classification);
+  	})
   }
 
 }

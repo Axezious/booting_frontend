@@ -84,25 +84,25 @@ export class InsertTicketComponent implements OnInit {
     this.ticketDtl.idTickets.idCustomer = new Users();
     this.account = this.auth.getAccount();
     
-    apiService.getListProducts().subscribe( datas => {
+    apiService.viewProducts().subscribe( datas => {
       console.log(datas)
       this.products = datas;
       this.productSelected = this.products[0].id
     })
 
-    apiService.getPriorities().subscribe( datas => {
+    apiService.viewPriorities().subscribe( datas => {
       console.log(datas)
       this.priorities = datas;
       this.prioritySelected = this.priorities[0].id
     })
 
-    apiService.getClassifications().subscribe( datas => {
+    apiService.viewClassifications().subscribe( datas => {
       console.log(datas);
       this.classifications = datas;
       this.classificationSelected = this.classifications[0].id
     })
     
-    apiService.getStatus().subscribe( datas => {
+    apiService.viewStatus().subscribe( datas => {
       console.log(datas);
       this.status = datas;
     })

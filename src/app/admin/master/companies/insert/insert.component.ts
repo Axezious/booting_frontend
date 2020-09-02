@@ -14,11 +14,18 @@ export class InsertComponent implements OnInit {
 
   company:Companies;	
 
-  constructor() { 
+  constructor(private apiService:ApiService, private authService:AuthService) { 
   	this.company = new Companies();
   }
 
   ngOnInit() {
+  }
+
+  async insertCompany() {
+  	this.company.createdBy = this.authService.getAccount().idUser.name;
+  	this.apiService.insertCompanies(this.company).subscribe(company =>{
+  		console.log(company);
+  	})
   }
 
 }

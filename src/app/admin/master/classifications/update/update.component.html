@@ -2,7 +2,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="../view">Classifications</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Insert</li>
+      <li class="breadcrumb-item active" aria-current="page">Update</li>
     </ol>
   </nav>
 </div>
@@ -20,7 +20,7 @@
             <label for="inputClassificationName">Name</label>
             <input type="text" name="name" [(ngModel)]="classification.name" class="form-control" id="inputClassificationName" placeholder="Classification name">
           </div>
-          <button type="submit" (click)="insertClassification()" class="btn btn-gradient-primary mt-3">Insert</button>
+          <button type="submit" (click)="updateClassification()" class="btn btn-gradient-primary mt-3">Update</button>
         </form>
       </div>
     </div>

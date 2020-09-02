@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ApiService } from '../../../../service/api.service';
-import { PrioritiesService } from '../../../../service/master/priorities.service';
+import { AuthService } from '../../../../service/auth.service';
 
 import { Priorities } from '../../../../model/priorities';
 
@@ -9,24 +10,35 @@ import { Priorities } from '../../../../model/priorities';
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
-  providers: [
-  	PrioritiesService
-  ]
 })
 export class UpdateComponent implements OnInit {
 
   priority:Priorities;
+  temp:Priorities;
 
-  constructor(private service:PrioritiesService, private apiService:ApiService) { 
-  	this.priority = new Priorities();
-  	
-  	this.priority.name = 'name';
-  	
-  	console.log(service.getUpdatePriority);
-  	
+  constructor(private apiService:ApiService, private authService:AuthService, private activatedRoute:ActivatedRoute) { 
+    this.priority = new Priorities();
+    this.temp = new Priorities();
+
+    this.activatedRoute.queryParams.subscribe((data) => {
+      this.temp = <Priorities>data;
+      this.priority.name = this.temp.name;
+      this.priority.code = this.temp.code;
+    })
   }
 
   ngOnInit() {
+    
+  }
+
+  async updatePriority() {
+    this.priority.id = this.temp.id;
+    this.priority.createdBy = this.temp.createdBy;
+    this.priority.updatedBy = this.authService.getAccount().idUser.name;
+
+    this.apiService.updatePriorities(this.priority).subscribe(priority =>{
+      console.log(this.priority);
+    })
   }
 
 }
