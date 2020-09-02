@@ -27,7 +27,17 @@ export class AuthService {
 
   removeStorage() {
     localStorage.removeItem('token');
-    localStorage.removeItem('');
+    localStorage.removeItem('email');
+    localStorage.removeItem('idUser');
+    localStorage.removeItem('nip');
+    localStorage.removeItem('name');
+    localStorage.removeItem('idCompany');
+    localStorage.removeItem('companyName');
+    localStorage.removeItem('idRole');
+    localStorage.removeItem('roleCode');
+    localStorage.removeItem('roleName');
+    localStorage.removeItem('contact');
+    localStorage.removeItem('address');
   }
 
   isAuthenticate(): boolean {
