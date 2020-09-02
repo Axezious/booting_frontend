@@ -46,7 +46,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
     ChartsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

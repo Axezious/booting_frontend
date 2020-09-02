@@ -36,9 +36,12 @@ export class AuthService {
 
   setAccount(account: Accounts) {
     localStorage.setItem('email', account.email);
+    localStorage.setItem('idUser', account.idUser.id);
     localStorage.setItem('nip', account.idUser.nip);
     localStorage.setItem('name', account.idUser.name);
+    localStorage.setItem('idCompany', account.idUser.idCompany.id);
     localStorage.setItem('companyName', account.idUser.idCompany.name);
+    localStorage.setItem('idRole', account.idUser.idRole.id);
     localStorage.setItem('roleCode', account.idUser.idRole.code);
     localStorage.setItem('roleName', account.idUser.idRole.name);
     localStorage.setItem('contact', account.idUser.contact);
@@ -52,9 +55,12 @@ export class AuthService {
     account.idUser.idRole = new Roles();
 
     account.email = localStorage.getItem('email');
+    account.idUser.id = localStorage.getItem('idUser')
     account.idUser.nip = localStorage.getItem('nip');
     account.idUser.name = localStorage.getItem('name');
+    account.idUser.idCompany.id = localStorage.getItem('idCompany');
     account.idUser.idCompany.name = localStorage.getItem('companyName');
+    account.idUser.idCompany.id = localStorage.getItem('idRole');
     account.idUser.idRole.code = localStorage.getItem('roleCode');
     account.idUser.idRole.name = localStorage.getItem('roleName');
     account.idUser.contact = localStorage.getItem('contact');

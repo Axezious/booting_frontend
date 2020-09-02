@@ -60,7 +60,7 @@
                                     [class.has-error]="confirmPassword.touched && confirmPassword.invalid">
                                     <label for="confirmPassword">Confirm Password</label>
                                     <input name="confirmPassword" appConfirmEqualValidator="password" required type="password" class="form-control" id="confirmPassword"
-                                        placeholder="Re-enter your password" [(ngModel)]="cPassword" #confirmPassword="ngModel">
+                                        placeholder="Re-enter your password" [(ngModel)]="cPass" #confirmPassword="ngModel">
                                         <span class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.required" style="color: red; font-size: 12px;">
                                             Confirm password is required
                                         </span>
