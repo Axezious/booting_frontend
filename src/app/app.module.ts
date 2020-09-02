@@ -12,10 +12,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TodoComponent } from './apps/todo-list/todo/todo.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
-import { TodoListComponent } from './apps/todo-list/todo-list.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
@@ -30,8 +28,6 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
     SidebarComponent,
     FooterComponent,
     DashboardComponent,
-    TodoListComponent,
-    TodoComponent,
     SpinnerComponent,
     ContentAnimateDirective,
     ConfirmEqualValidatorDirective,

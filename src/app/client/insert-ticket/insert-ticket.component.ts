@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { EditorChangeContent } from "ngx-quill";
 import { Accounts } from 'src/app/model/accounts';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
 import { AuthService } from 'src/app/service/auth.service';
