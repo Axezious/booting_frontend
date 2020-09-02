@@ -3,15 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { } from 'rxjs';
 import { AuthService } from '../service/auth.service'
-
 import { Users } from '../model/users';
 import { Accounts } from '../model/accounts';
 import { Priorities } from '../model/priorities';
 import { Roles } from '../model/roles';
 import { Companies } from '../model/companies';
-import { Classifications } from '../model/classifications';
-import { Status } from '../model/status';
 import { Products } from '../model/products';
+import { Classifications } from '../model/classifications';
+import { auth } from 'firebase';
+import { TicketsDtl } from '../model/tickets-dtl';
+import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
 
 @Injectable({
@@ -187,9 +188,9 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  //Crud dahsboard Client
-  //Crud dashboard Agent
-  //Crud dashboard Customer
-
+  insertTicket(data: TicketsDtl): Observable<TicketsDtl> {
+    return this.http.post<TicketsDtl>(`${this.base_url}/tickets/insert`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
 }
 

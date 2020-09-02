@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { AuthService } from './service/auth.service';
-import { Users } from './model/users';
 import { Accounts } from './model/accounts';
-import { Roles } from './model/roles';
 
 @Component({
   selector: 'app-root',

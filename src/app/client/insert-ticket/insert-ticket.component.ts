@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { EditorChangeContent } from "ngx-quill";
 import { Accounts } from 'src/app/model/accounts';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
 import { AuthService } from 'src/app/service/auth.service';
@@ -7,6 +6,11 @@ import { Users } from 'src/app/model/users';
 import { Companies } from 'src/app/model/companies';
 import { Roles } from 'src/app/model/roles';
 import { Tickets } from 'src/app/model/tickets';
+import { ApiService } from 'src/app/service/api.service';
+import { Products } from 'src/app/model/products';
+import { Priorities } from 'src/app/model/priorities';
+import { Classifications } from 'src/app/model/classifications';
+import { Status } from 'src/app/model/status';
 
 
 @Component({
@@ -26,6 +30,13 @@ export class InsertTicketComponent implements OnInit {
   fileList: File[] = [];
   listOfFiles: any[] = [];
   itemValue = '';
+  products: Products[];
+  priorities: Priorities[];
+  classifications: Classifications[];
+  productSelected: string;
+  prioritySelected: string;
+  classificationSelected: string;
+  status: Status[];
 
 
   uploadFiles() {
@@ -64,13 +75,36 @@ export class InsertTicketComponent implements OnInit {
     this.fileList.splice(index, 1);
   }
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private apiService: ApiService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
     this.ticketDtl.idTickets = new Tickets();
     this.ticketDtl.idTickets.idCustomer = new Users();
     this.account = this.auth.getAccount();
+    
+    apiService.viewProducts().subscribe( datas => {
+      console.log(datas)
+      this.products = datas;
+      this.productSelected = this.products[0].id
+    })
+
+    apiService.viewPriorities().subscribe( datas => {
+      console.log(datas)
+      this.priorities = datas;
+      this.prioritySelected = this.priorities[0].id
+    })
+
+    apiService.viewClassifications().subscribe( datas => {
+      console.log(datas);
+      this.classifications = datas;
+      this.classificationSelected = this.classifications[0].id
+    })
+    
+    apiService.viewStatus().subscribe( datas => {
+      console.log(datas);
+      this.status = datas;
+    })
   }
 
   ngOnInit() {
@@ -78,9 +112,28 @@ export class InsertTicketComponent implements OnInit {
   }
 
   submit() {
+    let product: Products = new Products();
+    product.id = this.productSelected;
+    this.ticketDtl.idTickets.idProduct = product;
+
+    let priority: Priorities = new Priorities();
+    priority.id = this.prioritySelected;
+    this.ticketDtl.idTickets.idPriority = priority;
+
+    let classification: Classifications = new Classifications();
+    classification.id = this.classificationSelected;
+    this.ticketDtl.idTickets.idClassification = classification;
+
+    this.ticketDtl.sender = this.account.idUser.name;
+    this.ticketDtl.description = this.itemValue;
+
     this.ticketDtl.idTickets.idCustomer = this.account.idUser;
-    this.uploadFiles();
+
+    // this.uploadFiles();
     console.log(this.ticketDtl);
+    // this.apiService.insertTicket(this.ticketDtl).subscribe( data => {
+    //   console.log(data);
+    // })
     
   }
 }
