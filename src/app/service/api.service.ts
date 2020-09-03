@@ -14,6 +14,7 @@ import { auth } from 'firebase';
 import { TicketsDtl } from '../model/tickets-dtl';
 import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
+import { Tickets } from '../model/tickets';
 
 @Injectable({
   providedIn: 'root'
@@ -188,8 +189,16 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  insertTicket(data: TicketsDtl): Observable<TicketsDtl> {
-    return this.http.post<TicketsDtl>(`${this.base_url}/tickets/insert`,
+  // CRUD TICKET
+  insertTicket(data: Tickets): Observable<Tickets> {
+    return this.http.post<Tickets>(`${this.base_url}/tickets/insert`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+
+  // CRUD USER
+  insertUser(data: Accounts): Observable<Accounts> {
+    return this.http.post<Accounts>(`${this.base_url}/account/insert`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 }

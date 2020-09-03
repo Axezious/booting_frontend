@@ -23,8 +23,8 @@ import { FireService } from 'src/app/service/fire.service';
 })
 export class InsertTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
-
   task: AngularFireUploadTask;
+
   files: File[] = []
   blurred = false
   focused = false
@@ -122,21 +122,21 @@ export class InsertTicketComponent implements OnInit {
 
   submit() {
     let product: Products = new Products();
-    product.id = this.productSelected;
+    product.code = this.productSelected;
     this.ticketDtl.idTickets.idProduct = product;
 
     let priority: Priorities = new Priorities();
-    priority.id = this.prioritySelected;
+    priority.code = this.prioritySelected;
     this.ticketDtl.idTickets.idPriority = priority;
 
     let classification: Classifications = new Classifications();
-    classification.id = this.classificationSelected;
+    classification.code = this.classificationSelected;
     this.ticketDtl.idTickets.idClassification = classification;
 
     this.ticketDtl.sender = this.account.idUser.name;
     this.ticketDtl.description = this.itemValue;
 
-    this.ticketDtl.idTickets.idStatus.id = '109e6b79-8e6c-4f1a-a947-23b9881fb483';
+    this.ticketDtl.idTickets.idStatus.code = 'OP';
 
     this.ticketDtl.idTickets.createdBy = this.account.idUser.name;
 
@@ -144,10 +144,9 @@ export class InsertTicketComponent implements OnInit {
 
     // this.uploadFiles();
     console.log(this.ticketDtl.idTickets);
-    // this.apiService.insertTicket(this.ticketDtl).subscribe( data => {
-    //   console.log(data);
-    // })
-    
+    this.apiService.insertTicket(this.ticketDtl.idTickets).subscribe( data => {
+      console.log(data);
+    })
     this.ticketDtl.idTickets.idCustomer = this.account.idUser;
     this.uploadFiles();
     console.log(this.ticketDtl); 
