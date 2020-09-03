@@ -1,15 +1,13 @@
 import { Companies } from './companies';
 import { Roles } from './roles';
+import { BaseModel } from './base-model';
 
-export class Users {
-    id: string;
+export class Users extends BaseModel {
     nip: string;
     name: string;
     idCompany: Companies;
     idRole: Roles;
     contact: string;
     address: string;
-    createdBy: String;
-    updatedBy: String;
-    // profilePicture: 
+    // profilePicture:
 }

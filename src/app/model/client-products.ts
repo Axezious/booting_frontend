@@ -1,12 +1,10 @@
 import { Companies } from './companies';
 import { Products } from './products';
+import { BaseModel } from './base-model';
 
-export class ClientProducts {
-    id: string;
+export class ClientProducts extends BaseModel{
     idCompany: Companies;
     idProduct: Products;
     ticketUrgent: number;
     ticketMedium: number;
-    createdBy : String;
-    updatedBy : String;
 }

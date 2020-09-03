@@ -1,10 +1,8 @@
 import { TicketsDtl } from './tickets-dtl';
+import { BaseModel } from './base-model';
 
-export class Attachment {
-    id: string;
+export class Attachment extends BaseModel {
     idTicketDtl: TicketsDtl;
     attach: File;
     extension: string;
-    createdBy : String;
-    updatedBy : String;
 }

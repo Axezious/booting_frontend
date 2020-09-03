@@ -1,6 +1,5 @@
-export class Companies {
-    id: string;
+import { BaseModel } from './base-model';
+
+export class Companies extends BaseModel {
     name: string;
-    createdBy : String;
-    updatedBy : String;
 }

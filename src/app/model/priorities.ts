@@ -1,7 +1,6 @@
-export class Priorities {
-    id: string;
+import { BaseModel } from './base-model';
+
+export class Priorities extends BaseModel {
     code: string;
     name: string;
-    createdBy : String;
-    updatedBy : String;
 }

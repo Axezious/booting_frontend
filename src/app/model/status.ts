@@ -1,7 +1,6 @@
-export class Status {
-    id: string;
+import { BaseModel } from './base-model';
+
+export class Status extends BaseModel {
     code: string;
     name: string;
-    createdBy : String;
-    updatedBy : String;
 }

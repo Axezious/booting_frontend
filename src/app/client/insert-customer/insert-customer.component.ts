@@ -20,7 +20,6 @@ export class InsertCustomerComponent implements OnInit {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
-    
     this.accountTemp = auth.getAccount();
     this.account.idUser.idCompany = this.accountTemp.idUser.idCompany;
     this.account.idUser.idRole = this.accountTemp.idUser.idRole;

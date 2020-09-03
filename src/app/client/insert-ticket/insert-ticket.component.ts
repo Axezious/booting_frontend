@@ -81,6 +81,7 @@ export class InsertTicketComponent implements OnInit {
     this.account.idUser.idRole = new Roles();
     this.ticketDtl.idTickets = new Tickets();
     this.ticketDtl.idTickets.idCustomer = new Users();
+    this.ticketDtl.idTickets.idStatus = new Status();
     this.account = this.auth.getAccount();
     
     apiService.viewProducts().subscribe( datas => {
@@ -127,10 +128,14 @@ export class InsertTicketComponent implements OnInit {
     this.ticketDtl.sender = this.account.idUser.name;
     this.ticketDtl.description = this.itemValue;
 
+    this.ticketDtl.idTickets.idStatus.id = '109e6b79-8e6c-4f1a-a947-23b9881fb483';
+
+    this.ticketDtl.idTickets.createdBy = this.account.idUser.name;
+
     this.ticketDtl.idTickets.idCustomer = this.account.idUser;
 
     // this.uploadFiles();
-    console.log(this.ticketDtl);
+    console.log(this.ticketDtl.idTickets);
     // this.apiService.insertTicket(this.ticketDtl).subscribe( data => {
     //   console.log(data);
     // })

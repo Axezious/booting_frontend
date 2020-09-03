@@ -1,11 +1,9 @@
 import { Users } from './users';
+import { BaseModel } from './base-model';
 
-export class Notifications {
-    id: string;
+export class Notifications extends BaseModel {
     idUsers: Users;
     notif: string;
     link: string;
     status: boolean;
-    createdBy : String;
-    updatedBy : String;
 }
