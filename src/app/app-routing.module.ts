@@ -4,7 +4,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {ActivateService} from './service/activate.service'
 import { CommonModule } from '@angular/common';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 

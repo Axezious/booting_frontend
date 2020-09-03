@@ -11,6 +11,9 @@ import { Products } from 'src/app/model/products';
 import { Priorities } from 'src/app/model/priorities';
 import { Classifications } from 'src/app/model/classifications';
 import { Status } from 'src/app/model/status';
+import { AngularFireUploadTask } from '@angular/fire/storage';
+import { Thread } from 'src/app/model/thread';
+import { FireService } from 'src/app/service/fire.service';
 
 
 @Component({
@@ -21,6 +24,7 @@ import { Status } from 'src/app/model/status';
 export class InsertTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
 
+  task: AngularFireUploadTask;
   files: File[] = []
   blurred = false
   focused = false
@@ -41,6 +45,10 @@ export class InsertTicketComponent implements OnInit {
 
   uploadFiles() {
     console.log(this.fileList);
+    let thread = new Thread();
+    thread.id = '123'; // Ganti dengan no ticket.
+    thread.contents = this.itemValue;
+    this.fire.insertFireHdr(thread, this.fileList);
     this.attachment.nativeElement.value = '';
     this.fileList = []
     this.listOfFiles = []
@@ -75,7 +83,7 @@ export class InsertTicketComponent implements OnInit {
     this.fileList.splice(index, 1);
   }
 
-  constructor(private auth: AuthService, private apiService: ApiService) {
+  constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -140,5 +148,8 @@ export class InsertTicketComponent implements OnInit {
     //   console.log(data);
     // })
     
+    this.ticketDtl.idTickets.idCustomer = this.account.idUser;
+    this.uploadFiles();
+    console.log(this.ticketDtl); 
   }
 }

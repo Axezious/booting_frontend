@@ -20,6 +20,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive'
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
