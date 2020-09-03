@@ -44,7 +44,6 @@ export class UsersService {
   }
 
   async viewUsers() {
-
     this.apiService.viewUsers().subscribe(users => {
       console.log(users);
       this.users = users;
@@ -55,9 +54,9 @@ export class UsersService {
       switchMap(() => this._search()),
       delay(200),
       tap(() => this._loading$.next(false))
-    ).subscribe(result => {
-      this._users$.next(result.users);
-      this._total$.next(result.total);
+    ).subscribe(result1 => {
+      this._users$.next(result1.users);
+      this._total$.next(result1.total);
     });
 
     this._search$.next();

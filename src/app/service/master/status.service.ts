@@ -34,7 +34,7 @@ export class StatusService {
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _status$ = new BehaviorSubject<Classifications[]>([]);
+  private _status$ = new BehaviorSubject<Status[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -45,7 +45,6 @@ export class StatusService {
 
   constructor(private apiService: ApiService) {
     this.viewStatus();
-
   }
 
   async viewStatus() {

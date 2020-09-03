@@ -27,7 +27,7 @@
 							  </tr>
 							  </thead>
 							  <tbody>
-							  <tr *ngFor="let classification of status$ | async; index as i">
+							  <tr *ngFor="let status of status$ | async; index as i">
 							    <th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
 							    <td>
     								<ngb-highlight [result]="status.code" [term]="service.searchTerm"></ngb-highlight>
@@ -41,8 +41,8 @@
 					                <button type="button" (click)="deleteStatus(status)" class="btn btn-outline-danger btn-sm">Delete</button>
 					              </div>
     							</td>
-							  </tr>
-							  </tbody>
+							  </tr>   
+							  </tbody>  
 							</table>
 						</div>
 

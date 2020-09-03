@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { AuthService } from '../service/auth.service';
 import { TicketStatus } from '../model/ticket-status';
+import { TicketChart } from '../model/ticket-chart';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,11 +15,15 @@ export class DashboardComponent implements OnInit {
   ticketOpen: number;
   ticketClose: number;
   ticketReOpen: number;
+  ticketChart: TicketChart;
+
   constructor(private apiService: ApiService, private authservice: AuthService) {
-    console.log("ini dashboard");
-    // this.ticketStatus = apiService.dashboardAdmin();
-    
-    apiService.dashboardAdmin().subscribe(result => {
+    this.getDashboardAdmin();
+    this.getChart();
+  }
+
+  getDashboardAdmin() {
+    this.apiService.dashboardAdmin().subscribe(result => {
       console.log(result);
       this.ticketStatus = result;
       this.ticketOpen = this.ticketStatus.ticketOpen
@@ -26,10 +31,15 @@ export class DashboardComponent implements OnInit {
       this.ticketReOpen = this.ticketStatus.ticketReopen
     });
   }
+
+  getChart() {
+    let a:string = "2020"
+    this.apiService.getChart(a).subscribe(result => {
+      console.log(result);
+      this.ticketChart = result;
+    })
+  }
   ngOnInit() {
-
-
-
   }
 
   date: Date = new Date();

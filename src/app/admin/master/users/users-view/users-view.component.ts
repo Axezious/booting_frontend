@@ -15,8 +15,10 @@ import { UsersService } from '../../../../service/master/users.service';
   ]
 })
 
-export class UsersViewComponent implements OnInit {
 
+
+export class UsersViewComponent implements OnInit {
+  parentMessage: string = "Parent Says Hello!!!!";
   users$:Observable<Users[]>;
   total$:Observable<number>;
 

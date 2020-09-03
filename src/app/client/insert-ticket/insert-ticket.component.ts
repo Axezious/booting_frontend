@@ -46,9 +46,12 @@ export class InsertTicketComponent implements OnInit {
     this.listOfFiles = []
   }
   onFileChanged(event: any) {
+    console.log(event);
     let totalSize = 0;
-    for (let i = 0; i <= event.target.files.length - 1; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
+      console.log(event.target);
       var selectedFile = event.target.files[i];
+      console.log(selectedFile);
       this.fileList.push(selectedFile);
       this.listOfFiles.push(selectedFile.name)
     }
