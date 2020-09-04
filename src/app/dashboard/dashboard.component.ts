@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
   visitSaleChartColors = [
     {
       backgroundColor: [
-        'rgba(154, 85, 255, 1)',
+        'yellow',
         'rgba(154, 85, 255, 1)',
         'rgba(154, 85, 255, 1)',
         'rgba(154, 85, 255, 1)',

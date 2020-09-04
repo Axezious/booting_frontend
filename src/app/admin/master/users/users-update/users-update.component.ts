@@ -7,6 +7,7 @@ import { AuthService } from '../../../../service/auth.service';
 import { Users } from '../../../../model/users';
 import { Roles } from '../../../../model/roles';
 import { Companies } from '../../../../model/companies';
+import { UsersViewComponent } from '../users-view/users-view.component';
 
 @Component({
   selector: 'app-users-update',
@@ -20,22 +21,35 @@ export class UsersUpdateComponent implements OnInit {
   roles:Roles[] = [];
   companies:Companies[] = [];
 
-  walah:Roles;
-
   constructor(private apiService:ApiService, private authService:AuthService, private activatedRoute:ActivatedRoute) { 
   	this.user = new Users();
+
   	this.user.idRole = new Roles();
   	this.user.idCompany = new Companies();
   	this.temp = new Users();
   	this.getRoles();
-  	this.getCompanies();
-  	this.walah = this.roles[1];
-  	console.log(this.user);
-  	this.activatedRoute.queryParams.subscribe((data) => {
-  		this.temp = <Users>data;
-  		this.user.name = this.temp.name;
+  	// this.getCompanies();
+     this.user.nip = this.activatedRoute.snapshot.queryParamMap.get('nip');
+     console.log(this.user.nip);
+     this.getUserByNip(this.user.nip);
+    //  console.log(firstparam);
+  	// this.activatedRoute.queryParams.subscribe((data) => {
 
-  	})
+   //    console.log(data);
+
+
+
+      
+  		
+    //   this.temp = <Users>data;
+  		// this.user.name = this.temp.name;
+    //   this.user.nip = this.temp.nip;
+    //   this.user.contact = this.temp.contact;
+    //   this.user.address = this.temp.address;
+    //   this.user.idCompany.name = this.temp.companyName;
+    //   this.user.idRole.name = this.temp.idRole.name;
+
+  	// })
   }
 
   ngOnInit() {
@@ -48,10 +62,17 @@ export class UsersUpdateComponent implements OnInit {
   	})
   }
 
-  async getCompanies() {
-  	this.apiService.viewCompanies().subscribe(companies => {
-  		this.companies = companies;
-  	})
+  // async getCompanies() {
+  // 	this.apiService.viewCompanies().subscribe(companies => {
+  // 		this.companies = companies;
+  // 	})
+  // }
+
+  async getUserByNip(nip:string) {
+    this.apiService.getUserByNip(nip).subscribe(result => {
+      console.log(result);
+      this.user = result;
+    })
   }
 
   async updateCompany() {

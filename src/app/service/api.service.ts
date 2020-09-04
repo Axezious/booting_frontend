@@ -178,10 +178,16 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  updateUsers(data: Companies): Observable<Users> {
+  updateUsers(data: Users): Observable<Users> {
     return this.http.put<Users>(`${this.base_url}/users/update`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
+
+  getUserByNip(nip:string): Observable<Users> {
+    return this.http.get<Users>(`${this.base_url}/users/get-users/${nip}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }  
+  
 
   //Crud dashboard Admin
   dashboardAdmin(): Observable<TicketStatus> {
@@ -195,6 +201,10 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  getListTicket():Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
 
   // CRUD USER
   insertUser(data: Accounts): Observable<Accounts> {

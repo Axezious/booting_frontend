@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChildren, OnInit } from '@angular/core';
+import { Component, QueryList, ViewChildren, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ApiService } from '../../../../service/api.service';
@@ -34,5 +34,11 @@ export class UsersViewComponent implements OnInit {
       this.service.viewUsers();
     })
   }
+
+  // helper(data:Users) {
+  //   let str:string = JSON.stringify(data);
+  //   console.log(str);
+  //   return str
+  // }
 
 }
