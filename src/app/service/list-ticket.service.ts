@@ -30,6 +30,7 @@ export class ListTicketsService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _tickets$ = new BehaviorSubject<Tickets[]>([]);
+  private _ticketsOpen$ = new BehaviorSubject<Tickets[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -48,7 +49,8 @@ export class ListTicketsService {
     this.apiService.getListTicket().subscribe(tickets => {
 
       this.tickets = tickets;
-      this.ticketsOpen = tickets.filter(data => data.idStatus.name == 'Open');
+      this.ticketsOpen = this.tickets.filter(data => data.idStatus.name == 'Open');
+      console.log(this.ticketsOpen);
 
       this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -57,6 +59,7 @@ export class ListTicketsService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
+      this._ticketsOpen$.next(result.tickets);
       this._tickets$.next(result.tickets);
       this._total$.next(result.total);
     });
@@ -67,7 +70,8 @@ export class ListTicketsService {
   }
 
   openFilter() {
-    this.tickets = this.tickets.filter(data => data.idStatus.name == 'Open');
+    let asdf = this.tickets.filter(data => data.idStatus.name == 'Open');
+    console.log(asdf);
   }
 
   // isOpen(element, index, array) {
@@ -87,6 +91,7 @@ export class ListTicketsService {
   }
 
   get tickets$() { return this._tickets$.asObservable(); }
+  get ticketsOpen$() { return this._ticketsOpen$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }

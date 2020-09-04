@@ -22,7 +22,9 @@ export class ListTicketComponent implements OnInit {
 
   constructor(private apiService:ApiService, private service:ListTicketsService) { 
   	this.tickets$ = service.tickets$;
+    this.ticketsOpen$ = service.ticketsOpen$;
     this.total$ = service.total$;
+    this.getOpenTickets();
   }
 
   ngOnInit() {
