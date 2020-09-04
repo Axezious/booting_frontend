@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'classifications', loadChildren: () => import('./master/classifications/classifications.module').then(m => m.ClassificationsModule) },
   { path: 'client-products', loadChildren: () => import('./master/client-products/client-products.module').then(m => m.ClientProductsModule) },
   { path: 'companies', loadChildren: () => import('./master/companies/companies.module').then(m => m.CompaniesModule) },
-  { path: 'priorities', loadChildren: () => import('./master/priorities/priorities.module').then(m => m.PrioritiesModule) },  
+  { path: 'priorities', loadChildren: () => import('./master/priorities/priorities.module').then(m => m.PrioritiesModule) },
+  { path: 'client-account', loadChildren: () => import('./master/client-account/client-account.module').then(m => m.ClientAccountModule) },  
 ];
 
 

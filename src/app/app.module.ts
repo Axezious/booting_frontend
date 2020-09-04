@@ -13,7 +13,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
@@ -31,7 +30,6 @@ import { from } from 'rxjs';
     FooterComponent,
     DashboardComponent,
     SpinnerComponent,
-    ContentAnimateDirective,
     ConfirmEqualValidatorDirective,
   ],
   imports: [
