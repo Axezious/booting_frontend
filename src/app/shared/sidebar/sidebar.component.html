@@ -18,7 +18,6 @@
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
-    <!-- <li class="nav-item" [ngClass]="{'active' : products.isActive || accordions.isActive || buttons.isActive || badges.isActive || breadcrumbs.isActive || dropdowns.isActive || modals.isActive || notifications.isActive || progressbar.isActive || pagination.isActive || tabs.isActive || typography.isActive || tooltips.isActive }"> -->
     <li *ngIf="role == 'ADM' || role == 'AGT' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : products.isActive || classifications.isActive || priorities.isActive || statusmaster.isActive || companies.isActive || accounts.isActive || roles.isActive || users.isActive || agentrelations.isActive || clientproducts.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
         <span class="menu-title">Admin Table Master</span>

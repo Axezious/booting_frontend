@@ -21,16 +21,20 @@
                 <input type="text" name="name" [(ngModel)]="users.name" class="form-control" id="inputName" placeholder="Name">
               </div>
               <div class="form-group">
+                <label for="inputCompanyName">Company</label>
+                <input type="text" name="companyName" [(ngModel)]="users.idCompany.name" class="form-control" id="inputCompanyName" placeholder="Name">
+              </div>
+              <!-- <div class="form-group">
                 <label for="inputIDCompanies">ID Companies</label>
                 <select id="inputIDCompanies" class="form-control" name="idCompany" [(ngModel)]="users.idCompany">
                   <option [ngValue]="null">Choose...</option>
                   <option *ngFor="let company of companies" [ngValue]="company">{{company.name}}</option>
                 </select>
-              </div>
+              </div> -->
               <div class="form-group">
-                <label for="inputIDRoles">ID Roles</label>
+                <label for="inputIDRoles">Role</label>
                 <select id="inputIDRoles" class="form-control" name="idRole" [(ngModel)]="users.idRole" >
-                  <option [ngValue]="null">Choose...</option>
+                  <option [ngValue]="" disabled>Choose...</option>
                   <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
                 </select>
               </div>
@@ -41,6 +45,14 @@
               <div class="form-group">
                 <label for="inputAddress">Address</label>
                 <textarea type="text" name="address" [(ngModel)]="users.address" class="form-control" rows="4" id="inputAddress"></textarea> 
+              </div>
+              <div class="form-group">
+                <label for="inputActive">isActive</label>
+                <select id="inputActive" class="form-control" name="isActive" [(ngModel)]="users.isActive" >
+                  <option [ngValue]="" disabled>Choose...</option>
+                  <option [ngValue]="true">Active</option>
+                  <option [ngValue]="false">Inactive</option>
+                </select>
               </div>
               <button type="submit" (click)="insertUsers()" class="btn btn-gradient-primary mt-3">Insert</button>
               <!-- <button class="btn btn-light">Cancel</button> -->
