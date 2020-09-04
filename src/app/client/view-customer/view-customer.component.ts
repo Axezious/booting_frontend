@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Accounts } from 'src/app/model/accounts';
 
 @Component({
   selector: 'app-view-customer',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-customer.component.scss']
 })
 export class ViewCustomerComponent implements OnInit {
+
+  account$:Observable<Accounts>[];
+  total$
 
   constructor() { }
 
