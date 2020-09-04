@@ -35,7 +35,7 @@ export class InsertCustomerComponent implements OnInit {
     console.log(this.account);
     console.log(this.cPass);
 
-    this.apiService.insertUser(this.account).subscribe( data => {
+    this.apiService.insertAccount(this.account).subscribe( data => {
       console.log(data);
     })
     

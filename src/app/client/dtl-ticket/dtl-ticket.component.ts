@@ -10,6 +10,7 @@ import { formatDate } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Thread } from '../../model/thread';
 import { FireService } from 'src/app/service/fire.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dtl-ticket',
@@ -19,6 +20,8 @@ import { FireService } from 'src/app/service/fire.service';
 
 export class DtlTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
+
+  xCode:string;
 
   files: File[] = []
   account: Accounts = new Accounts();
@@ -46,10 +49,24 @@ export class DtlTicketComponent implements OnInit {
     imageUrl: new FormControl('', Validators.required)
   })
 
+  constructor(private auth: AuthService, private fire: FireService, private route:ActivatedRoute) {
+    this.account.idUser = new Users();
+    this.account.idUser.idCompany = new Companies();
+    this.account.idUser.idRole = new Roles();
+    this.account = auth.getAccount();
+
+    this.xCode = this.route.snapshot.queryParamMap.get('code');
+
+    // this.items = db.list('threads').valueChanges();
+  }
+
+  ngOnInit() {
+  }
+
   uploadFiles() {
     console.log(this.fileList);
     let thread = new Thread();
-    thread.id = '123'; // Ganti dengan no ticket.
+    thread.id = 'slmb-541'; // Ganti dengan no ticket.
     thread.contents = this.itemValue;
     this.fire.insertFireDtl(thread, this.fileList);
     this.attachment.nativeElement.value = '';
@@ -83,18 +100,6 @@ export class DtlTicketComponent implements OnInit {
     this.listOfFiles.splice(index, 1);
     // delete file from FileList
     this.fileList.splice(index, 1);
-  }
-
-  constructor(private auth: AuthService, private fire: FireService) {
-    this.account.idUser = new Users();
-    this.account.idUser.idCompany = new Companies();
-    this.account.idUser.idRole = new Roles();
-    this.account = auth.getAccount();
-
-    // this.items = db.list('threads').valueChanges();
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {

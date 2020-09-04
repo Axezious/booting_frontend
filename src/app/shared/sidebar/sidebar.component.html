@@ -36,6 +36,7 @@
           <li class="nav-item"><a class="nav-link" routerLink="admin/users/view" routerLinkActive="active" #users="routerLinkActive">Users</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/agent-relations/view" routerLinkActive="active" #agentrelations="routerLinkActive">Agent Relations</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/client-products/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Products</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/client-account/insert" routerLinkActive="active" #clientproducts="routerLinkActive">Client Account</a></li>
         </ul>
       </div>
     </li>
@@ -76,12 +77,6 @@
       <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
         <span class="menu-title">Admin Tickets</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item" [ngClass]="{ 'active': charts.isActive }">
-      <a class="nav-link" routerLink="charts/chartjs" routerLinkActive #charts="routerLinkActive">
-        <span class="menu-title">Log</span>
-        <i class="mdi mdi-login-variant menu-icon"></i>
       </a>
     </li>
   </ul>

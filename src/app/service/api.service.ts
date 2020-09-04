@@ -10,7 +10,7 @@ import { Roles } from '../model/roles';
 import { Companies } from '../model/companies';
 import { Products } from '../model/products';
 import { Classifications } from '../model/classifications';
-import { auth } from 'firebase';
+import { auth, User } from 'firebase';
 import { TicketsDtl } from '../model/tickets-dtl';
 import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
@@ -184,6 +184,11 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  getUserByNip(nip: string): Observable<Users> {
+    return this.http.get<Users>(`${this.base_url}/users/get-users/${nip}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
   //Crud dashboard Admin
   dashboardAdmin(): Observable<TicketStatus> {
     return this.http.get<TicketStatus>(`${this.base_url}/tickets/all-status`,
@@ -216,10 +221,14 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  getListTicket(): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
 
-  // CRUD USER
-  insertUser(data: Accounts): Observable<Accounts> {
-    return this.http.post<Accounts>(`${this.base_url}/account/insert`, data,
+  // CRUD ACCOUNT
+  insertAccount(data: Accounts): Observable<Accounts> {
+    return this.http.post<Accounts>(`${this.base_url}/accounts/insert`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -227,6 +236,7 @@ export class ApiService {
     return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
+
 
 }
 

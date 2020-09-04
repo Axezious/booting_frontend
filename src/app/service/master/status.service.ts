@@ -2,16 +2,10 @@ import { Injectable, PipeTransform } from '@angular/core';
 
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
-import { Classifications } from '../../model/classifications';
 import { ApiService } from '../api.service';
 
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 import { Status } from '../../../app/model/status'
-
-
-
-
-
 
 interface SearchResult {
   status: Status[];
@@ -69,10 +63,10 @@ export class StatusService {
     })
   }
 
-  matches(classification: Classifications, term: string) {
-    return classification.code.toLowerCase().includes(term.toLowerCase())
-      || classification.name.toLowerCase().includes(term.toLowerCase());
-    //  || classification.name.toLowerCase().includes(term.toLowerCase());
+  matches(status: Status, term: string) {
+    return status.code.toLowerCase().includes(term.toLowerCase())
+      || status.name.toLowerCase().includes(term.toLowerCase());
+    //  || status.name.toLowerCase().includes(term.toLowerCase());
   }
 
   get status$() { return this._status$.asObservable(); }
@@ -96,7 +90,7 @@ export class StatusService {
 
     // 1. filter
     let status = this.status;
-    status = status.filter(statuss => this.matches(statuss, searchTerm,));
+    status = status.filter(status => this.matches(status, searchTerm,));
     const total = status.length;
 
     // 2. paginate

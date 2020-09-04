@@ -15,14 +15,14 @@ export class UsersInsertComponent implements OnInit {
 
   users:Users;
   roles:Roles[] = [];
-  companies:Companies[] = [];
+  // companies:Companies[] = [];
 
   constructor(private apiService:ApiService, private authService:AuthService) { 
   	this.users = new Users();
   	this.users.idRole = new Roles();
   	this.users.idCompany = new Companies();
   	this.getRoles();
-  	this.getCompanies();
+  	// this.getCompanies();
   }
 
   ngOnInit() {
@@ -41,10 +41,10 @@ export class UsersInsertComponent implements OnInit {
   	})
   }
 
-  async getCompanies() {
-  	this.apiService.viewCompanies().subscribe(companies => {
-  		this.companies = companies;
-  	})
-  }
+  // async getCompanies() {
+  // 	this.apiService.viewCompanies().subscribe(companies => {
+  // 		this.companies = companies;
+  // 	})
+  // }
 
 }
