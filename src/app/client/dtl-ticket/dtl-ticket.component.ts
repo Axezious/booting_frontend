@@ -49,7 +49,7 @@ export class DtlTicketComponent implements OnInit {
   uploadFiles() {
     console.log(this.fileList);
     let thread = new Thread();
-    thread.id = '123'; // Ganti dengan no ticket.
+    thread.id = 'slmb-541'; // Ganti dengan no ticket.
     thread.contents = this.itemValue;
     this.fire.insertFireDtl(thread, this.fileList);
     this.attachment.nativeElement.value = '';

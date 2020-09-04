@@ -14,7 +14,8 @@ import { Status } from 'src/app/model/status';
 import { AngularFireUploadTask } from '@angular/fire/storage';
 import { Thread } from 'src/app/model/thread';
 import { FireService } from 'src/app/service/fire.service';
-
+import { async } from '@angular/core/testing';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-insert-ticket',
@@ -24,7 +25,6 @@ import { FireService } from 'src/app/service/fire.service';
 export class InsertTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
   task: AngularFireUploadTask;
-
   files: File[] = []
   blurred = false
   focused = false
@@ -42,16 +42,26 @@ export class InsertTicketComponent implements OnInit {
   classificationSelected: string;
   status: Status[];
 
-
-  uploadFiles() {
+  codeTicket: string;
+  
+  uploadFiles(kode:string) {
     console.log(this.fileList);
     let thread = new Thread();
-    thread.id = '123'; // Ganti dengan no ticket.
+    let currentDate = new Date();
+
+    thread.id = kode; // Ganti dengan no ticket.
     thread.contents = this.itemValue;
+    thread.dateAndTime =  formatDate(currentDate, 'dd-MM-yyyy HH:mm:ss', 'en-US');
+    thread.something = 'TEST ONLY';
+
+    this.auth.getAccount().idUser.id;
+    this.auth.getAccount().idUser.name;
+    
     this.fire.insertFireHdr(thread, this.fileList);
     this.attachment.nativeElement.value = '';
     this.fileList = []
     this.listOfFiles = []
+    
   }
   onFileChanged(event: any) {
     let totalSize = 0;
@@ -60,10 +70,11 @@ export class InsertTicketComponent implements OnInit {
       this.fileList.push(selectedFile);
       this.listOfFiles.push(selectedFile.name)
     }
+
     for (let i = 0; i <= this.fileList.length - 1; i++) {
       totalSize += this.fileList[i].size
-
     }
+
     console.log(totalSize);
     let mat = Math.floor(totalSize / 1024)
     if (mat > 1000) {
@@ -82,6 +93,8 @@ export class InsertTicketComponent implements OnInit {
     // delete file from FileList
     this.fileList.splice(index, 1);
   }
+
+  fileLength: number;
 
   constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService) {
     this.account.idUser = new Users();
@@ -141,14 +154,19 @@ export class InsertTicketComponent implements OnInit {
     this.ticketDtl.idTickets.createdBy = this.account.idUser.name;
 
     this.ticketDtl.idTickets.idCustomer = this.account.idUser;
+    this.ticketDtl.date = new Date();
+    console.log(this.ticketDtl.date);
+    
 
     // this.uploadFiles();
     console.log(this.ticketDtl.idTickets);
     this.apiService.insertTicket(this.ticketDtl.idTickets).subscribe( data => {
       console.log(data);
+      this.ticketDtl.idTickets = data;
+
+      this.ticketDtl.idTickets.idCustomer = this.account.idUser;
+      this.uploadFiles(this.ticketDtl.idTickets.code);
+      console.log(this.ticketDtl); 
     })
-    this.ticketDtl.idTickets.idCustomer = this.account.idUser;
-    this.uploadFiles();
-    console.log(this.ticketDtl); 
   }
 }
