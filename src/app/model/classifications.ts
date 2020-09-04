@@ -1,7 +1,6 @@
-export class Classifications {
-    id: string;
+import { BaseModel } from './base-model';
+
+export class Classifications extends BaseModel {
     code: string;
     name: string;
-    createdBy : String;
-    updatedBy : String;
 }

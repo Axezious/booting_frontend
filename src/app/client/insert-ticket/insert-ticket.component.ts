@@ -11,6 +11,9 @@ import { Products } from 'src/app/model/products';
 import { Priorities } from 'src/app/model/priorities';
 import { Classifications } from 'src/app/model/classifications';
 import { Status } from 'src/app/model/status';
+import { AngularFireUploadTask } from '@angular/fire/storage';
+import { Thread } from 'src/app/model/thread';
+import { FireService } from 'src/app/service/fire.service';
 
 
 @Component({
@@ -20,6 +23,7 @@ import { Status } from 'src/app/model/status';
 })
 export class InsertTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
+  task: AngularFireUploadTask;
 
   files: File[] = []
   blurred = false
@@ -41,6 +45,10 @@ export class InsertTicketComponent implements OnInit {
 
   uploadFiles() {
     console.log(this.fileList);
+    let thread = new Thread();
+    thread.id = '123'; // Ganti dengan no ticket.
+    thread.contents = this.itemValue;
+    this.fire.insertFireHdr(thread, this.fileList);
     this.attachment.nativeElement.value = '';
     this.fileList = []
     this.listOfFiles = []
@@ -78,12 +86,13 @@ export class InsertTicketComponent implements OnInit {
     this.fileList.splice(index, 1);
   }
 
-  constructor(private auth: AuthService, private apiService: ApiService) {
+  constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
     this.ticketDtl.idTickets = new Tickets();
     this.ticketDtl.idTickets.idCustomer = new Users();
+    this.ticketDtl.idTickets.idStatus = new Status();
     this.account = this.auth.getAccount();
     
     apiService.viewProducts().subscribe( datas => {
@@ -116,27 +125,33 @@ export class InsertTicketComponent implements OnInit {
 
   submit() {
     let product: Products = new Products();
-    product.id = this.productSelected;
+    product.code = this.productSelected;
     this.ticketDtl.idTickets.idProduct = product;
 
     let priority: Priorities = new Priorities();
-    priority.id = this.prioritySelected;
+    priority.code = this.prioritySelected;
     this.ticketDtl.idTickets.idPriority = priority;
 
     let classification: Classifications = new Classifications();
-    classification.id = this.classificationSelected;
+    classification.code = this.classificationSelected;
     this.ticketDtl.idTickets.idClassification = classification;
 
     this.ticketDtl.sender = this.account.idUser.name;
     this.ticketDtl.description = this.itemValue;
 
+    this.ticketDtl.idTickets.idStatus.code = 'OP';
+
+    this.ticketDtl.idTickets.createdBy = this.account.idUser.name;
+
     this.ticketDtl.idTickets.idCustomer = this.account.idUser;
 
     // this.uploadFiles();
-    console.log(this.ticketDtl);
-    // this.apiService.insertTicket(this.ticketDtl).subscribe( data => {
-    //   console.log(data);
-    // })
-    
+    console.log(this.ticketDtl.idTickets);
+    this.apiService.insertTicket(this.ticketDtl.idTickets).subscribe( data => {
+      console.log(data);
+    })
+    this.ticketDtl.idTickets.idCustomer = this.account.idUser;
+    this.uploadFiles();
+    console.log(this.ticketDtl); 
   }
 }

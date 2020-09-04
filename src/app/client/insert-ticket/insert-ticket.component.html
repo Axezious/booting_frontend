@@ -58,14 +58,11 @@
                             <div class="form-group">
                                 <label for="products">Products</label>
                                 <select [(ngModel)]="productSelected" class="form-control">
-                                    <option *ngFor="let product of products" [value]="product.id">
+                                    <option *ngFor="let product of products" [value]="product.code">
                                         {{product.name}}
                                     </option>
                                 </select>
                             </div>
-
-
-                            
 
                         </div>
                         <h4 class="card-product">Additional Information</h4>
@@ -73,7 +70,7 @@
                             <div class="form-group">
                                 <label for="products">Priorities</label>
                                 <select [(ngModel)]="prioritySelected" class="form-control">
-                                    <option *ngFor="let priority of priorities" [value]="priority.id">
+                                    <option *ngFor="let priority of priorities" [value]="priority.code">
                                         {{priority.name}}
                                     </option>
                                 </select>
@@ -81,7 +78,7 @@
                             <div class="form-group">
                                 <label for="products">Classifications</label>
                                 <select [(ngModel)]="classificationSelected" class="form-control">
-                                    <option *ngFor="let classification of classifications" [value]="classification.id">
+                                    <option *ngFor="let classification of classifications" [value]="classification.code">
                                         {{classification.name}}
                                     </option>
                                 </select>

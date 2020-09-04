@@ -1,11 +1,9 @@
 import { Tickets } from './tickets';
+import { BaseModel } from './base-model';
 
-export class TicketsDtl {
-    id: string;
+export class TicketsDtl extends BaseModel {
     sender: string;
     idTickets: Tickets;
     date: Date;
     description: string;
-    createdBy : String;
-    updatedBy : String;
 }

@@ -1,8 +1,7 @@
-export class TemplateEmail {
-    id: string;
+import { BaseModel } from './base-model';
+
+export class TemplateEmail extends BaseModel {
     code: string;
     name: string;
     template: string;
-    createdBy : String;
-    updatedBy : String;
 }

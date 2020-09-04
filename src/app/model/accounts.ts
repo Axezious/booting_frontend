@@ -1,10 +1,9 @@
 import {Users} from '../model/users'
+import { BaseModel } from './base-model';
 
-export class Accounts {
-    id: string;
+export class Accounts extends BaseModel {
+
     email: string;
     pass: string;
     idUser: Users;
-    createdBy : String;
-    updatedBy : String;
 }

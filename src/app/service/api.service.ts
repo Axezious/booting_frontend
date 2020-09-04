@@ -15,6 +15,7 @@ import { TicketsDtl } from '../model/tickets-dtl';
 import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
 import { TicketChart } from '../model/ticket-chart';
+import { Tickets } from '../model/tickets';
 
 @Injectable({
   providedIn: 'root'
@@ -188,16 +189,44 @@ export class ApiService {
     return this.http.get<TicketStatus>(`${this.base_url}/tickets/all-status`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-
-  insertTicket(data: TicketsDtl): Observable<TicketsDtl> {
-    return this.http.post<TicketsDtl>(`${this.base_url}/tickets/insert`,
+   //Crud dashboard Client
+   dashboardClient(data:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-company/${data}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+   //Crud dashboard Agent
+   dashboardAgent(data:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${data}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+   //Crud dashboard Customer
+   dashboardCustomer(data:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-customer/${data}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+  //CRUD dashboardRecentAdmin
+  recentAdmin(): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getChart(data:string): Observable<TicketChart> {
-    return this.http.get<TicketChart>(`${this.base_url}/tickets/charts/${data}`,
-      {headers : {Authorization:`Bearer ${this.authService.getToken()}`}})
+  // CRUD TICKET
+  insertTicket(data: Tickets): Observable<Tickets> {
+    return this.http.post<Tickets>(`${this.base_url}/tickets/insert`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-  
+
+
+  // CRUD USER
+  insertUser(data: Accounts): Observable<Accounts> {
+    return this.http.post<Accounts>(`${this.base_url}/account/insert`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  getChart(data: string): Observable<TicketChart[]> {
+    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
 }
 

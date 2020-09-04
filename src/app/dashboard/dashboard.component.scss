@@ -51,17 +51,18 @@
     li {
       &:nth-child(1) {
         .legend-dots {
-          background: linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1));
+          background: linear-gradient(to right,  #fe7096, #fe7096);
         }
       }
       &:nth-child(2) {
         .legend-dots {
-          background: linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1));
+          background:linear-gradient(to right, #90caf9, #047edf 99%);
         }
       }
       &:nth-child(3) {
         .legend-dots {
-          background:linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))
+          
+          background: linear-gradient(to right, #84d9d2, #07cdae);
         }
       }
     }

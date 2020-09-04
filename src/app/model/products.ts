@@ -1,8 +1,7 @@
-export class Products {
-    id: string;
+import { BaseModel } from './base-model';
+
+export class Products extends BaseModel {
     code: string;
     name: string;  
     description: string;
-    createdBy : String;
-    updatedBy : String;
 }

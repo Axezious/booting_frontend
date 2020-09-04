@@ -63,7 +63,6 @@ export class AuthService {
     account.idUser = new Users();
     account.idUser.idCompany = new Companies();
     account.idUser.idRole = new Roles();
-
     account.email = localStorage.getItem('email');
     account.idUser.id = localStorage.getItem('idUser')
     account.idUser.nip = localStorage.getItem('nip');

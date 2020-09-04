@@ -19,6 +19,7 @@ export class StatusViewComponent implements OnInit {
 
   constructor(private service: StatusService, private apiService: ApiService) {
     this.status$ = service.status$;
+    
     this.total$ = service.total$;
   }
 

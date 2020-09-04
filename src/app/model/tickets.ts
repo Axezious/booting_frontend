@@ -3,9 +3,9 @@ import { Products } from './products';
 import { Priorities } from './priorities';
 import { Status } from './status';
 import { Classifications } from './classifications';
+import { BaseModel } from './base-model';
 
-export class Tickets {
-    id: string;
+export class Tickets extends BaseModel {
     idCustomer: Users;
     idProduct: Products;
     idPriority: Priorities;
@@ -13,6 +13,4 @@ export class Tickets {
     idClassification: Classifications;
     subject: string;
     idStatus: Status;
-    createdBy : String;
-    updatedBy : String;
 }

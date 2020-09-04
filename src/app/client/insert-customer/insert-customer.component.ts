@@ -4,6 +4,7 @@ import { Users } from 'src/app/model/users';
 import { Roles } from 'src/app/model/roles';
 import { Companies } from 'src/app/model/companies';
 import { AuthService } from 'src/app/service/auth.service';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-insert-customer',
@@ -16,22 +17,27 @@ export class InsertCustomerComponent implements OnInit {
   accountTemp: Accounts = new Accounts();
   cPass: String;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private apiService: ApiService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
-    
     this.accountTemp = auth.getAccount();
     this.account.idUser.idCompany = this.accountTemp.idUser.idCompany;
-    this.account.idUser.idRole = this.accountTemp.idUser.idRole;
+    this.account.idUser.idRole.code = 'CTM';
   }
 
   ngOnInit() {
   }
 
   submit() {
+    this.account.createdBy = this.accountTemp.idUser.name;
+    this.account.idUser.createdBy = this.accountTemp.idUser.name;
     console.log(this.account);
     console.log(this.cPass);
+
+    this.apiService.insertUser(this.account).subscribe( data => {
+      console.log(data);
+    })
     
     this.account = new Accounts();
     this.account.idUser = new Users();

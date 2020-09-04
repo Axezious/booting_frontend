@@ -23,7 +23,7 @@
           <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
         </h4>
         <h2 class="mb-5">{{ticketOpen}}</h2>
-        <h6 class="card-text">last 24 hours</h6>
+        <!-- <h6 class="card-text">last 24 hours</h6> -->
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
           <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
         </h4>
         <h2 class="mb-5">{{ticketClose}}</h2>
-        <h6 class="card-text">last 24 hours</h6>
+        <!-- <h6 class="card-text">last 24 hours</h6> -->
       </div>
     </div>
   </div>
@@ -47,12 +47,12 @@
           <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
         </h4>
         <h2 class="mb-5">{{ticketReOpen}}</h2>
-        <h6 class="card-text">last 24 hours</h6>
+        <!-- <h6 class="card-text">last 24 hours</h6> -->
       </div>
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="account.idUser.idRole.code == 'ADM' || account.idUser.idRole.code == 'SPA' || account.idUser.idRole.code == 'CLI'">
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -174,84 +174,31 @@
                   Status
                 </th>
                 <th>
-                  Last Update
+                  Created At
                 </th>
                 <th>
-                  Tracking ID
+                  Code
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of ticketsHelper" name="item.idCustomer.name">
                 <td>
-                  <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image">
-                  David Grey
+                  {{item.idCustomer.name}}
                 </td>
                 <td>
-                  Fund is not recieved
+                  {{item.subject}}
                 </td>
                 <td>
-                  <label class="badge badge-gradient-success">DONE</label>
+                  <label *ngIf="item.idStatus.name=='Close'"class="badge badge-gradient-info">{{item.idStatus.name}}</label>
+                  <label *ngIf="item.idStatus.name=='Re-open'"class="badge badge-gradient-success">{{item.idStatus.name}}</label>
+                  <label *ngIf="item.idStatus.name=='Open'"class="badge badge-gradient-danger">{{item.idStatus.name}}</label>
                 </td>
                 <td>
-                  Dec 5, 2017
+                  {{item.createdAt | date:'MMM d, y, h:mm a'}}
                 </td>
                 <td>
-                  WD-12345
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img src="assets/images/faces/face2.jpg" class="mr-2" alt="image">
-                  Stella Johnson
-                </td>
-                <td>
-                  High loading time
-                </td>
-                <td>
-                  <label class="badge badge-gradient-warning">PROGRESS</label>
-                </td>
-                <td>
-                  Dec 12, 2017
-                </td>
-                <td>
-                  WD-12346
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image">
-                  Marina Michel
-                </td>
-                <td>
-                  Website down for one week
-                </td>
-                <td>
-                  <label class="badge badge-gradient-info">ON HOLD</label>
-                </td>
-                <td>
-                  Dec 16, 2017
-                </td>
-                <td>
-                  WD-12347
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image">
-                  John Doe
-                </td>
-                <td>
-                  Loosing control on server
-                </td>
-                <td>
-                  <label class="badge badge-gradient-danger">REJECTED</label>
-                </td>
-                <td>
-                  Dec 3, 2017
-                </td>
-                <td>
-                  WD-12348
+                  {{item.code}}
                 </td>
               </tr>
             </tbody>

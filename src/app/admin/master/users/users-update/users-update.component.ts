@@ -60,7 +60,7 @@ export class UsersUpdateComponent implements OnInit {
   	this.user.updatedBy = this.authService.getAccount().idUser.name;
   	console.log(this.user);
   	this.apiService.updateUsers(this.user).subscribe(user =>{
-  		console.log(user);
+  		console.log(this.user);
   	})
   }
 
