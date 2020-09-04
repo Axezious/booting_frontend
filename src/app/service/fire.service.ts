@@ -93,12 +93,12 @@ export class FireService {
     // });
   }
 
-  // getRealtimeChat(nomorTiket: string, call: Callback) {
-  //   this.db.list(`threads/${nomorTiket}/`).valueChanges().subscribe(data => {
-  //     console.log(data);
+  getRealtimeChat(nomorTiket: string, call: Callback) {
+    this.db.list(`threads/${nomorTiket}/`).valueChanges().subscribe(data => {
+      console.log(data);
       
-  //   });
-  // }
+    });
+  }
 }
 
 interface Callback {
