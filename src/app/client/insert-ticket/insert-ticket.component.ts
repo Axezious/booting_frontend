@@ -53,10 +53,10 @@ export class InsertTicketComponent implements OnInit {
     thread.contents = this.itemValue;
     thread.dateAndTime =  formatDate(currentDate, 'dd-MM-yyyy HH:mm:ss', 'en-US');
     thread.something = 'TEST ONLY';
+    thread.user = new Users();
+    thread.user.id = this.auth.getAccount().idUser.id;
+    thread.user.name = this.auth.getAccount().idUser.name;
 
-    this.auth.getAccount().idUser.id;
-    this.auth.getAccount().idUser.name;
-    
     this.fire.insertFireHdr(thread, this.fileList);
     this.attachment.nativeElement.value = '';
     this.fileList = []

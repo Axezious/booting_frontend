@@ -6,5 +6,6 @@ export class Thread {
     contents: string;
     urlFiles: string[]; 
     dateAndTime: string;
+    user: Users;
     something: string;
 }
