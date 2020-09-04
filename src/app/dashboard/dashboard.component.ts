@@ -32,11 +32,11 @@ export class DashboardComponent implements OnInit {
     console.log(this.account.idUser.idRole.code);
     this.AllDashboard();
     this.getChart();
-
+    this.getChartCilent();
   }
 
- async AllDashboard() {
-    if (this.account.idUser.idRole.code == "ADM" ||this.account.idUser.idRole.code == "SPA" ) {
+  async AllDashboard() {
+    if (this.account.idUser.idRole.code == "ADM" || this.account.idUser.idRole.code == "SPA") {
       console.log("admin");
       this.getDashboardAdmin();
     }
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
- async getDashboardAgent() {
+  async getDashboardAgent() {
     let agent = this.account.idUser.nip
     console.log(agent);
     this.apiService.dashboardAgent(agent).subscribe(result => {
@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
- async getDashboardCustomer() {
+  async getDashboardCustomer() {
     let customer = this.account.idUser.nip
     this.apiService.dashboardCustomer(customer).subscribe(result => {
       this.tickets = result;
@@ -172,6 +172,32 @@ export class DashboardComponent implements OnInit {
         console.log(this.ticketsHelper);
       }
     })
+  }
+
+  getRecentTickets() {
+    this.apiService.recentAdmin().subscribe(data => {
+      this.tickets = data;
+      if (this.tickets.length < 5) {
+        for (let i = 0; i < this.tickets.length; i++) {
+          this.ticketsHelper.push(this.tickets[i])
+        }
+        console.log(this.ticketsHelper);
+
+      } else {
+        for (let i = 0; i < 5; i++) {
+          this.ticketsHelper.push(this.tickets[i]);
+        }
+        console.log(this.ticketsHelper);
+      }
+    })
+  }
+  getChartCilent() {
+    let data = { 'name': `${this.account.idUser.idCompany.name}`, 'year': "2020" }
+    this.apiService.getChartClient(data).subscribe(result =>{
+      console.log();
+      
+    })
+    console.log(data.year);
   }
 
 
@@ -225,26 +251,6 @@ export class DashboardComponent implements OnInit {
       });
     })
   }
-  getRecentTickets() {
-    this.apiService.recentAdmin().subscribe(data => {
-      this.tickets = data;
-      if (this.tickets.length < 5) {
-        for (let i = 0; i < this.tickets.length; i++) {
-          this.ticketsHelper.push(this.tickets[i])
-        }
-        console.log(this.ticketsHelper);
-
-      } else {
-        for (let i = 0; i < 5; i++) {
-          this.ticketsHelper.push(this.tickets[i]);
-        }
-        console.log(this.ticketsHelper);
-      }
-    })
-  }
-
-
-
 
   ngOnInit() {
   }

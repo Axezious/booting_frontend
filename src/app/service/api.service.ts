@@ -16,6 +16,7 @@ import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
 import { TicketChart } from '../model/ticket-chart';
 import { Tickets } from '../model/tickets';
+import { data } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -194,18 +195,18 @@ export class ApiService {
     return this.http.get<TicketStatus>(`${this.base_url}/tickets/all-status`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-   //Crud dashboard Client
-   dashboardClient(data:string): Observable<Tickets[]> {
+  //Crud dashboard Client
+  dashboardClient(data: string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-company/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-   //Crud dashboard Agent
-   dashboardAgent(data:string): Observable<Tickets[]> {
+  //Crud dashboard Agent
+  dashboardAgent(data: string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-   //Crud dashboard Customer
-   dashboardCustomer(data:string): Observable<Tickets[]> {
+  //Crud dashboard Customer
+  dashboardCustomer(data: string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-customer/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
@@ -237,6 +238,10 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  getChartClient(data: {}): Observable<TicketChart[]> {
+    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
 
 }
 

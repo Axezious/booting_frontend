@@ -79,5 +79,11 @@
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
+    <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+      <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
+        <span class="menu-title">Download Report</span>
+        <i class="mdi mdi-ticket-confirmation menu-icon"></i>
+      </a>
+    </li>
   </ul>
 </nav>

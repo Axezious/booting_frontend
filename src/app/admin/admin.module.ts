@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CommonModule } from '@angular/common';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -14,11 +15,12 @@ import { ViewTicketComponent } from './view-ticket/view-ticket.component';
     ViewTicketComponent
   ],
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ToastModule
   ]
 })
 export class AdminModule { }
