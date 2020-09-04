@@ -93,6 +93,8 @@ export class FireService {
     // });
   }
 
+  // testt
+
   
   getRealtimeChat(nomorTiket: string, call: Callback) {
     this.db.list(`threads/${nomorTiket}/`).valueChanges().subscribe(data => {
