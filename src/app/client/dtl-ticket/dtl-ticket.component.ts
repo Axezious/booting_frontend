@@ -11,6 +11,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Thread } from '../../model/thread';
 import { FireService } from 'src/app/service/fire.service';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Tickets } from 'src/app/model/tickets';
 
 @Component({
   selector: 'app-dtl-ticket',
@@ -21,7 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DtlTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
 
-  xCode:string;
+  xCode: string;
 
   files: File[] = []
   account: Accounts = new Accounts();
@@ -31,7 +33,7 @@ export class DtlTicketComponent implements OnInit {
   listOfFiles: any[] = [];
 
   itemValue = '';
-  items: Observable<any[]>;
+  items: any[] = [];
   threads: Thread[] = [];
 
   days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -49,24 +51,28 @@ export class DtlTicketComponent implements OnInit {
     imageUrl: new FormControl('', Validators.required)
   })
 
-  constructor(private auth: AuthService, private fire: FireService, private route:ActivatedRoute) {
+  constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
     this.account = auth.getAccount();
+    this.ticketDtl.idTickets = new Tickets();
 
     this.xCode = this.route.snapshot.queryParamMap.get('code');
-
-    // this.items = db.list('threads').valueChanges();
+    db.list(`threads/XwCi-868`).query.orderByKey().on('child_added', data => {
+      // console.log(data.val());
+      this.items.push(data.val())
+    })
   }
 
   ngOnInit() {
   }
 
-  uploadFiles() {
+  uploadFiles(kode: string) {
     console.log(this.fileList);
     let thread = new Thread();
-    thread.id = 'slmb-541'; // Ganti dengan no ticket.
+    thread.id = 'XwCi-868'; // Ganti dengan no ticket.
+    // thread.id = kode; // Ganti dengan no ticket.
     thread.contents = this.itemValue;
     this.fire.insertFireDtl(thread, this.fileList);
     this.attachment.nativeElement.value = '';
@@ -104,14 +110,16 @@ export class DtlTicketComponent implements OnInit {
 
   onSubmit() {
     let thread = new Thread();
-    thread.id = '123'; // Ganti ke nomor ticket.
+    thread.id = 'XwCi-868'; // Ganti ke nomor ticket.
     thread.contents = this.itemValue;
 
     // this.fire.insertFireDtl(thread, this.files);
     // this.itemValue = '';
     // console.log(thread.contents);
     this.threads.push(thread);
-    
-    this.uploadFiles();
+    // this.db.list('threads/slmb-541').push({contents: this.itemValue});
+
+    this.uploadFiles(this.ticketDtl.idTickets.code);
+
   }
 }
