@@ -1,0 +1,97 @@
+<div class="page-header">
+    <h3 class="page-title">
+        Insert Client Account
+    </h3>
+</div>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Account</h4>
+                <div class="forms-sample mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" [(ngModel)]="account.email"
+                                        placeholder="Insert E-Mail">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group" [class.has-error]="password.touched && password.invalid">
+                                    <label for="password">Password</label>
+                                    <input name="password" required type="password" class="form-control" id="pass"
+                                        placeholder="Password" [(ngModel)]="account.pass" #password="ngModel">
+                                    <span class="help-block" *ngIf="password.touched && password.errors?.required"
+                                        style="color: red; font-size: 12px;">
+                                        Password is required
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="card-title mt-3">User</h4>
+                <div class="forms-sample mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="nip">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Insert Name"
+                                        [(ngModel)]="account.idUser.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="address">NIP</label>
+                                    <input type="text" class="form-control" id="nip" placeholder="nip"
+                                        [(ngModel)]="account.idUser.nip">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="nip">Contact</label>
+                                    <input type="text" class="form-control" id="contact" placeholder="Insert phone number"
+                                        [(ngModel)]="account.idUser.contact">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" placeholder="address"
+                                        [(ngModel)]="account.idUser.address">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="card-title mt-3">Company</h4>
+                <div class="forms-sample mt-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="nip">Company Name</label>
+                                    <input type="text" class="form-control" id="company" placeholder="Insert Company Name"
+                                        [(ngModel)]="account.idUser.idCompany.name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mt-3" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

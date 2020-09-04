@@ -11,6 +11,7 @@ import { QuillModule } from 'ngx-quill';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
 
 const routes: Routes = [
   { path: 'dtl-ticket', component: DtlTicketComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     EmailRegistrasiComponent,
     InsertCustomerComponent,
     InsertTicketComponent,
+    ViewCustomerComponent,
   ],
   imports: [
     CommonModule, NgbModule, FormsModule,
