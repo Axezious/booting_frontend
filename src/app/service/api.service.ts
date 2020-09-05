@@ -12,6 +12,7 @@ import { Products } from '../model/products';
 import { Classifications } from '../model/classifications';
 import { auth, User } from 'firebase';
 import { TicketsDtl } from '../model/tickets-dtl';
+import { TicketHeader } from '../model/ticket-header';
 import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
 import { TicketChart } from '../model/ticket-chart';
@@ -222,10 +223,31 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  getTicketByCode(code:string):Observable<TicketHeader> {
+    return this.http.get<TicketHeader>(`${this.base_url}/tickets/get-ticket/${code}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
   getListTicket(): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
+
+  getListTicketByAgent(nip:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${nip}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  getListTicketByCompany(name:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-Company/${name}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  getListTicketByCustomer(nip:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-customer/${nip}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
 
   // CRUD ACCOUNT
   insertAccount(data: Accounts): Observable<Accounts> {

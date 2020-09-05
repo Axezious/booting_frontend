@@ -1,10 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
+import { TicketHeader } from 'src/app/model/ticket-header';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
+import { ApiService } from 'src/app/service/api.service';
 import { Accounts } from 'src/app/model/accounts';
 import { Users } from 'src/app/model/users';
+import { Status } from 'src/app/model/status';
 import { Companies } from 'src/app/model/companies';
+import { Priorities } from 'src/app/model/priorities';
+import { Products } from 'src/app/model/products';
 import { Roles } from 'src/app/model/roles';
 import { formatDate } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -24,6 +29,7 @@ export class DtlTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
 
   xCode: string;
+  ticketHdr:TicketHeader = new TicketHeader();
 
   files: File[] = []
   account: Accounts = new Accounts();
@@ -51,7 +57,7 @@ export class DtlTicketComponent implements OnInit {
     imageUrl: new FormControl('', Validators.required)
   })
 
-  constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase) {
+  constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase, private api:ApiService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -59,6 +65,17 @@ export class DtlTicketComponent implements OnInit {
     this.ticketDtl.idTickets = new Tickets();
 
     this.xCode = this.route.snapshot.queryParamMap.get('code');
+
+    this.ticketHdr.idTicket = new Tickets();
+    this.ticketHdr.idTicket.idStatus = new Status();
+    this.ticketHdr.idTicket.idPriority = new Priorities();
+    this.ticketHdr.idTicket.idCustomer = new Users();
+    this.ticketHdr.idTicket.idCustomer.idCompany = new Companies();
+    this.ticketHdr.idTicket.idProduct = new Products();
+    this.ticketHdr.idAgent = new Users();
+
+    this.getTicketByCode();
+
     db.list(`threads/XwCi-868`).query.orderByKey().on('child_added', data => {
       // console.log(data.val());
       this.items.push(data.val())
@@ -66,6 +83,14 @@ export class DtlTicketComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async getTicketByCode() {
+    this.api.getTicketByCode(this.xCode).subscribe(result => {
+      this.ticketHdr = result;
+
+      console.log(this.ticketHdr);
+    })
   }
 
   uploadFiles(kode: string) {
