@@ -151,7 +151,7 @@
 </div>
 
 <div class="row" *ngFor="let data of items">
-    <div class="col-md-12 grid-margin stretch-card mx-auto">
+    <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto':data.user.name==account.idUser.name}">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -161,8 +161,8 @@
                     <div class="col-md-11 mt-2">
                         <div class="row">
                             <div class="col-md-10">
-                                <span class="card-title">{{account.idUser.name}}</span>
-                                <div class="text-muted" style="font-size: small;">{{dayName}}, {{cValue}}
+                                <span class="card-title" [innerHTML]="data.user.name"></span>
+                                <div class="text-muted" style="font-size: small;" [innerHTML]="data.dateAndTime">
                                 </div>
                             </div>
                             <div class="col-md-2 text-right">
