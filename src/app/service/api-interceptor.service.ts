@@ -13,7 +13,9 @@ export class ApiInterceptorService implements HttpInterceptor {
 
   intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>> { 	
   	
-  	return next.handle(request).pipe(tap(() => {}, 
+  	return next.handle(request).pipe(tap(() => {
+  		return request;
+  	}, 
   		(err:any) => {
   			if (err instanceof HttpErrorResponse) {
   				if (err.status === 401) {
