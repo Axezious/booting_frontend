@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
 import { TicketHeader } from 'src/app/model/ticket-header';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { ApiService } from 'src/app/service/api.service';
 import { Accounts } from 'src/app/model/accounts';
@@ -29,7 +29,7 @@ export class DtlTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
 
   xCode: string;
-  ticketHdr:TicketHeader = new TicketHeader();
+  ticketHdr: TicketHeader = new TicketHeader();
 
   files: File[] = []
   account: Accounts = new Accounts();
@@ -39,7 +39,7 @@ export class DtlTicketComponent implements OnInit {
   listOfFiles: any[] = [];
 
   itemValue = '';
-  items: any[] = [];
+  items: Observable<any[]>;
   threads: Thread[] = [];
 
   days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -57,7 +57,7 @@ export class DtlTicketComponent implements OnInit {
     imageUrl: new FormControl('', Validators.required)
   })
 
-  constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase, private api:ApiService) {
+  constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase, private api: ApiService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -76,10 +76,20 @@ export class DtlTicketComponent implements OnInit {
 
     this.getTicketByCode();
 
-    db.list(`threads/${this.xCode}`).query.orderByKey().on('child_added', data => {
-      // console.log(data.val());
-      this.items.push(data.val())
-    })
+    // db.list(`threads/${this.xCode}`).query.orderByKey().on('child_added', data => {
+    //   // console.log(data);
+    //   // console.log(data.child('threads/MTeg-695/1').ref);
+    //   // this.items.push(data.val());
+    //   // console.log(data.val());
+    // })
+
+    this.items = db.list(`threads/${this.xCode}`).valueChanges()
+
+    // db.list(`threads/${this.xCode}`).query.orderByKey().on('child_changed', data => {
+    //   // this.items.push(data.val());
+    //   this.items[this.items.length - 1] = data.val();
+    //   // console.log(data.val());
+    // })
   }
 
   ngOnInit() {
@@ -151,6 +161,5 @@ export class DtlTicketComponent implements OnInit {
     // this.db.list('threads/slmb-541').push({contents: this.itemValue});
 
     this.uploadFiles(this.xCode);
-
   }
 }

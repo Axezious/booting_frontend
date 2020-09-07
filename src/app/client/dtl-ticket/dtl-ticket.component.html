@@ -150,7 +150,7 @@
     </div>
 </div>
 
-<div class="row" *ngFor="let data of items">
+<div class="row" *ngFor="let data of items | async">
     <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto':data.user.name==account.idUser.name}">
         <div class="card">
             <div class="card-body">
@@ -173,6 +173,12 @@
                         <div class="row">
                             <div class="col-md-12 pt-3">
                                 <div [innerHTML]="data.contents"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pt-3" *ngFor="let img of data.urlFiles | keyvalue">
+                                <img [src]="img.value" width="500" height="500">
+                                <!-- <a href="img.value"></a> -->
                             </div>
                         </div>
                     </div>
