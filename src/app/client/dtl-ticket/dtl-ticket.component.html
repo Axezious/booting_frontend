@@ -3,20 +3,20 @@
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi-email-outline"></i>
         </span>
-        #777 Ini Judul Ticket
+        #{{ticketHdr.idTicket.code}} {{ticketHdr.idTicket.subject}}
     </h3>
     <button type="button" class="btn btn-danger btn-fw justify-self-end">Close Ticket</button>
 </div>
 <div class="d-flex" style="margin-top: 0px;">
     <div class="pr-3" style="font-size: 12px; margin-top: -10px;">
-        17 Agustus 11:45 AM
+        {{ticketHdr.idTicket.createdAt}}
     </div>
     <div class="pr-3" style="font-size: 12px; margin-top: -14px;">
         <div ngbDropdown>
             Status:
             <button class="btn btn-info btn-sm" type="button" id="dropdownMenuSizeButton3" ngbDropdownToggle
                 style="padding: 3px; font-size: 13px;">
-                Open
+                <!-- {{ticketHdr.IdStatus.name}} -->
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownMenuSizeButton3">
                 <a class="dropdown-item" style="font-size: small;">Open</a>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="" style="font-size: 12px; margin-top: -14px;">
-        Priority: <label class="badge badge-gradient-warning">inipriority</label>
+        Priority: <label class="badge badge-gradient-warning">{{ticketHdr.idTicket.idPriority.name}}</label>
     </div>
 </div>
 <hr>
@@ -38,22 +38,22 @@
         <a href="" class="pr-2">
             <img class="rounded-circle" src="assets/images/faces/avogadro.jpg" style="height: 30px;">
         </a>
-        <p class="d-inline">Avogadro</p>
+        <p class="d-inline">{{ticketHdr.idAgent.name}}</p>
     </div>
-    <div class="col-md-4 pt-3">
+    <!-- <div class="col-md-4 pt-3">
         <div class="text-muted pb-2" style="font-size: small;">
             Due Date:
         </div>
         <p>
             23 Agustus 11:45 AM
         </p>
-    </div>
-    <div class="col-md-4 pt-3">
+    </div> -->
+    <div class="col-md-4 pt-3 ml-auto">
         <div class="text-muted pb-2" style="font-size: small;">
             Product Name:
         </div>
         <p>
-            Gojek Application
+            {{ticketHdr.idTicket.idProduct.name}}
         </p>
     </div>
 </div>
@@ -150,8 +150,8 @@
     </div>
 </div>
 
-<div class="row" *ngFor="let data of threads">
-    <div class="col-md-12 grid-margin stretch-card mx-auto">
+<div class="row" *ngFor="let data of items | async">
+    <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto':data.user.name==account.idUser.name}">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -161,8 +161,8 @@
                     <div class="col-md-11 mt-2">
                         <div class="row">
                             <div class="col-md-10">
-                                <span class="card-title">{{account.idUser.name}}</span>
-                                <div class="text-muted" style="font-size: small;">{{dayName}}, {{cValue}}
+                                <span class="card-title" [innerHTML]="data.user.name"></span>
+                                <div class="text-muted" style="font-size: small;" [innerHTML]="data.dateAndTime">
                                 </div>
                             </div>
                             <div class="col-md-2 text-right">
@@ -173,6 +173,12 @@
                         <div class="row">
                             <div class="col-md-12 pt-3">
                                 <div [innerHTML]="data.contents"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pt-3" *ngFor="let img of data.urlFiles | keyvalue">
+                                <img [src]="img.value" width="500" height="500">
+                                <!-- <a href="img.value"></a> -->
                             </div>
                         </div>
                     </div>

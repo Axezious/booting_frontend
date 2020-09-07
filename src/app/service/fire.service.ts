@@ -5,17 +5,20 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Thread } from '../model/thread';
 import { v4 as uuid } from 'uuid';
 import { Callbacks } from 'jquery';
+import { TicketsDtl } from '../model/tickets-dtl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireService {
   task: AngularFireUploadTask;
+  ticketDtl: TicketsDtl = new TicketsDtl();
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   insertFireHdr(t: Thread, files: File[]) {
-    const idHdr: string = t.id + ' - 1';
+    // const idHdr: string = t.id + ' - 1';
+    const idHdr: string = '1';
 
     // this.db.list(`threads/${t.id}/`).set(idHdr, t);
     this.db.list(`threads/${t.id}/`).set(idHdr, t);
@@ -23,9 +26,9 @@ export class FireService {
   }
 
   insertFireDtl(t: Thread, files: File[]) {
-    this.getSizeTicket('slmb-541', {
+    this.getSizeTicket(t.id, { //'XwCi-868'
       onFinished: (data) => {
-        const idDtl: string = `${t.id} - ${data + 1}`;
+        const idDtl: string = `${data + 1}`;
     
         this.db.list(`threads/${t.id}/`).set(idDtl, t);
         this.startUpload(files, t.id, idDtl);
@@ -57,7 +60,6 @@ export class FireService {
             console.log(url);
 
             // Insert to realtime after upload files.
-            // this.db.list(`threads/${nomorTicket}/${id}/urlFiles`).push(url);
             this.db.list(`threads/${nomorTicket}/${id}/urlFiles`).push(url);
           });
         }),
@@ -91,13 +93,6 @@ export class FireService {
       // 
       
     // });
-  }
-
-  getRealtimeChat(nomorTiket: string, call: Callback) {
-    this.db.list(`threads/${nomorTiket}/`).valueChanges().subscribe(data => {
-      console.log(data);
-      
-    });
   }
 }
 

@@ -1,5 +1,6 @@
 import { Users } from '../model/users';
 import { AuthService } from '../service/auth.service';
+import { Tickets } from './tickets';
 
 export class Thread {
     id: string;
@@ -8,4 +9,5 @@ export class Thread {
     dateAndTime: string;
     user: Users;
     something: string;
+    
 }
