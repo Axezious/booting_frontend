@@ -59,8 +59,8 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="nip">Contact</label>
-                                    <input type="text" class="form-control" id="contact" placeholder="Insert phone number"
-                                        [(ngModel)]="account.idUser.contact">
+                                    <input type="text" class="form-control" id="contact"
+                                        placeholder="Insert phone number" [(ngModel)]="account.idUser.contact">
                                 </div>
                             </div>
                         </div>
@@ -83,12 +83,37 @@
                             <div class="form-group-row">
                                 <div class="form-group">
                                     <label for="nip">Company Name</label>
-                                    <input type="text" class="form-control" id="company" placeholder="Insert Company Name"
-                                        [(ngModel)]="account.idUser.idCompany.name">
+                                    <input type="text" class="form-control" id="company"
+                                        placeholder="Insert Company Name" [(ngModel)]="account.idUser.idCompany.name">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <h4 class="card-title mt-3">Agent</h4>
+                    <div class="form-group">
+                        <label for="products">Select Agent</label>
+                        <select [(ngModel)]="agentSelected" class="form-control">
+                            <option *ngFor="let user of users" [value]="user.nip">
+                                {{user.nip}} - {{user.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <div class="input-group">
+                            <input id="endDate" class="form-control" (change)="convertDate()" placeholder="yyyy-mm-dd" name="dd"
+                                [(ngModel)]="endDate" ngbDatepicker #d2="ngbDatepicker">
+                                {{endDate  | json}}
+                            <div class="input-group-append">
+                                <button id="endDate" class="btn btn-outline-secondary btn-icon calendar"
+                                    (click)="d2.toggle()" type="button">
+                                    <i class="mdi mdi-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-gradient-primary mt-3" (click)="submit()">Submit</button>
                 </div>
             </div>

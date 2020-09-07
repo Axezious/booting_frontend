@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Users } from 'src/app/model/users';
+import { ClientService } from 'src/app/service/master/client.service';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-view-client',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewClientComponent implements OnInit {
 
-  constructor() { }
+  // users$:Observable<Users[]>;
+  // total$:Observable<number>;
+
+  constructor(private service:ClientService, private apiService:ApiService) {
+    // this.users$ = service.users$;
+    // this.total$ = service.total$;
+  }
 
   ngOnInit() {
   }
+
+  // async deleteUser(user:Users) {
+  //   this.
+  // }
 
 }

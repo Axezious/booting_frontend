@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
+import { UpdateCustomerComponent } from './update-customer/update-customer.component';
 
 const routes: Routes = [
   { path: 'dtl-ticket', component: DtlTicketComponent },
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'insert-ticket', component: InsertTicketComponent },
   { path: 'email-registrasi', component: EmailRegistrasiComponent },
   { path: 'insert-customer', component: InsertCustomerComponent },
+  { path: 'view-customer', component: ViewCustomerComponent},
+  { path: 'update-customer', component: UpdateCustomerComponent},
 ]
 
 @NgModule({
@@ -29,6 +32,7 @@ const routes: Routes = [
     InsertCustomerComponent,
     InsertTicketComponent,
     ViewCustomerComponent,
+    UpdateCustomerComponent,
   ],
   imports: [
     CommonModule, NgbModule, FormsModule,
