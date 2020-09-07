@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {Accounts} from '../../model/accounts';
 import {DecimalPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
+import { ApiService } from '../api.service';
 // import {SortColumn, SortDirection} from './sortable.directive';
 
 interface SearchResult {
@@ -26,7 +27,7 @@ interface State {
 
 export class AccountsService {
 
-  ACCOUNTS: Accounts[] 
+  accounts: Accounts[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
@@ -41,7 +42,7 @@ export class AccountsService {
     // sortDirection: ''
   };
 
-  constructor(private pipe: DecimalPipe) {
+  constructor(private pipe: DecimalPipe, private apiservice:ApiService) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -55,6 +56,10 @@ export class AccountsService {
 
     this._search$.next();
   }
+
+  // async viewAccounts() {
+  //   this.apiservice.
+  // }
 
   matches(account: Accounts, term: string, pipe: PipeTransform) {
   return account.email.toLowerCase().includes(term.toLowerCase())
@@ -87,7 +92,7 @@ export class AccountsService {
     // let countries = sort(COUNTRIES, sortColumn, sortDirection);
 
     // 2. filter
-    let accounts = this.ACCOUNTS;
+    let accounts = this.accounts
     accounts = accounts.filter(account => this.matches(account, searchTerm, this.pipe));
     const total = accounts.length;
 

@@ -3,6 +3,7 @@ import { Accounts } from 'src/app/model/accounts';
 import { AuthService } from 'src/app/service/auth.service';
 import { Users } from 'src/app/model/users';
 import { Roles } from 'src/app/model/roles';
+import { LoginComponent } from 'src/app/user-pages/login/login.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,12 +15,11 @@ export class SidebarComponent implements OnInit {
   public samplePagesCollapsed = false;
   account: Accounts = new Accounts();
   role:string;
-  
+  roleHelper:string = localStorage.getItem('roleCode');
   constructor(private auth: AuthService) {
     // this.account = auth.getAccount();
     this.account.idUser = new Users();
     this.account.idUser.idRole = new Roles();
-    
   }
 
 

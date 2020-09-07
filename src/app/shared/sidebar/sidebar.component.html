@@ -19,7 +19,7 @@
       </a>
     </li>
     <!-- <li class="nav-item" [ngClass]="{'active' : products.isActive || accordions.isActive || buttons.isActive || badges.isActive || breadcrumbs.isActive || dropdowns.isActive || modals.isActive || notifications.isActive || progressbar.isActive || pagination.isActive || tabs.isActive || typography.isActive || tooltips.isActive }"> -->
-    <li *ngIf="role == 'ADM' || role == 'AGT' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : products.isActive || classifications.isActive || priorities.isActive || statusmaster.isActive || companies.isActive || accounts.isActive || roles.isActive || users.isActive || agentrelations.isActive || clientproducts.isActive }">  
+    <li *ngIf="role == 'ADM' || role == 'AGT' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : products.isActive || classifications.isActive || priorities.isActive || statusmaster.isActive || companies.isActive ||  roles.isActive || agentrelations.isActive || clientproducts.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
         <span class="menu-title">Admin Table Master</span>
         <i class="menu-arrow"></i>
@@ -31,9 +31,9 @@
           <li class="nav-item"><a class="nav-link" routerLink="admin/priorities/view" routerLinkActive="active" #priorities="routerLinkActive">Priorities</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/status/view" routerLinkActive="active" #statusmaster="routerLinkActive">Status</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/companies/view" routerLinkActive="active" #companies="routerLinkActive">Companies</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/accounts/view" routerLinkActive="active" #accounts="routerLinkActive">Accounts</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" routerLink="admin/accounts/view" routerLinkActive="active" #accounts="routerLinkActive">Accounts</a></li> -->
           <li class="nav-item"><a class="nav-link" routerLink="admin/roles/view" routerLinkActive="active" #roles="routerLinkActive">Roles</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/users/view" routerLinkActive="active" #users="routerLinkActive">Users</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" routerLink="admin/users/view" routerLinkActive="active" #users="routerLinkActive">Users</a></li> -->
           <li class="nav-item"><a class="nav-link" routerLink="admin/agent-relations/view" routerLinkActive="active" #agentrelations="routerLinkActive">Agent Relations</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/client-products/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Products</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/client-account/insert" routerLinkActive="active" #clientproducts="routerLinkActive">Client Account</a></li>
