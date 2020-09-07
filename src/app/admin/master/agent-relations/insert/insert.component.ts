@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-insert',
@@ -15,5 +15,10 @@ export class InsertComponent implements OnInit {
 
   startDate:NgbDateStruct;
   endDate:NgbDateStruct;
+
+  walahDalah() {
+  	let str:string = `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}`;
+  	console.log(str);
+  }
 
 }

@@ -67,18 +67,18 @@
         </ul>
       </div>
     </li>
-    <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="client/list-ticket" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">Client Tickets</span>
+        <span class="menu-title">View Tickets</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
-    <li *ngIf="role == 'ADM' || role == 'AGT' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+    <!-- <li *ngIf="role == 'ADM' || role == 'AGT' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
         <span class="menu-title">Admin Tickets</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
-    </li>
+    </li> -->
     <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
         <span class="menu-title">Download Report</span>
