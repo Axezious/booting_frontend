@@ -5,18 +5,20 @@ import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
 
 import { Priorities } from '../../../../model/priorities';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
+  providers: [MessageService]
 })
 export class UpdateComponent implements OnInit {
 
-  priority:Priorities;
-  temp:Priorities;
+  priority: Priorities;
+  temp: Priorities;
 
-  constructor(private apiService:ApiService, private authService:AuthService, private activatedRoute:ActivatedRoute) { 
+  constructor(private apiService: ApiService, private authService: AuthService, private activatedRoute: ActivatedRoute, private messageService: MessageService) {
     this.priority = new Priorities();
     this.temp = new Priorities();
 
@@ -28,7 +30,7 @@ export class UpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   async updatePriority() {
@@ -36,8 +38,11 @@ export class UpdateComponent implements OnInit {
     this.priority.createdBy = this.temp.createdBy;
     this.priority.updatedBy = this.authService.getAccount().idUser.name;
 
-    this.apiService.updatePriorities(this.priority).subscribe(priority =>{
+    this.apiService.updatePriorities(this.priority).subscribe(priority => {
       console.log(this.priority);
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' }), err => {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      }
     })
   }
 

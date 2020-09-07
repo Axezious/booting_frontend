@@ -43,8 +43,4 @@ export class UpdateComponent implements OnInit {
 		});
 		
 	}
-	showSuccess() {
-		this.messeageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
-	  }
-
 }
