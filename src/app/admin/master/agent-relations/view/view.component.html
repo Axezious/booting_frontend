@@ -1,4 +1,4 @@
-<!-- <div class="row">
+<div class="row">
 	<div class="col-md-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
@@ -23,9 +23,10 @@
 							    <th scope="col">No</th>
 							    <th scope="col">Agent</th>
 							    <th scope="col">Client</th>
-							    <th scope="col">Start Date</th>
-							    <th scope="col">End Date</th>
-							    <th scope="col">Actions</th>
+							    <th scope="col">Tickets</th>
+							    <!-- <th scope="col">Start Date</th>
+							    <th scope="col">End Date</th> -->
+							    <th scope="col">Report</th>
 							  </tr>
 							  </thead>
 							  <tbody>
@@ -35,18 +36,24 @@
 							    	<ngb-highlight [result]="agentRelation.idAgent.name" [term]="service.searchTerm"></ngb-highlight>
 							    </td>
     							<td>
-    								<ngb-highlight [result]="agentRelation.idClient.name" [term]="service.searchTerm"></ngb-highlight>
+    								<ngb-highlight [result]="agentRelation.idCompany.name" [term]="service.searchTerm"></ngb-highlight>
     							</td>
-    							<td>
+    							<!-- <td>
     								<ngb-highlight [result]="agentRelation.startDate | date:'mediumDate'" [term]="service.searchTerm"></ngb-highlight>
     							</td>
     							<td>
     								<ngb-highlight [result]="agentRelation.endDate | date:'mediumDate'" [term]="service.searchTerm"></ngb-highlight>
+    							</td> -->
+    							<td>
+    							  <div class="btn-group-vertical" role="group">
+					                <button type="button" class="btn btn-outline-danger btn-sm btn-block">Open : 10</button>
+					                <button type="button" class="btn btn-outline-primary btn-sm btn-block">Close : 5</button>
+					                <button type="button" class="btn btn-outline-success btn-sm btn-block">Reopen : 1</button>
+					              </div>
     							</td>
     							<td>
     							  <div class="btn-group" role="group">
-					                <button type="button" routerLink="../update" class="btn btn-outline-primary btn-sm">Update</button>
-					                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+					                <button type="button" routerLink="../update" class="btn btn-outline-primary btn-sm">Download</button>
 					              </div>
     							</td>
 							  </tr>
