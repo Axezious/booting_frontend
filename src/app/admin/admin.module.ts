@@ -8,11 +8,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { ToastModule } from 'primeng/toast';
+import { ListAgentsComponent } from './agent/list-agents/list-agents.component';
 
 
 @NgModule({
   declarations: [
-    ViewTicketComponent
+    ViewTicketComponent,
+    ListAgentsComponent
   ],
   imports: [
     CommonModule,

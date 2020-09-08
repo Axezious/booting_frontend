@@ -255,6 +255,14 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  forgotPassword(data:Accounts):Observable<Accounts> {
+     return this.http.put<Accounts>(`${this.base_url}/accounts/forgot`, data);;
+  }
+
+  changePassword(data:any):Observable<any> {
+     return this.http.put<any>(`${this.base_url}/accounts/update`, data);;
+  } 
+
   getChart(data: string): Observable<TicketChart[]> {
     return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })

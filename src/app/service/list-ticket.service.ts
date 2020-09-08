@@ -148,14 +148,14 @@ export class ListTicketsService {
   }
 
   matches(ticket: Tickets, term: string) {
-  if (ticket.idCustomer.name != null && ticket.code != null && ticket.subject != null && ticket.idStatus.name != null) {
-    return ticket.idCustomer.name.toLowerCase().includes(term.toLowerCase())
-    || ticket.code.toLowerCase().includes(term.toLowerCase())
-    || ticket.subject.toLowerCase().includes(term.toLowerCase())
-    || ticket.idStatus.name.toLowerCase().includes(term.toLowerCase());  
-    // || ticket.address.toLowerCase().includes(term.toLowerCase())
-   //  || ticket.name.toLowerCase().includes(term.toLowerCase());  
-  }  
+    if (ticket.idCustomer.name != null && ticket.code != null && ticket.subject != null && ticket.idStatus.name != null) {
+      return ticket.idCustomer.name.toLowerCase().includes(term.toLowerCase())
+      || ticket.code.toLowerCase().includes(term.toLowerCase())
+      || ticket.subject.toLowerCase().includes(term.toLowerCase())
+      || ticket.idStatus.name.toLowerCase().includes(term.toLowerCase());  
+      // || ticket.address.toLowerCase().includes(term.toLowerCase())
+     //  || ticket.name.toLowerCase().includes(term.toLowerCase());  
+    }  
   
   }
 
@@ -178,6 +178,9 @@ export class ListTicketsService {
 
   private _search(data): Observable<SearchResult> {
     const {pageSize, page, searchTerm} = this._state;
+
+    console.log(page);
+    console.log(pageSize);
 
     // 1. filter
     let tickets = data;

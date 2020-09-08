@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ListAgentsComponent } from './agent/list-agents/list-agents.component';
 
 const routes: Routes = [
   { path: 'products', loadChildren: () => import('./master/products/products.module').then(m => m.ProductsModule) },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'companies', loadChildren: () => import('./master/companies/companies.module').then(m => m.CompaniesModule) },
   { path: 'priorities', loadChildren: () => import('./master/priorities/priorities.module').then(m => m.PrioritiesModule) },
   { path: 'client-account', loadChildren: () => import('./master/client-account/client-account.module').then(m => m.ClientAccountModule) },  
+  { path: 'list-agents', component: ListAgentsComponent },
 ];
 
 
