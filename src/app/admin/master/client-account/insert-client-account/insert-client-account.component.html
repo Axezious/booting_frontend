@@ -100,11 +100,24 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <div class="input-group">
+                            <input id="startDate" class="form-control" (change)="convertDate()" placeholder="yyyy-mm-dd" name="dd"
+                                [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button id="startDate" class="btn btn-outline-secondary btn-icon calendar"
+                                    (click)="d1.toggle()" type="button">
+                                    <i class="mdi mdi-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="endDate">End Date</label>
                         <div class="input-group">
                             <input id="endDate" class="form-control" (change)="convertDate()" placeholder="yyyy-mm-dd" name="dd"
                                 [(ngModel)]="endDate" ngbDatepicker #d2="ngbDatepicker">
-                                {{endDate  | json}}
                             <div class="input-group-append">
                                 <button id="endDate" class="btn btn-outline-secondary btn-icon calendar"
                                     (click)="d2.toggle()" type="button">

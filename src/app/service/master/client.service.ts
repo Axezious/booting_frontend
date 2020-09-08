@@ -22,7 +22,7 @@ interface State {
 })
 export class ClientService {
 
-  account: Accounts = new Accounts();
+  accountTemp: Accounts = new Accounts();
   users: Users[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
@@ -37,38 +37,38 @@ export class ClientService {
   }
 
   constructor(private apiService: ApiService, private authService: AuthService) {
-    this.account = authService.getAccount();
-    let companyName = this.account.idUser.idCompany.name;
-    // this.viewClient(companyName);
+    this.accountTemp.idUser = new Users();
+    this.accountTemp = authService.getAccount();  
+    this.viewClient();
   }
 
-  // async viewClient(data: string) {
-  //   this.apiService.viewClient(data).subscribe(data => {
-  //     console.log(data);
-  //     this.users = data;
+  async viewClient() {
+    this.apiService.viewClient().subscribe(data => {
+      console.log(data);
+      this.users = data;
 
-  //     this._search$.pipe(
-  //       tap(() => this._loading$.next(true)),
-  //       debounceTime(200),
-  //       switchMap(() => this._search()),
-  //       delay(200),
-  //       tap(() => this._loading$.next(false))
-  //     ).subscribe(result => {
-  //       this._users$.next(result.users);
-  //       this._total$.next(result.total);
-  //     });
-  //     this._search$.next();
-  //   })
-  // }
+      this._search$.pipe(
+        tap(() => this._loading$.next(true)),
+        debounceTime(200),
+        switchMap(() => this._search()),
+        delay(200),
+        tap(() => this._loading$.next(false))
+      ).subscribe(result => {
+        this._users$.next(result.users);
+        this._total$.next(result.total);
+      });
+      this._search$.next();
+    })
+  }
 
   matches(users: Users, term: string) {
     return users.name.toLowerCase().includes(term.toLowerCase());
     //dan lain lain
   }
 
-  get users$() { return this.users$.asObservable(); }
-  get total$() { return this.total$.asObservable(); }
-  get loading$() { return this.loading$.asObservable(); }
+  get users$() { return this._users$.asObservable(); }
+  get total$() { return this._total$.asObservable(); }
+  get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
   get pageSize() {return this._state.pageSize; }
   get searchTerm() { return this._state.searchTerm}
