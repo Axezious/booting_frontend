@@ -1,14 +1,12 @@
-import { Injectable, PipeTransform } from '@angular/core';
-
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-
-import { Classifications } from '../../model/classifications';
-import { ApiService } from '../api.service';
-
+import { ClientProducts } from "../../model/client-products";
+import { ApiService } from "../api.service";
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { Companies } from 'src/app/model/companies';
 
 interface SearchResult {
-  classifications: Classifications[];
+  clientProducts: ClientProducts[];
   total: number;
 }
 
@@ -22,13 +20,13 @@ interface State {
   providedIn: 'root'
 })
 
-export class ClassificationsService {
+export class ClientProductsService {
 
-  classifications: Classifications[] = [];
+  clientProducts: ClientProducts[] = []
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _classifications$ = new BehaviorSubject<Classifications[]>([]);
+  private _clientProducts$ = new BehaviorSubject<ClientProducts[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -38,15 +36,13 @@ export class ClassificationsService {
   };
 
   constructor(private apiService: ApiService) {
-    this.viewClassifications();
-
+    this.viewClientProducts();
   }
 
-  async viewClassifications() {
-
-    this.apiService.viewClassifications().subscribe(classifications => {
-      console.log(classifications);
-      this.classifications = classifications;
+  async viewClientProducts() {
+    this.apiService.viewClientProduct().subscribe(clientProduct => {
+      console.log(clientProduct);
+      this.clientProducts = clientProduct;
 
       this._search$.pipe(
         tap(() => this._loading$.next(true)),
@@ -55,22 +51,20 @@ export class ClassificationsService {
         delay(200),
         tap(() => this._loading$.next(false))
       ).subscribe(result => {
-        this._classifications$.next(result.classifications);
+        this._clientProducts$.next(result.clientProducts);
         this._total$.next(result.total);
       });
-
       this._search$.next();
-
     })
   }
 
-  matches(classification: Classifications, term: string) {
-    return classification.code.toLowerCase().includes(term.toLowerCase())
-      || classification.name.toLowerCase().includes(term.toLowerCase());
+  matches(clientProduct: ClientProducts, term: string) {
+    return clientProduct.idCompany.name.toLowerCase().includes(term.toLowerCase())
+     || clientProduct.idProduct.name.toLowerCase().includes(term.toLowerCase());
     //  || classification.name.toLowerCase().includes(term.toLowerCase());
   }
 
-  get classifications$() { return this._classifications$.asObservable(); }
+  get clientProducts$() { return this._clientProducts$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -90,15 +84,13 @@ export class ClassificationsService {
     const { pageSize, page, searchTerm } = this._state;
 
     // 1. filter
-    let classifications = this.classifications;
-    classifications = classifications.filter(classification => this.matches(classification, searchTerm,));
-    const total = classifications.length;
+    let clientProducts = this.clientProducts;
+    clientProducts = clientProducts.filter(clientProducts => this.matches(clientProducts, searchTerm,));
+    const total = clientProducts.length;
 
     // 2. paginate
-    classifications = classifications.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({ classifications, total });
+    clientProducts = clientProducts.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    return of({ clientProducts, total });
   }
 
-
 }
-

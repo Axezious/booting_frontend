@@ -5,25 +5,14 @@
         </span>
         #{{ticketHdr.idTicket.code}} {{ticketHdr.idTicket.subject}}
     </h3>
-    <button type="button" class="btn btn-danger btn-fw justify-self-end">Close Ticket</button>
+    <button type="button" (click)="updateStatus(ticketHdr.idTicket)" class="btn btn-danger btn-fw justify-self-end">Close Ticket</button>
 </div>
 <div class="d-flex" style="margin-top: 0px;">
     <div class="pr-3" style="font-size: 12px; margin-top: -10px;">
         {{ticketHdr.idTicket.createdAt}}
     </div>
-    <div class="pr-3" style="font-size: 12px; margin-top: -14px;">
-        <div ngbDropdown>
-            Status:
-            <button class="btn btn-info btn-sm" type="button" id="dropdownMenuSizeButton3" ngbDropdownToggle
-                style="padding: 3px; font-size: 13px;">
-                <!-- {{ticketHdr.IdStatus.name}} -->
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownMenuSizeButton3">
-                <a class="dropdown-item" style="font-size: small;">Open</a>
-                <a class="dropdown-item" style="font-size: small;">Re-Open</a>
-                <a class="dropdown-item" style="font-size: small;">Close</a>
-            </div>
-        </div>
+    <div class="" style="font-size: 12px; margin-top: -14px;">
+        Status: <label class="badge badge-gradient-success">{{ticketHdr.idTicket.idStatus.name}}</label>
     </div>
     <div class="" style="font-size: 12px; margin-top: -14px;">
         Priority: <label class="badge badge-gradient-warning">{{ticketHdr.idTicket.idPriority.name}}</label>
@@ -49,6 +38,98 @@
         </p>
     </div>
 </div>
+
+<!-- LEFT CHAT -->
+<!-- <div class="row">
+    <div class="col-md-10 grid-margin align-self-start">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-2" style="padding-left: 35px;">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <span class="card-title">Mamang Garox</span>
+                                <div class="text-muted" style="font-size: small;">17 Agustus 11:45 AM (2 years ago)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11 pt-3">
+                                <p>Hello</p>
+                                <p>
+                                    Welcome to Booting Desks new Unified Ticket Screen.
+                                    Here, you have complete context of the ticket.
+                                    Now that your had received your first ticket, did you notice that it has been
+                                    assigned to you? To respond to this ticket smartly, check out the Auto-Suggested
+                                    Solutions in the pane to your left.
+                                </p>
+                                <p>
+                                    When you're done composing your response, you may send it and close the ticket.
+                                </p>
+                                <p>
+                                    Whatever action you perform, be rest assured that you can always track them under
+                                    the ticket's history. With that, you're one step close to delivering top-notch
+                                    customer service!
+                                </p>
+                                <p>
+                                    Cheers,<br>
+                                    Batch6 Team <br>
+                                    1 888 900 9646
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- RIGHT CHAT -->
+<!-- <div class="row">
+    <div class="col-md-10 grid-margin ml-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mt-2" style="padding-left: 40px;">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <span class="card-title">{{account.idUser.name}}</span>
+                                <div class="text-muted" style="font-size: small;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11 pt-3">
+                                <p>Hello</p>
+                                <p>
+                                    Welcome to Booting Desks new Unified Ticket Screen.
+                                    Here, you have complete context of the ticket.
+                                    Now that your had received your first ticket, did you notice that it has been
+                                    assigned to you? To respond to this ticket smartly, check out the Auto-Suggested
+                                    Solutions in the pane to your left.
+                                </p>
+                                <p>
+                                    When you're done composing your response, you may send it and close the ticket.
+                                </p>
+                                <p>
+                                    Whatever action you perform, be rest assured that you can always track them under
+                                    the ticket's history. With that, you're one step close to delivering top-notch
+                                    customer service!
+                                </p>
+                                <p>
+                                    Cheers,<br>
+                                    Batch6 Team <br>
+                                    1 888 900 9646
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 
 <div class="row" *ngFor="let data of items | async">
     <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto':data.user.name==account.idUser.name}">

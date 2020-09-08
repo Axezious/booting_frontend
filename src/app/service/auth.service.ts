@@ -36,6 +36,10 @@ export class AuthService {
     return this.getToken() != null && this.getToken() != undefined;
   }
 
+  adminPermit() : boolean {
+    return localStorage.getItem('roleCode') == 'ADM' || localStorage.getItem('roleCode') == 'SPA'
+  }
+
   setAccount(account: Accounts) {
     if (account.idUser.idPhoto == null || account.idUser.idPhoto == undefined) {
       account.idUser.idPhoto = new PhotoProfile();

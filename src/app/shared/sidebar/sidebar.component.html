@@ -39,11 +39,11 @@
           <li class="nav-item"><a class="nav-link" routerLink="admin/users/view" routerLinkActive="active" #users="routerLinkActive">Users</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/agent-relations/view" routerLinkActive="active" #agentrelations="routerLinkActive">Agent Relations</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/client-products/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Products</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/client-account/insert" routerLinkActive="active" #clientproducts="routerLinkActive">Client Account</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/client-account/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Account</a></li>
         </ul>
       </div>
     </li>
-    <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive || dtlticket.isActive }">  
+    <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
         <i class="menu-arrow"></i>
@@ -53,7 +53,7 @@
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/view-customer" routerLinkActive="active" #customer="routerLinkActive">View Customer</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="client/dtl-ticket" routerLinkActive="active" #dtlticket="routerLinkActive">Detail Ticket</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" routerLink="client/dtl-ticket" routerLinkActive="active" #dtlticket="routerLinkActive">Detail Ticket</a></li> -->
           <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li>
         </ul>
       </div>
