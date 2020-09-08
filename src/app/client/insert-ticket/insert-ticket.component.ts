@@ -24,6 +24,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './insert-ticket.component.html',
   styleUrls: ['./insert-ticket.component.scss'],
   providers:[MessageService]
+  
 })
 export class InsertTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
@@ -169,6 +170,7 @@ export class InsertTicketComponent implements OnInit {
     this.apiService.insertTicket(this.ticketDtl.idTickets).subscribe( data => {
       console.log(data);
       this.ticketDtl.idTickets = data;
+
       this.ticketDtl.idTickets.idCustomer = this.account.idUser;
       this.uploadFiles(this.ticketDtl.idTickets.code);
       console.log(this.ticketDtl); 

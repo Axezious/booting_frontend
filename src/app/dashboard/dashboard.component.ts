@@ -203,7 +203,7 @@ export class DashboardComponent implements OnInit {
   getChartCilent() {
     let data = { 'name': `${this.account.idUser.idCompany.name}`, 'year': "2020" }
     this.apiService.getChartClient(data).subscribe(result =>{
-      console.log();
+      console.log(result);
       
     })
     console.log(data.year);

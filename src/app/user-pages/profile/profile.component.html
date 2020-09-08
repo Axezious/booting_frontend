@@ -11,11 +11,11 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-auto mb-3">
                                         <div class="mx-auto" style="width: 140px;">
-                                            <div *ngIf="account.idUser.idPhoto.id ==''"
+                                            <div *ngIf="account.idUser.idPhoto.id ==' '"
                                                 class="d-flex justify-content-center align-items-center rounded"
                                                 style="height: 140px; background-color: rgb(233, 236, 239);">
                                                 <span
-                                                    style="color: rgb(166, 168, 170); font: bold 8pt Arial;">kosong</span>
+                                                    style="color: rgb(166, 168, 170); font: bold 8pt Arial;"></span>
                                             </div>
                                             <div *ngIf="account.idUser.idPhoto.id !=' '"
                                                 class="d-flex justify-content-center align-items-center rounded">
@@ -35,8 +35,8 @@
                                             </div>
                                         </div>
                                         <div class="text-center text-sm-right">
-                                            <span class="badge badge-secondary">administrator</span>
-                                            <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                                            <span class="badge badge-secondary">{{this.account.idUser.idRole.name}}</span>
+                                            <div class="text-muted"><small></small></div>
                                         </div>
                                     </div>
                                 </div>

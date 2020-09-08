@@ -18,9 +18,12 @@ export class AppComponent implements OnInit{
   showFooter: boolean = true;
   isLoading: boolean;
 
-  constructor(private router: Router, authService:AuthService) {
-      
+  constructor(private router: Router,private authService:AuthService) {
+    console.log("ini");
+    
+    console.log(this.authService.getAccount().idUser.idRole.code);
     this.role = authService.getAccount().idUser.idRole.code;
+    
     
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => { 

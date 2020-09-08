@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.account = this.auth.getAccount();
-    this.account.idUser.idPhoto.id = localStorage.getItem('idPhoto')
     if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
       this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
     }

@@ -14,13 +14,13 @@ export class ProfileComponent implements OnInit {
   urlFoto: string = ""
   account: Accounts
   constructor(private apiService: ApiService, private authService: AuthService) {
-    this.account = authService.getAccount();
-
+    this.account = authService.getAccount(); 
+    console.log(this.account);
+    
   }
 
   ngOnInit() {
     this.account = this.authService.getAccount();
-    this.account.idUser.idPhoto.id = localStorage.getItem('idPhoto')
     if (this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined) {
       this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
     }
