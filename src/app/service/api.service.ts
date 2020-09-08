@@ -294,6 +294,7 @@ export class ApiService {
     return this.http.get<String>(`${this.base_url}/photo-profile/files/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
+  
   // AGENT
   viewAgent(): Observable<Users[]> {
     return this.http.get<Users[]>(`${this.base_url}/users/all-agent`,
