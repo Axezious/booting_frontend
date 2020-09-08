@@ -18,6 +18,7 @@ import { TicketStatus } from '../model/ticket-status';
 import { TicketChart } from '../model/ticket-chart';
 import { Tickets } from '../model/tickets';
 import { AgentRelations } from '../model/agent-relations';
+import { ClientProducts } from '../model/client-products';
 
 @Injectable({
   providedIn: 'root'
@@ -223,7 +224,13 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getTicketByCode(code:string):Observable<TicketHeader> {
+  updateStatusTicket(data: Tickets): Observable<Tickets> {
+    console.log(data);
+    return this.http.put<Tickets>(`${this.base_url}/tickets/update`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  getTicketByCode(code: string): Observable<TicketHeader> {
     return this.http.get<TicketHeader>(`${this.base_url}/tickets/get-ticket/${code}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
@@ -232,18 +239,18 @@ export class ApiService {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-  
-  getListTicketByAgent(nip:string): Observable<Tickets[]> {
+
+  getListTicketByAgent(nip: string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getListTicketByCompany(name:string): Observable<Tickets[]> {
+  getListTicketByCompany(name: string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-Company/${name}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getListTicketByCustomer(nip:string): Observable<Tickets[]> {
+  getListTicketByCustomer(nip: string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-customer/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
@@ -278,14 +285,20 @@ export class ApiService {
   }
 
   // AGENT RELATION
-  insertAgentRelation(data:AgentRelations): Observable<AgentRelations> {
-    return this.http.post<AgentRelations>(`${this.base_url}/agent-relations/insert`, data, 
-    {headers: { Authorization: `Bearer ${this.authService.getToken()}`}})
+  insertAgentRelation(data: AgentRelations): Observable<AgentRelations> {
+    return this.http.post<AgentRelations>(`${this.base_url}/agent-relations/insert`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   // CLIENT
   viewClient() {
-    
+
+  }
+
+  //CLIENT PRODUCT
+  viewClientProduct(): Observable<ClientProducts[]> {
+    return this.http.get<ClientProducts[]>(`${this.base_url}/client-products/all`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 }
 

@@ -5,25 +5,14 @@
         </span>
         #{{ticketHdr.idTicket.code}} {{ticketHdr.idTicket.subject}}
     </h3>
-    <button type="button" class="btn btn-danger btn-fw justify-self-end">Close Ticket</button>
+    <button type="button" (click)="updateStatus(ticketHdr.idTicket)" class="btn btn-danger btn-fw justify-self-end">Close Ticket</button>
 </div>
 <div class="d-flex" style="margin-top: 0px;">
     <div class="pr-3" style="font-size: 12px; margin-top: -10px;">
         {{ticketHdr.idTicket.createdAt}}
     </div>
-    <div class="pr-3" style="font-size: 12px; margin-top: -14px;">
-        <div ngbDropdown>
-            Status:
-            <button class="btn btn-info btn-sm" type="button" id="dropdownMenuSizeButton3" ngbDropdownToggle
-                style="padding: 3px; font-size: 13px;">
-                <!-- {{ticketHdr.IdStatus.name}} -->
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownMenuSizeButton3">
-                <a class="dropdown-item" style="font-size: small;">Open</a>
-                <a class="dropdown-item" style="font-size: small;">Re-Open</a>
-                <a class="dropdown-item" style="font-size: small;">Close</a>
-            </div>
-        </div>
+    <div class="" style="font-size: 12px; margin-top: -14px;">
+        Status: <label class="badge badge-gradient-success">{{ticketHdr.idTicket.idStatus.name}}</label>
     </div>
     <div class="" style="font-size: 12px; margin-top: -14px;">
         Priority: <label class="badge badge-gradient-warning">{{ticketHdr.idTicket.idPriority.name}}</label>
@@ -59,7 +48,7 @@
 </div>
 
 <!-- LEFT CHAT -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-10 grid-margin align-self-start">
         <div class="card">
             <div class="card-body">
@@ -102,10 +91,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- RIGHT CHAT -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-10 grid-margin ml-auto">
         <div class="card">
             <div class="card-body">
@@ -148,7 +137,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="row" *ngFor="let data of items | async">
     <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto':data.user.name==account.idUser.name}">

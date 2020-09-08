@@ -44,6 +44,10 @@ export class AuthService {
     return this.getToken() !=null && this.getToken() != undefined;
   }
 
+  adminPermit() : boolean {
+    return localStorage.getItem('roleCode') == 'ADM' || localStorage.getItem('roleCode') == 'SPA'
+  }
+
   setAccount(account: Accounts) {
     localStorage.setItem('email', account.email);
     localStorage.setItem('idUser', account.idUser.id);

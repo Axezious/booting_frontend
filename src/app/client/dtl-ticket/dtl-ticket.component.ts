@@ -72,6 +72,7 @@ export class DtlTicketComponent implements OnInit {
     this.ticketHdr.idTicket.idCustomer = new Users();
     this.ticketHdr.idTicket.idCustomer.idCompany = new Companies();
     this.ticketHdr.idTicket.idProduct = new Products();
+    this.ticketHdr.idTicket.idStatus = new Status();
     this.ticketHdr.idAgent = new Users();
 
     this.getTicketByCode();
@@ -161,5 +162,15 @@ export class DtlTicketComponent implements OnInit {
     // this.db.list('threads/slmb-541').push({contents: this.itemValue});
 
     this.uploadFiles(this.xCode);
+  }
+
+  updateStatus(tickets : Tickets) {
+    tickets.idStatus.code = 'CL';
+    tickets.updatedBy = this.auth.getAccount().idUser.name
+    // console.log(tickets);
+    this.api.updateStatusTicket(tickets).subscribe(res => {
+      console.log(res);
+    })
+    
   }
 }
