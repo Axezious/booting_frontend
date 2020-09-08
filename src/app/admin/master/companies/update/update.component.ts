@@ -5,18 +5,20 @@ import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
 
 import { Companies } from '../../../../model/companies';
+import { MessageService } from 'primeng/api';
 
 @Component({
 	selector: 'app-update',
 	templateUrl: './update.component.html',
-	styleUrls: ['./update.component.scss']
+	styleUrls: ['./update.component.scss'],
+	providers: [MessageService]
 })
 export class UpdateComponent implements OnInit {
 
 	company: Companies;
 	temp: Companies;
 
-	constructor(private apiService: ApiService, private authService: AuthService, private activatedRoute: ActivatedRoute) {
+	constructor(private apiService: ApiService, private authService: AuthService, private activatedRoute: ActivatedRoute, private messageService: MessageService) {
 		this.company = new Companies();
 		this.temp = new Companies();
 		console.log(this.company);
@@ -37,7 +39,10 @@ export class UpdateComponent implements OnInit {
 		console.log(this.company);
 		this.apiService.updateCompanies(this.company).subscribe(company => {
 			console.log(this.company);
-		})
+			this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+		}, err => {
+			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+		});
 	}
 
 }

@@ -29,10 +29,19 @@ export class DashboardComponent implements OnInit {
   customer: string;
   constructor(private apiService: ApiService, private authservice: AuthService) {
     this.account = this.authservice.getAccount();
+    console.log("Ini profile");
+    
+    console.log(this.account);
     console.log(this.account.idUser.idRole.code);
     this.AllDashboard();
     this.getChart();
     this.getChartCilent();
+    
+    
+  }
+
+  tesAccount(){
+  this.apiService 
   }
 
   async AllDashboard() {

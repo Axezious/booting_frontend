@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { } from 'rxjs';
 import { AuthService } from '../service/auth.service'
@@ -17,7 +17,10 @@ import { Status } from '../model/status';
 import { TicketStatus } from '../model/ticket-status';
 import { TicketChart } from '../model/ticket-chart';
 import { Tickets } from '../model/tickets';
+import { data } from 'jquery';
+import { saveAs } from "file-saver"
 import { AgentRelations } from '../model/agent-relations';
+
 
 @Injectable({
   providedIn: 'root'
@@ -233,7 +236,7 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getListTicketByAgent(nip: string): Observable<Tickets[]> {
+  getListTicketByAgent(nip:string): Observable<Tickets[]> {
     return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
@@ -255,6 +258,14 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  forgotPassword(data:Accounts):Observable<Accounts> {
+    return this.http.put<Accounts>(`${this.base_url}/accounts/forgot`, data);;
+ }
+
+ changePassword(data:any):Observable<any> {
+    return this.http.put<any>(`${this.base_url}/accounts/update`, data);;
+ }
+
   getChart(data: string): Observable<TicketChart[]> {
     return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
@@ -265,18 +276,30 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  // CUSTOMER
+  getReport() {//tambahin parameter nip
+    let headers_object = new HttpHeaders()
+      .set("Authorization", "Bearer " + this.authService.getToken())
+      .set("Content-Type", "application/pdf");
+    this.http.get(this.base_url + '/report/totalTicketAgent/a1', { headers: headers_object, responseType: 'blob' }).subscribe(res => {
+      const blob = new Blob([res], { type: 'application/octet-stream' })
+      saveAs(blob, "repot" + ".pdf");
+    })
+  }
+ // CUSTOMER
   viewCustomer(data: string): Observable<Users[]> {
     return this.http.get<Users[]>(`${this.base_url}/users/all-customer/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-
+  getPhoto(data: string) {// photo/profile/files/id
+    return this.http.get<String>(`${this.base_url}/photo-profile/files/${data}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
   // AGENT
   viewAgent(): Observable<Users[]> {
     return this.http.get<Users[]>(`${this.base_url}/users/all-agent`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
-
+  
   // AGENT RELATION
   viewAgentRelation(): Observable<AgentRelations[]> {
     return this.http.get<AgentRelations[]>(`${this.base_url}/agent-relations/all`,

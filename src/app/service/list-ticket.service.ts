@@ -179,6 +179,9 @@ export class ListTicketsService {
   private _search(data): Observable<SearchResult> {
     const { pageSize, page, searchTerm } = this._state;
 
+    console.log(page);
+    console.log(pageSize);
+
     // 1. filter
     let tickets = data;
     tickets = tickets.filter(ticket => this.matches(ticket, searchTerm));

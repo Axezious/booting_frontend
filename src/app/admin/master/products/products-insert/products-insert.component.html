@@ -1,24 +1,35 @@
+<div class="page-header">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="../view">Products</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Insert</li>
+    </ol>
+  </nav>
+</div>
 <div class="row">
-    <div class="col-md-12 grid-margin stretch-card mx-auto">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title" style="text-align: center;">PRODUCTS</h4>
-                <form class="forms-sample mt-5">
-                    <div class="form-group">
-                        <label for="inputProductCode">Code</label>
-                        <input type="text" class="form-control" id="inputProductCode" placeholder="Product code">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputProductName">Name</label>
-                        <input type="text" class="form-control" id="inputProductName" placeholder="Product name">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputProductDescription">Description</label>
-                        <textarea class="form-control" rows="4" id="inputProductDescription"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-gradient-primary mt-3">Submit</button>
-                </form>
-            </div>
-        </div>
+  <div class="col-md-12 grid-margin stretch-card mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title" style="text-align: center;">PRODUCTS</h4>
+        <form class="forms-sample mt-5">
+          <div class="form-group">
+            <label for="inputProductCode">Code</label>
+            <input type="text" name="code" [(ngModel)]="product.code" class="form-control" id="inputProductCode"
+              placeholder="Product code">
+          </div>
+          <div class="form-group">
+            <label for="inputProductName">Name</label>
+            <input type="text" name="code" [(ngModel)]="product.name" class="form-control" id="inputProductName"
+              placeholder="Product Name">
+          </div>
+          <div class="form-group">
+            <label for="inputProductDesc">Description</label>
+            <input type="text" name="code" [(ngModel)]="product.description" class="form-control" id="inputProductDesc"
+              placeholder="Product Description">
+          </div>
+          <button type="submit" (click)="insertProduct()" class="btn btn-gradient-primary mt-3">Insert</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

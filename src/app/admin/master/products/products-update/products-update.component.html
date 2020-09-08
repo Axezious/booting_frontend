@@ -1,1 +1,38 @@
-<p>products-update works!</p>
+<div class="page-header">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="../view">Product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align: center;">PRODUCTS</h4>
+                <form class="forms-sample mt-5">
+                    <div class="form-group">
+                        <label for="inputProductCode">Code</label>
+                        <input type="text" name="code" [(ngModel)]="product.code" class="form-control"
+                            id="inputProductCode" placeholder="Product code">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputProductName">Name</label>
+                        <input type="text" name="name" [(ngModel)]="product.name" class="form-control"
+                            id="inputProductName" placeholder="Product Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputProductDesc">Description</label>
+                        <input type="text" name="description" [(ngModel)]="product.description" class="form-control"
+                            id="inputProductDesc" placeholder="Product Description">
+                    </div>
+                    <button type="submit" (click)="updateProduct()"
+                        class="btn btn-gradient-primary mt-3">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast [baseZIndex]="100" class="custom-toast" key="tc"></p-toast>
+<!-- <p-toast position="bottom-right" key="tc"></p-toast> -->

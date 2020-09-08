@@ -1,9 +1,9 @@
-import { BaseModel } from './base-model';
-import { Users } from './users';
 
-export class Profile extends BaseModel {
-    user: Users;
+import { BaseModel } from './base-model';
+
+export class PhotoProfile extends BaseModel {
+
     name: string;
     type: string;
-    data: File;
+    data: any;
 }
