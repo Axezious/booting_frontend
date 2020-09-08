@@ -12,7 +12,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
+import { ToastModule } from 'primeng/toast';
 import { UpdateCustomerComponent } from './update-customer/update-customer.component';
+
+
 
 const routes: Routes = [
   { path: 'dtl-ticket', component: DtlTicketComponent },
@@ -36,7 +39,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule, NgbModule, FormsModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes),ToastModule,
     QuillModule.forRoot({
       modules: {
         syntax: true,

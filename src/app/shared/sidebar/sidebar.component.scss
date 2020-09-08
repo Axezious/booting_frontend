@@ -252,6 +252,7 @@
             .badge,.menu-sub-title {
               display: none;
             }
+            
             .menu-title {
               @include border-radius(0 5px 5px 0px);
               background: $sidebar-menu-hover-bg;
