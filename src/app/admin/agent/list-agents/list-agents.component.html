@@ -52,10 +52,10 @@
     							</td> -->
     							<td>
     							  <div class="template-demo">
-					                <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="openMediumModal(mediumModalContent)">
+					                <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="openMediumModal(mediumModalContent, agentRelation.idCompany.id)">
 					                	<i class="mdi mdi-information-variant"></i>
 					                </button>
-					                <button type="button" class="btn btn-secondary btn-rounded btn-sm">
+					                <button type="button" class="btn btn-primary btn-rounded btn-sm">
 					                	<i class="mdi mdi-printer"></i>
 					                </button>
 					              </div>
@@ -86,13 +86,14 @@
 <ng-template #mediumModalContent let-modal class="modal fade" id="exampleModal-2" aria-labelledby="exampleModalLabel-2">
   <div class="modal-content" style="background-color: white">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
+      <!-- <h5 class="modal-title" id="exampleModalLabel-2">Agent : {{agentModals$[0].agent}}</h5> -->
       <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div class="row">
+      	<h3 class="mx-auto mb-4">Handled Ticket</h3>
 		<div class="col-lg-11 grid-margin mx-auto">
 			<form>
 			  <!-- <div class="d-flex justify-content-between"> -->
@@ -109,14 +110,30 @@
 				  <thead>
 				  <tr>
 				    <th scope="col">No</th>
-				    <th scope="col">Companies</th>
+				    <th scope="col">Customer</th>
+				    <th scope="col">Total</th>
+				    <th scope="col">Open</th>
+				    <th scope="col">Close</th>
+				    <th scope="col">Reopen</th>
 				  </tr>
 				  </thead>
 				  <tbody>
-				  <tr *ngFor="let company of companies$ | async; index as i">
+				  <tr *ngFor="let agentModal of agentModals$ | async; index as i">
 				    <th scope="row">{{ (i + 1) + ((service2.page -1) * service2.pageSize) }}</th>
 				    <td>
-				    	<ngb-highlight [result]="company.name" [term]="service2.searchTerm"></ngb-highlight>
+				    	<ngb-highlight [result]="agentModal.customer" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.total | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.open | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.close | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.reopen | number" [term]="service2.searchTerm"></ngb-highlight>
 				    </td>
 					<!-- <td>
 						<ngb-highlight [result]="agentRelation.idCompany.name" [term]="service.searchTerm"></ngb-highlight>

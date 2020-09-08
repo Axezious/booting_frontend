@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
-import { Companies } from '../model/companies';
+import { AgentRelations } from '../model/agent-relations';
 import { ApiService } from './api.service';
 
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
 interface SearchResult {
-  companies: Companies[];
+  agentRelations: AgentRelations[];
   total: number;
 }
 
@@ -22,11 +22,11 @@ interface State {
 })
 export class ListAgentsService {
 
-  companies: Companies[] = [];
+  agentRelations: AgentRelations[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _companies$ = new BehaviorSubject<Companies[]>([]);
+  private _agentRelations$ = new BehaviorSubject<AgentRelations[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -36,15 +36,15 @@ export class ListAgentsService {
   };
 
   constructor(private apiService: ApiService) {
-    this.viewCompanies();
+    this.viewAgentRelations();
     
   }
 
-  async viewCompanies() {
+  async viewAgentRelations() {
 
-    this.apiService.viewCompanies().subscribe(companies => {
-      console.log(companies);
-      this.companies = companies;
+    this.apiService.viewAgentRelations().subscribe(agentRelations => {
+      console.log(agentRelations);
+      this.agentRelations = agentRelations;
 
       this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -53,7 +53,7 @@ export class ListAgentsService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      this._companies$.next(result.companies);
+      this._agentRelations$.next(result.agentRelations);
       this._total$.next(result.total);
     });
 
@@ -62,13 +62,12 @@ export class ListAgentsService {
     })
   }
 
-  matches(company: Companies, term: string) {
-  return company.name.toLowerCase().includes(term.toLowerCase());
-  	// || company.address.toLowerCase().includes(term.toLowerCase())
-   //  || company.name.toLowerCase().includes(term.toLowerCase());
+  matches(agentRelation: AgentRelations, term: string) {
+  return agentRelation.idAgent.name.toLowerCase().includes(term.toLowerCase())
+  	|| agentRelation.idCompany.name.toLowerCase().includes(term.toLowerCase());
   }
 
-  get companies$() { return this._companies$.asObservable(); }
+  get agentRelations$() { return this._agentRelations$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -88,13 +87,13 @@ export class ListAgentsService {
     const {pageSize, page, searchTerm} = this._state;
 
     // 1. filter
-    let companies = this.companies;
-    companies = companies.filter(company => this.matches(company, searchTerm,));
-    const total = companies.length;
+    let agentRelations = this.agentRelations;
+    agentRelations = agentRelations.filter(agentRelation => this.matches(agentRelation, searchTerm,));
+    const total = agentRelations.length;
 
     // 2. paginate
-    companies = companies.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({companies, total});
+    agentRelations = agentRelations.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    return of({agentRelations, total});
   }
 
 }
