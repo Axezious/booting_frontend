@@ -1,53 +1,69 @@
 <div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Tickets List</h4>
-                <div class="d-flex">
-                    <span class="align-self-center">Search</span><input class="form-control col-sm-4" type="text"
-                        placeholder="Search" aria-label="Search" [formControl]="filter" />
-                    <div class="ml-auto">
-                        <button type="button" class="btn btn-outline-primary btn-sm" routerLink="../insert">Insert</button>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped align-self-center">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th>Description</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let product of products$ | async; index as i">
-                                <th scope="row">{{ i + 1 }}</th>
-                                <td>
-                                    <ngb-highlight [result]="product.name" [term]="filter.value"></ngb-highlight>
-                                    <!-- {{product.name}} -->
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title mb-4" style="text-align: center;">Products</h4>
+				<div class="row">
+					<div class="col-lg-12 grid-margin">
+						<form>
+						  <!-- <div class="d-flex justify-content-between"> -->
+							  <div class="form-group form-inline">
+								 Search: <input class="form-control ml-2" name="searchTerm" type="text" [(ngModel)]="service.searchTerm"/>
+								 <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+								 <button type="button" routerLink="../insert" id="insert1" class="ml-auto btn btn-gradient-success btn-sm">insert</button>
+							  </div>
+
+							  <!-- <div></div> -->
+						  <!-- </div> -->
+						</form>
+						<div class="table-responsive">
+							<table class="table table-striped" style="text-align: center;">
+							  <thead>
+							  <tr>
+							    <th scope="col">No</th>
+							    <th scope="col">Name</th>
+							    <th scope="col">Code</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Action</th>
+                              </tr>
+							  </thead>
+							  <tbody>
+							  <tr *ngFor="let product of products$ | async; index as i">
+							    <th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
+							    <td>
+    								<ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight>
+    							</td>
+    							<td>
+    								<ngb-highlight [result]="product.code" [term]="service.searchTerm"></ngb-highlight>
                                 </td>
                                 <td>
-                                    <ngb-highlight [result]="product.code" [term]="filter.value">
-                                    </ngb-highlight>
-                                    <!-- {{product.code}} -->
-                                </td>
-                                <td>
-                                    <ngb-highlight [result]="product.descriptions " [term]="filter.value">
-                                    </ngb-highlight>
-                                    <!-- {{product.descriptions}} -->
-                                </td>
-                                <td>
-                                    <button type="submit">Update</button>
-                                    <button type="submit">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- </div> -->
-            </div>
-        </div>
-    </div>
+    								<ngb-highlight [result]="product.descriptions" [term]="service.searchTerm"></ngb-highlight>
+    							</td>
+    							<td>
+									<div class="btn-group" role="group" style="align-content: center;">
+										<button type="button" routerLink="../update" [queryParams]="product" class="btn btn-outline-primary btn-sm">Update</button>
+										<button type="button" (click)="deleteProduct(product)" class="btn btn-outline-danger btn-sm">Delete</button>
+									  </div>
+    							</td>
+							  </tr>
+							  </tbody>
+							</table>
+						</div>
+
+						<div id="pagination" class="d-flex flex-wrap justify-content-between p-2">
+						    <ngb-pagination
+						      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+						    </ngb-pagination>
+
+						    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+						      <option [ngValue]="5">5 items per page</option>
+						      <option [ngValue]="10">10 items per page</option>
+						      <option [ngValue]="15">15 items per page</option>
+						    </select>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
