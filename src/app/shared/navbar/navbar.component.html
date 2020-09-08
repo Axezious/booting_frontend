@@ -10,18 +10,22 @@
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item nav-profile dropdown" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
-          <div class="nav-profile-img">
-            <img src="assets/images/faces/face1.jpg" alt="image">
+          <div *ngIf="account.idUser.idPhoto.id !=' '" class="nav-profile-img">
+            <img src="{{urlFoto}}" alt="image">
             <span class="availability-status online"></span>
           </div>
+          <div *ngIf="account.idUser.idPhoto.id ==' '" class="nav-profile-img" style=" background-color: rgb(233, 236, 239); border-radius: 50%;">
+            <span class="availability-status online"></span>
+          </div>
+          
           <div class="nav-profile-text">
             <p class="mb-1 text-black">{{account.idUser.name}}</p>
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
-          <a class="dropdown-item" href="javascript:;">
+          <a class="dropdown-item" href="javascript:;" routerLink="user-pages/edit-profile">
             <i class="mdi mdi-cached mr-2 text-success"></i>
-            Activity Log
+            Profile
           </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="javascript:;" (click)="logout()">

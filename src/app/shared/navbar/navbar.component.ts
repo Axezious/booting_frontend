@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
   account: Accounts = new Accounts();
+  readonly base_url = 'http://147.139.130.49:8080';
+  urlFoto:string = ""
   
   constructor(config: NgbDropdownConfig,private auth: AuthService, private api: ApiService, private router: Router) {
     config.placement = 'bottom-right';
@@ -23,6 +25,12 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.account = this.auth.getAccount();
+    this.account.idUser.idPhoto.id = localStorage.getItem('idPhoto')
+    if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
+      this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
+    }
+    
   }
 
   // toggle sidebar in small devices

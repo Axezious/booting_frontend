@@ -16,11 +16,14 @@ import { Thread } from 'src/app/model/thread';
 import { FireService } from 'src/app/service/fire.service';
 import { async } from '@angular/core/testing';
 import { formatDate } from '@angular/common';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-insert-ticket',
   templateUrl: './insert-ticket.component.html',
-  styleUrls: ['./insert-ticket.component.scss']
+  styleUrls: ['./insert-ticket.component.scss'],
+  providers:[MessageService]
 })
 export class InsertTicketComponent implements OnInit {
   @ViewChild('attachments', { static: false }) attachment: any;
@@ -99,7 +102,7 @@ export class InsertTicketComponent implements OnInit {
 
   fileLength: number;
 
-  constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService) {
+  constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService,private messageService:MessageService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -166,10 +169,12 @@ export class InsertTicketComponent implements OnInit {
     this.apiService.insertTicket(this.ticketDtl.idTickets).subscribe( data => {
       console.log(data);
       this.ticketDtl.idTickets = data;
-
       this.ticketDtl.idTickets.idCustomer = this.account.idUser;
       this.uploadFiles(this.ticketDtl.idTickets.code);
       console.log(this.ticketDtl); 
-    })
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+		}, err => {
+			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+		});
   }
 }

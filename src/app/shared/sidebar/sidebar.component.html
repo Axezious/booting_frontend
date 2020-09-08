@@ -2,8 +2,11 @@
   <ul class="nav">
     <li class="nav-item nav-profile">
       <a href="javascript:;" class="nav-link">
-        <div class="nav-profile-image">
-          <img src="assets/images/faces/face1.jpg" alt="profile">
+        <div *ngIf="account.idUser.idPhoto.id !=' '" class="nav-profile-image">
+          <img [src]="urlFoto" alt="profile">
+          <span class="login-status online"></span> <!--change to offline or busy as needed-->              
+        </div>
+        <div *ngIf="account.idUser.idPhoto.id ==' '" class="nav-profile-image " style="width: 60px; height: 40px; border-radius: 50%; background-color: rgb(233, 236, 239);">
           <span class="login-status online"></span> <!--change to offline or busy as needed-->              
         </div>
         <div class="nav-profile-text">
@@ -36,7 +39,7 @@
           <li class="nav-item"><a class="nav-link" routerLink="admin/users/view" routerLinkActive="active" #users="routerLinkActive">Users</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/agent-relations/view" routerLinkActive="active" #agentrelations="routerLinkActive">Agent Relations</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="admin/client-products/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Products</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="admin/client-account/insert" routerLinkActive="active" #clientproducts="routerLinkActive">Client Account</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="admin/client-account/view" routerLinkActive="active" #clientproducts="routerLinkActive">Client Account</a></li>
         </ul>
       </div>
     </li>
@@ -80,10 +83,12 @@
       </a>
     </li> -->
     <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
-      <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">Download Report</span>
+      <button (click)=downloadReport()>Download Report</button>
+      <!-- <a class="nav-link"  routerLinkActive #forms="routerLinkActive">
+        <button (click)=downloadReport() >Download Report</button>
+        <span (click)=downloadReport() class="menu-title">Download Report</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
-      </a>
+      </a> -->
     </li>
   </ul>
 </nav>

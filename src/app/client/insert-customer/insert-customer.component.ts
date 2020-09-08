@@ -5,11 +5,13 @@ import { Roles } from 'src/app/model/roles';
 import { Companies } from 'src/app/model/companies';
 import { AuthService } from 'src/app/service/auth.service';
 import { ApiService } from 'src/app/service/api.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-insert-customer',
   templateUrl: './insert-customer.component.html',
-  styleUrls: ['./insert-customer.component.scss']
+  styleUrls: ['./insert-customer.component.scss'],
+  providers:[MessageService]
 })
 export class InsertCustomerComponent implements OnInit {
 
@@ -17,7 +19,7 @@ export class InsertCustomerComponent implements OnInit {
   accountTemp: Accounts = new Accounts();
   cPass: String;
 
-  constructor(private auth: AuthService, private apiService: ApiService) {
+  constructor(private auth: AuthService, private apiService: ApiService,private messageService:MessageService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -37,7 +39,10 @@ export class InsertCustomerComponent implements OnInit {
 
     this.apiService.insertAccount(this.account).subscribe( data => {
       console.log(data);
-    })
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+		}, err => {
+			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+		});
     
     this.account = new Accounts();
     this.account.idUser = new Users();
