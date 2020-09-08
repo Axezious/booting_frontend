@@ -18,6 +18,7 @@ import { FireService } from 'src/app/service/fire.service';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Tickets } from 'src/app/model/tickets';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-dtl-ticket',
@@ -37,7 +38,7 @@ export class DtlTicketComponent implements OnInit {
   selectedFile: File;
   fileList: File[] = [];
   listOfFiles: any[] = [];
-
+  readonly base_url = 'http://147.139.130.49:8080';
   itemValue = '';
   items: Observable<any[]>;
   threads: Thread[] = [];
@@ -56,6 +57,7 @@ export class DtlTicketComponent implements OnInit {
     category: new FormControl(''),
     imageUrl: new FormControl('', Validators.required)
   })
+  labelCloseButton = ""
 
   constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase, private api: ApiService) {
     this.account.idUser = new Users();
@@ -63,9 +65,7 @@ export class DtlTicketComponent implements OnInit {
     this.account.idUser.idRole = new Roles();
     this.account = auth.getAccount();
     this.ticketDtl.idTickets = new Tickets();
-
     this.xCode = this.route.snapshot.queryParamMap.get('code');
-
     this.ticketHdr.idTicket = new Tickets();
     this.ticketHdr.idTicket.idStatus = new Status();
     this.ticketHdr.idTicket.idPriority = new Priorities();
@@ -74,7 +74,7 @@ export class DtlTicketComponent implements OnInit {
     this.ticketHdr.idTicket.idProduct = new Products();
     this.ticketHdr.idTicket.idStatus = new Status();
     this.ticketHdr.idAgent = new Users();
-
+    
     this.getTicketByCode();
 
     // db.list(`threads/${this.xCode}`).query.orderByKey().on('child_added', data => {
@@ -96,9 +96,16 @@ export class DtlTicketComponent implements OnInit {
   ngOnInit() {
   }
 
-  async getTicketByCode() {
+   getTicketByCode() {
     this.api.getTicketByCode(this.xCode).subscribe(result => {
       this.ticketHdr = result;
+      if(this.ticketHdr.idTicket.idStatus.code == 'OP'){
+        this.labelCloseButton="Close Ticket"
+      } else if(this.ticketHdr.idTicket.idStatus.code == 'CL'){
+        this.labelCloseButton="Re-Open Ticket"
+      } else if(this.ticketHdr.idTicket.idStatus.code == 'RO'){
+        this.labelCloseButton="Close Ticket"
+      }
 
       console.log(this.ticketHdr);
     })
@@ -115,6 +122,9 @@ export class DtlTicketComponent implements OnInit {
     thread.user = new Users();
     thread.user.id = this.auth.getAccount().idUser.id;
     thread.user.name = this.auth.getAccount().idUser.name;
+    if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
+      thread.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
+    }
     this.fire.insertFireDtl(thread, this.fileList);
     this.attachment.nativeElement.value = '';
     this.fileList = []
@@ -162,10 +172,24 @@ export class DtlTicketComponent implements OnInit {
     // this.db.list('threads/slmb-541').push({contents: this.itemValue});
 
     this.uploadFiles(this.xCode);
+    this.itemValue= ""
   }
-
+  
   updateStatus(tickets : Tickets) {
-    tickets.idStatus.code = 'CL';
+    
+    if(tickets.idStatus.code == 'OP'){
+      tickets.idStatus.code = 'CL';
+      this.ticketHdr.idTicket.idStatus.name = "Close"
+      this.labelCloseButton = "Re-Open Ticket"
+    } else if(tickets.idStatus.code == 'CL'){
+      tickets.idStatus.code = 'RO'
+      this.ticketHdr.idTicket.idStatus.name = "Re-Open"
+      this.labelCloseButton = "Close Ticket"
+    } else if(tickets.idStatus.code == 'RO'){
+      tickets.idStatus.code = 'CL'
+      this.ticketHdr.idTicket.idStatus.name = "Close"
+      this.labelCloseButton = "Re-Open Ticket"
+    }
     tickets.updatedBy = this.auth.getAccount().idUser.name
     // console.log(tickets);
     this.api.updateStatusTicket(tickets).subscribe(res => {
@@ -173,4 +197,5 @@ export class DtlTicketComponent implements OnInit {
     })
     
   }
+  
 }

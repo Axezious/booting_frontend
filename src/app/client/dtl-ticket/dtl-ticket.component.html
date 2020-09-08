@@ -5,7 +5,7 @@
         </span>
         #{{ticketHdr.idTicket.code}} {{ticketHdr.idTicket.subject}}
     </h3>
-    <button type="button" (click)="updateStatus(ticketHdr.idTicket)" class="btn btn-danger btn-fw justify-self-end">Close Ticket</button>
+    <button type="button" (click)="updateStatus(ticketHdr.idTicket)" class="btn btn-danger btn-fw justify-self-end">{{labelCloseButton}}</button>
 </div>
 <div class="d-flex" style="margin-top: 0px;">
     <div class="pr-3" style="font-size: 12px; margin-top: -10px;">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
     </div>
 </div> -->
@@ -137,7 +137,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-1">
-                        <img class="rounded-circle" src="assets/images/faces/Kekeyi.jpg" style="height: 50px;">
+                        <img class="rounded-circle" src="{{data.urlFoto}}" style="height: 50px; width: 50px;">
                     </div>
                     <div class="col-md-11 mt-2">
                         <div class="row">

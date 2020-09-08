@@ -45,10 +45,11 @@ export class InsertTicketComponent implements OnInit {
   prioritySelected: string;
   classificationSelected: string;
   status: Status[];
-
+  readonly base_url = 'http://147.139.130.49:8080';
   codeTicket: string;
   
   uploadFiles(kode:string) {
+    this.account = this.auth.getAccount();
     console.log(this.fileList);
     let thread = new Thread();
     let currentDate = new Date();
@@ -60,6 +61,10 @@ export class InsertTicketComponent implements OnInit {
     thread.user = new Users();
     thread.user.id = this.auth.getAccount().idUser.id;
     thread.user.name = this.auth.getAccount().idUser.name;
+    if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
+      thread.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
+      
+    }
 
     this.fire.insertFireHdr(thread, this.fileList);
     this.attachment.nativeElement.value = '';
@@ -170,7 +175,6 @@ export class InsertTicketComponent implements OnInit {
     this.apiService.insertTicket(this.ticketDtl.idTickets).subscribe( data => {
       console.log(data);
       this.ticketDtl.idTickets = data;
-
       this.ticketDtl.idTickets.idCustomer = this.account.idUser;
       this.uploadFiles(this.ticketDtl.idTickets.code);
       console.log(this.ticketDtl); 

@@ -9,5 +9,6 @@ export class Thread {
     dateAndTime: string;
     user: Users;
     something: string;
+    urlFoto: string;
     
 }

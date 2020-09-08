@@ -29,6 +29,7 @@ import { ClientProducts } from '../model/client-products';
 export class ApiService {
 
   readonly base_url = 'http://147.139.130.49:8080'
+  // readonly base_url = 'http://252b960fe95d.ngrok.io'
   //readonly base_url = 'http://localhost:8080'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
