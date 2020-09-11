@@ -21,7 +21,7 @@ import { data } from 'jquery';
 import { saveAs } from "file-saver"
 import { AgentRelations } from '../model/agent-relations';
 import { ClientProducts } from '../model/client-products';
-import { AgentModal } from '../model/agent-modal';
+
 
 @Injectable({
   providedIn: 'root'
@@ -309,11 +309,6 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getAgentModal(id:string):Observable<AgentModal[]> {
-    return this.http.get<AgentModal[]>(`${this.base_url}/tickets/list-agent/${id}`,
-      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
-  }
-
   // AGENT RELATION
   viewAgentRelation(): Observable<AgentRelations[]> {
     return this.http.get<AgentRelations[]>(`${this.base_url}/agent-relations/all`,
@@ -336,6 +331,11 @@ export class ApiService {
       {
         headers: { Authorization: `Bearer ${this.authService.getToken()}` }
       })
+  }
+
+  insertPhotoProfile(data:any): Observable<any> {
+    return this.http.post<any>(`${this.base_url}/photo-profile/uploads`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 }
 

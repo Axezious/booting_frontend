@@ -37,7 +37,8 @@ export class AuthService {
   }
 
   adminPermit() : boolean {
-    return localStorage.getItem('roleCode') == 'ADM' || localStorage.getItem('roleCode') == 'SPA'
+    this.account = JSON.parse(localStorage.getItem('account'))
+    return this.account.idUser.idRole.code == 'ADM' || this.account.idUser.idRole.code == 'SPA'
   }
 
   setAccount(account: Accounts) {
@@ -48,8 +49,6 @@ export class AuthService {
       account.idUser.idPhoto.type = " "
       account.idUser.idPhoto.data = " "
     }
-    console.log("setAccount");
-    console.log(account);
     localStorage.setItem('account', JSON.stringify(account));
     // if (account.idUser.idPhoto == null || account.idUser.idPhoto == undefined) {
     //   localStorage.setItem('email', account.email);
@@ -96,7 +95,6 @@ export class AuthService {
       account.idUser.idRole = new Roles();
     } else {
       account = JSON.parse(localStorage.getItem('account'));
-      console.log(account);
     }
 
     // account.idUser = new Users();

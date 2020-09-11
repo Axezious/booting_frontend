@@ -14,12 +14,13 @@
                                             <div *ngIf="account.idUser.idPhoto.id ==' '"
                                                 class="d-flex justify-content-center align-items-center rounded"
                                                 style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                <span
-                                                    style="color: rgb(166, 168, 170); font: bold 8pt Arial;"></span>
+                                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;"></span>
                                             </div>
                                             <div *ngIf="account.idUser.idPhoto.id !=' '"
                                                 class="d-flex justify-content-center align-items-center rounded">
-                                                <img src="{{urlFoto}}" alt="image">
+                                                <img src="{{urlFoto}}" alt="image" *ngIf="!imageUrl" >
+                                                <img [src]="imageUrl" *ngIf="imageUrl" height="100" width="200" alt="image">
+
                                             </div>
                                         </div>
                                     </div>
@@ -28,14 +29,19 @@
                                             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{account.idUser.name}}</h4>
                                             <p class="mb-0">{{this.account.idUser.idRole.name}}</p>
                                             <div class="mt-2">
-                                                <button class="btn btn-primary" type="button">
+                                                <button (click)="fileInput.click()" class="btn btn-primary"
+                                                    type="button">
                                                     <i class="fa fa-fw fa-camera"></i>
                                                     <span>Change Photo</span>
                                                 </button>
+                                                <span style="color:red;" *ngIf="message">{{message}}</span>
+                                                <input #fileInput #file  style="display: none;" #attachments type="file"
+                                                    accept='image/*' (change)="onFileChanged($event)">
                                             </div>
                                         </div>
                                         <div class="text-center text-sm-right">
-                                            <span class="badge badge-secondary">{{this.account.idUser.idRole.name}}</span>
+                                            <span
+                                                class="badge badge-secondary">{{this.account.idUser.idRole.name}}</span>
                                             <div class="text-muted"><small></small></div>
                                         </div>
                                     </div>
@@ -53,25 +59,45 @@
                                                             <div class="form-group">
                                                                 <label>Full Name</label>
                                                                 <input class="form-control" type="text" name="name"
-                                                                    placeholder="John Smith" value="John Smith">
+                                                                    placeholder="{{account.idUser.name}}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label>Email</label>
+                                                                <label>Company</label>
                                                                 <input class="form-control" type="text"
-                                                                    placeholder="user@example.com">
+                                                                    placeholder="{{account.idUser.idCompany.name}}"
+                                                                    disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col mb-3">
+                                                        <div class="col">
                                                             <div class="form-group">
-                                                                <label>About</label>
-                                                                <textarea class="form-control" rows="5"
-                                                                    placeholder="My Bio"></textarea>
+                                                                <label>Role</label>
+                                                                <input class="form-control" type="text"
+                                                                    placeholder="{{account.idUser.idRole.name}}"
+                                                                    disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Address</label>
+                                                                <input class="form-control" type="text"
+                                                                    placeholder="{{account.idUser.address}}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Contact</label>
+                                                                <input class="form-control" type="text"
+                                                                    placeholder="{{account.idUser.contact}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -79,7 +105,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col d-flex justify-content-end">
-                                                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                                                    <button (click)="saveChanges()" class="btn btn-primary" type="submit">Save Changes</button>
                                                 </div>
                                             </div>
                                         </form>
