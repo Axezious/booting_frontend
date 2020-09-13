@@ -42,7 +42,7 @@ export class ListAgentsService {
 
   async viewAgentRelations() {
 
-    this.apiService.viewAgentRelations().subscribe(agentRelations => {
+    this.apiService.viewAgentRelation().subscribe(agentRelations => {
       console.log(agentRelations);
       this.agentRelations = agentRelations;
 

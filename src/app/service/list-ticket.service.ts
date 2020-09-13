@@ -1,6 +1,6 @@
-import { Injectable, PipeTransform } from '@angular/core';
+import {Injectable, PipeTransform} from '@angular/core';
 
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 
 import { Tickets } from '../model/tickets';
 import { Accounts } from '../model/accounts';
@@ -29,13 +29,13 @@ interface State {
 })
 
 export class ListTicketsService {
-
+  
   account: Accounts = new Accounts();
-  tickets: Tickets[] = [];
-  ticketsFilter: Tickets[] = [];
-  ticketsOpen: Tickets[] = [];
-  ticketsClose: Tickets[] = [];
-  ticketsReopen: Tickets[] = [];
+  tickets:Tickets[] = [];
+  ticketsFilter:Tickets[] = [];
+  ticketsOpen:Tickets[] = [];
+  ticketsClose:Tickets[] = [];
+  ticketsReopen:Tickets[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
@@ -52,7 +52,7 @@ export class ListTicketsService {
     searchTerm: ''
   };
 
-  constructor(private apiService: ApiService, private authService: AuthService) {
+  constructor(private apiService: ApiService, private authService:AuthService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -63,20 +63,20 @@ export class ListTicketsService {
     let nip = this.account.idUser.nip;
 
     if (role == 'ADM' || role == 'SPA') {
-      this.viewTickets();
+      this.viewTickets();  
     }
 
     if (role == 'AGT') {
-      this.viewTicketsByAgent(nip);
+      this.viewTicketsByAgent(nip);  
     }
-
+    
     if (role == 'CLI') {
-      this.viewTicketsByCompany(company);
+      this.viewTicketsByCompany(company);  
     }
 
     if (role == 'CTM') {
-      this.viewTicketsByCustomer(nip);
-    }
+      this.viewTicketsByCustomer(nip);  
+    }    
 
   }
 
@@ -89,28 +89,28 @@ export class ListTicketsService {
     })
   }
 
-  async viewTicketsByAgent(nip: string) {
-    this.apiService.getListTicketByAgent(nip).subscribe(tickets => {
-      this.tickets = tickets;
-      this.dataInit(this.tickets);
+  async viewTicketsByAgent(nip:string) {
+     this.apiService.getListTicketByAgent(nip).subscribe(tickets => {
+       this.tickets = tickets;
+       this.dataInit(this.tickets);
 
-    })
+    }) 
   }
 
-  async viewTicketsByCompany(name: string) {
-    this.apiService.getListTicketByCompany(name).subscribe(tickets => {
-      this.tickets = tickets;
-      this.dataInit(this.tickets);
+  async viewTicketsByCompany(name:string) {
+     this.apiService.getListTicketByCompany(name).subscribe(tickets => {
+       this.tickets = tickets;
+       this.dataInit(this.tickets);
 
-    })
+    }) 
   }
 
-  async viewTicketsByCustomer(nip: string) {
-    this.apiService.getListTicketByCustomer(nip).subscribe(tickets => {
-      this.tickets = tickets;
-      this.dataInit(this.tickets);
+  async viewTicketsByCustomer(nip:string) {
+     this.apiService.getListTicketByCustomer(nip).subscribe(tickets => {
+       this.tickets = tickets;
+       this.dataInit(this.tickets);
 
-    })
+    }) 
   }
 
   allFilter() {
@@ -144,7 +144,7 @@ export class ListTicketsService {
       this._total$.next(result.total);
     });
 
-    this._search$.next();
+    this._search$.next();    
   }
 
   matches(ticket: Tickets, term: string) {
@@ -167,9 +167,9 @@ export class ListTicketsService {
   get pageSize() { return this._state.pageSize; }
   get searchTerm() { return this._state.searchTerm; }
 
-  set page(page: number) { this._set({ page }); }
-  set pageSize(pageSize: number) { this._set({ pageSize }); }
-  set searchTerm(searchTerm: string) { this._set({ searchTerm }); }
+  set page(page: number) { this._set({page}); }
+  set pageSize(pageSize: number) { this._set({pageSize}); }
+  set searchTerm(searchTerm: string) { this._set({searchTerm}); }
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
@@ -177,10 +177,7 @@ export class ListTicketsService {
   }
 
   private _search(data): Observable<SearchResult> {
-    const { pageSize, page, searchTerm } = this._state;
-
-    console.log(page);
-    console.log(pageSize);
+    const {pageSize, page, searchTerm} = this._state;
 
     console.log(page);
     console.log(pageSize);
@@ -192,7 +189,7 @@ export class ListTicketsService {
 
     // 2. paginate
     tickets = tickets.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({ tickets, total });
+    return of({tickets, total});
   }
 
 

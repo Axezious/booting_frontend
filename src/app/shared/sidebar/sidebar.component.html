@@ -43,6 +43,12 @@
         </ul>
       </div>
     </li>
+    <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+      <a class="nav-link" routerLink="admin/list-agents" routerLinkActive #forms="routerLinkActive">
+        <span class="menu-title">List Agents</span>
+        <i class="mdi mdi-ticket-confirmation menu-icon"></i>
+      </a>
+    </li>
     <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
@@ -76,12 +82,6 @@
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
-    <!-- <li *ngIf="role == 'ADM' || role == 'AGT' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
-      <a class="nav-link" routerLink="admin/view-ticket" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">Admin Tickets</span>
-        <i class="mdi mdi-ticket-confirmation menu-icon"></i>
-      </a>
-    </li> -->
     <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <button (click)=downloadReport()>Download Report</button>
       <!-- <a class="nav-link"  routerLinkActive #forms="routerLinkActive">

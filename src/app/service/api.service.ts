@@ -21,6 +21,7 @@ import { data } from 'jquery';
 import { saveAs } from "file-saver"
 import { AgentRelations } from '../model/agent-relations';
 import { ClientProducts } from '../model/client-products';
+import { AgentModal } from '../model/agent-modal';
 
 
 @Injectable({
@@ -306,6 +307,11 @@ export class ApiService {
   // AGENT
   viewAgent(): Observable<Users[]> {
     return this.http.get<Users[]>(`${this.base_url}/users/all-agent`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  getAgentModal(id:string):Observable<AgentModal[]> {
+    return this.http.get<AgentModal[]>(`${this.base_url}/tickets/list-agent/${id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
