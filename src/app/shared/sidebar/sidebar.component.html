@@ -45,20 +45,20 @@
     </li>
     <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="admin/list-agents" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">List Agents</span>
+        <span class="menu-title">Agent Relations</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
-    <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : insertticket.isActive }">  
+    <li *ngIf="role == 'SPA'" class="nav-item" >  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed2">
         <ul class="nav flex-column sub-menu">
-          <li *ngIf="role == 'CLI' || role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
-          <li *ngIf="role == 'CLI' || role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/view-customer" routerLinkActive="active" #customer="routerLinkActive">View Customer</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
+          <li *ngIf="role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
+          <li *ngIf="role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/view-customer" routerLinkActive="active" #customer="routerLinkActive">View Customer</a></li>
+          <li *ngIf="role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
           <!-- <li class="nav-item"><a class="nav-link" routerLink="client/dtl-ticket" routerLinkActive="active" #dtlticket="routerLinkActive">Detail Ticket</a></li> -->
           <!-- <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li> -->
         </ul>
@@ -76,9 +76,15 @@
         </ul>
       </div>
     </li> -->
+    <li *ngIf="role == 'SPA' || role == 'CLI'" class="nav-item">
+      <a class="nav-link" routerLink="client/view-customer" routerLinkActive #forms="routerLinkActive">
+        <span class="menu-title">Customer</span>
+        <i class="mdi mdi-account menu-icon"></i>
+      </a>
+    </li>
     <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="client/list-ticket" routerLinkActive #forms="routerLinkActive">
-        <span class="menu-title">View Tickets</span>
+        <span class="menu-title">Tickets</span>
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
