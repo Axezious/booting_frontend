@@ -25,23 +25,25 @@ export class DashboardComponent implements OnInit {
   close = [];
   reOpen = [];
   agent: string;
+  readonly base_url = 'http://147.139.130.49:8080';
+  urlFoto:string = ""
 
   customer: string;
-  constructor(private apiService: ApiService, private authservice: AuthService) {
+  constructor(private apiService: ApiService, private auth: AuthService, private authservice: AuthService) {
     this.account = this.authservice.getAccount();
     console.log("Ini profile");
-    
+
     console.log(this.account);
     console.log(this.account.idUser.idRole.code);
     this.AllDashboard();
     this.getChart();
     this.getChartCilent();
-    
-    
+
+
   }
 
-  tesAccount(){
-  this.apiService 
+  tesAccount() {
+    this.apiService
   }
 
   async AllDashboard() {
@@ -202,9 +204,9 @@ export class DashboardComponent implements OnInit {
   }
   getChartCilent() {
     let data = { 'name': `${this.account.idUser.idCompany.name}`, 'year': "2020" }
-    this.apiService.getChartClient(data).subscribe(result =>{
+    this.apiService.getChartClient(data).subscribe(result => {
       console.log(result);
-      
+
     })
     console.log(data.year);
   }
@@ -262,6 +264,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   date: Date = new Date();
