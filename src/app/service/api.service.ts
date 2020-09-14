@@ -251,7 +251,7 @@ export class ApiService {
   }
 
   getListTicketByCompany(name: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-Company/${name}`,
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-company/${name}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
