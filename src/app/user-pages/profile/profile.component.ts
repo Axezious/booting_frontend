@@ -60,6 +60,8 @@ export class ProfileComponent implements OnInit {
     this.apiService.insertPhotoProfile(data).subscribe(result => {
       console.log(result);
       console.log("SAVE CHANGES");
+    }, err => {
+      console.log(err);
     })
   }
 

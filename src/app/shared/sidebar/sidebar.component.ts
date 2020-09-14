@@ -29,9 +29,9 @@ export class SidebarComponent implements OnInit {
   }
 
 
-  downloadReport() {
-    this.apiservice.getReport();
-  }
+  // downloadReport() {
+  //   this.apiservice.getReport();
+  // }
 
   ngOnInit() {
     const body = document.querySelector('body');

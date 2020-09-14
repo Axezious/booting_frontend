@@ -82,13 +82,8 @@
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
-    <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
+    <!-- <li *ngIf="role == 'ADM' || role == 'SPA'" class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <button (click)=downloadReport()>Download Report</button>
-      <!-- <a class="nav-link"  routerLinkActive #forms="routerLinkActive">
-        <button (click)=downloadReport() >Download Report</button>
-        <span (click)=downloadReport() class="menu-title">Download Report</span>
-        <i class="mdi mdi-ticket-confirmation menu-icon"></i>
-      </a> -->
-    </li>
+    </li> -->
   </ul>
 </nav>

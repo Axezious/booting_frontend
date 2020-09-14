@@ -8,6 +8,7 @@ import { AgentModal } from '../../../model/agent-modal';
 import { Companies } from '../../../model/companies';
 import { AgentModalService } from '../../../service/agent-modal.service';
 import { ListAgentsService } from '../../../service/list-agents.service';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-list-agents',
@@ -24,21 +25,25 @@ export class ListAgentsComponent implements OnInit {
   total$: Observable<number>;
   total2$: Observable<number>;
 
-  constructor(private service:ListAgentsService, private modalService: NgbModal, private service2:AgentModalService) { 
-  	this.agentRelations$ = service.agentRelations$;
-  	this.total$ = service.total$;
+  constructor(private service: ListAgentsService, private modalService: NgbModal, private service2: AgentModalService, private apiservice: ApiService) {
+    this.agentRelations$ = service.agentRelations$;
+    this.total$ = service.total$;
   }
 
   ngOnInit() {
   }
 
-  async openMediumModal( mediumModalContent, id ) {
-  	console.log(id);
-  	this.service2.viewAgentModal(id);
-  	this.agentModals$ = this.service2.agentModals$;
-  	this.total2$ = this.service2.total$;
-  		
-    this.modalService.open( mediumModalContent, { size : 'lg' } );
+  downloadReport(nip) {
+    this.apiservice.getReport(nip);
+  }
+
+  async openMediumModal(mediumModalContent, id) {
+    console.log(id);
+    this.service2.viewAgentModal(id);
+    this.agentModals$ = this.service2.agentModals$;
+    this.total2$ = this.service2.total$;
+
+    this.modalService.open(mediumModalContent, { size: 'lg' });
   }
 
 }

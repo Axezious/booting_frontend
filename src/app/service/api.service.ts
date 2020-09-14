@@ -31,7 +31,7 @@ export class ApiService {
 
   readonly base_url = 'http://147.139.130.49:8080'
   // readonly base_url = 'http://252b960fe95d.ngrok.io'
-  //readonly base_url = 'http://localhost:8080'
+  // readonly base_url = 'http://localhost:8080'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -285,11 +285,11 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getReport() {//tambahin parameter nip
+  getReport(nip) {//tambahin parameter nip
     let headers_object = new HttpHeaders()
       .set("Authorization", "Bearer " + this.authService.getToken())
       .set("Content-Type", "application/pdf");
-    this.http.get(this.base_url + '/report/totalTicketAgent/a1', { headers: headers_object, responseType: 'blob' }).subscribe(res => {
+    this.http.get(this.base_url + `/report/totalTicketAgent/${nip}`, { headers: headers_object, responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res], { type: 'application/octet-stream' })
       saveAs(blob, "repot" + ".pdf");
     })
