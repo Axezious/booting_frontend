@@ -56,6 +56,7 @@ export class AgentModalService {
 
     this.apiService.getAgentModal(id).subscribe(agentModals => {
       console.log(agentModals);
+
       this.agentModals = agentModals;
 
       this._search$.pipe(
@@ -71,6 +72,9 @@ export class AgentModalService {
 
     this._search$.next();
 
+    }, err => {
+      console.log(err);
+      this.agentModals = [];
     })
   }
 

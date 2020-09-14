@@ -63,8 +63,11 @@ export class ListAgentsService {
   }
 
   matches(agentRelation: AgentRelations, term: string) {
-  return agentRelation.idAgent.name.toLowerCase().includes(term.toLowerCase())
-  	|| agentRelation.idCompany.name.toLowerCase().includes(term.toLowerCase());
+    if (agentRelation.idAgent != null && agentRelation.idCompany != null){
+      return agentRelation.idAgent.name.toLowerCase().includes(term.toLowerCase())
+        || agentRelation.idCompany.name.toLowerCase().includes(term.toLowerCase());    
+    }  
+  
   }
 
   get agentRelations$() { return this._agentRelations$.asObservable(); }

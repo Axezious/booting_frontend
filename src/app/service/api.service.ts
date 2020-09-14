@@ -30,7 +30,7 @@ import { AgentModal } from '../model/agent-modal';
 export class ApiService {
 
   readonly base_url = 'http://147.139.130.49:8080'
-  // readonly base_url = 'http://252b960fe95d.ngrok.io'
+  readonly base_url2 = 'http://052a843eb7a1.ngrok.io'
   // readonly base_url = 'http://localhost:8080'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -289,7 +289,7 @@ export class ApiService {
     let headers_object = new HttpHeaders()
       .set("Authorization", "Bearer " + this.authService.getToken())
       .set("Content-Type", "application/pdf");
-    this.http.get(this.base_url + `/report/totalTicketAgent/${nip}`, { headers: headers_object, responseType: 'blob' }).subscribe(res => {
+    this.http.get(this.base_url2 + `/report/totalTicketAgent/${nip}`, { headers: headers_object, responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res], { type: 'application/octet-stream' })
       saveAs(blob, "repot" + ".pdf");
     })

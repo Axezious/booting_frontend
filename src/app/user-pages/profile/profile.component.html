@@ -18,7 +18,7 @@
                                             </div>
                                             <div *ngIf="account.idUser.idPhoto.id !=' '"
                                                 class="d-flex justify-content-center align-items-center rounded">
-                                                <img src="{{urlFoto}}" alt="image" *ngIf="!imageUrl" >
+                                                <img src="{{urlFoto}}" height="100" width="200" alt="image" *ngIf="!imageUrl" >
                                                 <img [src]="imageUrl" *ngIf="imageUrl" height="100" width="200" alt="image">
 
                                             </div>

@@ -49,22 +49,22 @@
         <i class="mdi mdi-ticket-confirmation menu-icon"></i>
       </a>
     </li>
-    <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : customer.isActive || emailregistrasi.isActive || insertticket.isActive }">  
+    <li *ngIf="role == 'CLI' || role == 'CTM' || role == 'SPA'" class="nav-item" [ngClass]="{'active' : insertticket.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed2 = !uiBasicCollapsed2" [attr.aria-expanded]="uiBasicCollapsed2" aria-controls="ui-basic">
         <span class="menu-title">Client Table Master</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed2">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="client/view-customer" routerLinkActive="active" #customer="routerLinkActive">View Customer</a></li>
+          <li *ngIf="role == 'CLI' || role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/insert-customer" routerLinkActive="active" #customer="routerLinkActive">Insert Customer</a></li>
+          <li *ngIf="role == 'CLI' || role == 'SPA'" class="nav-item"><a class="nav-link" routerLink="client/view-customer" routerLinkActive="active" #customer="routerLinkActive">View Customer</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="client/insert-ticket" routerLinkActive="active" #insertticket="routerLinkActive">Insert Ticket</a></li>
           <!-- <li class="nav-item"><a class="nav-link" routerLink="client/dtl-ticket" routerLinkActive="active" #dtlticket="routerLinkActive">Detail Ticket</a></li> -->
-          <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" routerLink="client/email-registrasi" routerLinkActive="active" #emailregistrasi="routerLinkActive">Email Registrasi</a></li> -->
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{'active' : login.isActive || registrasi.isActive }">  
+    <!-- <li class="nav-item" [ngClass]="{'active' : login.isActive || registrasi.isActive }">  
       <a class="nav-link" (click)="uiBasicCollapsed3 = !uiBasicCollapsed3" [attr.aria-expanded]="uiBasicCollapsed3" aria-controls="ui-basic">
         <span class="menu-title">User Pages</span>
         <i class="menu-arrow"></i>
@@ -75,7 +75,7 @@
           <li class="nav-item"><a class="nav-link" routerLink="user-pages/register" routerLinkActive="active" #registrasi="routerLinkActive">Registrasi</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
     <li class="nav-item" [ngClass]="{ 'active': forms.isActive }">
       <a class="nav-link" routerLink="client/list-ticket" routerLinkActive #forms="routerLinkActive">
         <span class="menu-title">View Tickets</span>
