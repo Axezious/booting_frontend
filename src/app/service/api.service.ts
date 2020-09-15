@@ -65,22 +65,22 @@ export class ApiService {
 
   //CRUD Companies
   viewCompanies(): Observable<Companies[]> {
-    return this.http.get<Companies[]>(`${this.base_url}/companies/all-active`,
+    return this.http.get<Companies[]>(`${this.base_url}/companies/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   insertCompanies(data: Companies): Observable<Companies> {
-    return this.http.post<Companies>(`${this.base_url}/companies/insert`, data,
+    return this.http.post<Companies>(`${this.base_url}/companies/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deleteCompanies(company: Companies) {
-    return this.http.delete<Companies>(`${this.base_url}/companies/delete/${company.id}`,
+    return this.http.delete<Companies>(`${this.base_url}/companies/${company.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateCompanies(data: Companies): Observable<Companies> {
-    return this.http.put<Companies>(`${this.base_url}/companies/update`, data,
+    return this.http.put<Companies>(`${this.base_url}/companies/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 

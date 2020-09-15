@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
 import { ViewComponent } from './view/view.component';
 import { InsertComponent } from './insert/insert.component';
 import { UpdateComponent } from './update/update.component';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 const routes:Routes = [
@@ -20,8 +21,8 @@ const routes:Routes = [
 @NgModule({
   declarations: [ViewComponent, InsertComponent, UpdateComponent],
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, NgbModule,ToastModule,
-    RouterModule.forChild(routes)
+    CommonModule, FormsModule, ReactiveFormsModule, NgbModule, ToastModule,
+    CheckboxModule, RouterModule.forChild(routes)
   ]
 })
 export class CompaniesModule { }

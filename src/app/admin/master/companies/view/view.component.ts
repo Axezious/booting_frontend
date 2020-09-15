@@ -20,10 +20,12 @@ export class ViewComponent implements OnInit {
   companies$:Observable<Companies[]>;
   total$:Observable<number>;
   param:Companies = new Companies();
+  selectedDel:Companies[] = []
 
   constructor(private service:CompaniesService, private apiService:ApiService, private messageService: MessageService) { 
   	this.companies$ = service.companies$;
   	this.total$ = service.total$;
+
   }
 
   ngOnInit() {
@@ -39,15 +41,31 @@ export class ViewComponent implements OnInit {
     })
   }
 
-  showConfirm(company:Companies) {
-        this.param = company;
+
+
+  deleteAll() {
+    console.log(this.selectedDel);
+    for (let i = 0; i < this.selectedDel.length; i++ ) {
+      this.apiService.deleteCompanies(this.selectedDel[i]).subscribe(company =>{
+      console.log(company);
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      this.service.viewCompanies();
+    }, err => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+    })
+    }
+  }
+
+  showConfirm() {
         this.messageService.clear();
-        this.messageService.add({key: 'sc', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+        this.messageService.add({key: 'sc', sticky: true, severity:'warn', summary:'Are you sure about this?', detail:'Confirm to proceed'});
     }
 
   onConfirm() {
-        this.deleteCompany(this.param)
+        // this.deleteCompany(this.param);
+        this.deleteAll();
         this.messageService.clear('sc');
+        this.selectedDel = [];
     }
 
     onReject() {

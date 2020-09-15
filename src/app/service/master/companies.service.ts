@@ -25,6 +25,26 @@ interface State {
 export class CompaniesService {
   
   companies: Companies[] = [];
+  // companies: Companies[] = [
+  //   {
+  //     id:'1',
+  //     name:'test1',
+  //     createdAt: new Date(),
+  //     createdBy: 'admin',
+  //     updatedAt:new Date(),
+  //     updatedBy:'admin',
+  //     active: true
+  //   },
+  //   {
+  //     id:'2',
+  //     name:'test2',
+  //     createdAt: new Date(),
+  //     createdBy: 'admin',
+  //     updatedAt:new Date(),
+  //     updatedBy:'admin',
+  //     active: true
+  //   },
+  // ];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
