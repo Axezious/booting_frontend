@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/service/auth.service';
 import { ApiService } from 'src/app/service/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Accounts } from 'src/app/model/accounts';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers: [NgbDropdownConfig]
+  providers: [NgbDropdownConfig,MessageService]
 })
 export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
@@ -19,12 +21,23 @@ export class NavbarComponent implements OnInit {
   readonly base_url = 'http://147.139.130.49:8080';
   urlFoto:string = ""
   
-  constructor(config: NgbDropdownConfig,private auth: AuthService, private api: ApiService, private router: Router) {
+  constructor(config: NgbDropdownConfig,private auth: AuthService,
+     private api: ApiService, private router: Router,private route:ActivatedRoute,private profileService:RefreshProfileService,private messageService:MessageService) {
     config.placement = 'bottom-right';
     this.account = auth.getAccount();
   }
 
   ngOnInit() {
+    this.getPhotoProfile();
+    this.profileService.profile.subscribe(data =>{
+      this.getPhotoProfile();
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Photo Profile Berhasil' });
+    })
+    
+  }
+
+
+  getPhotoProfile(){
     this.account = this.auth.getAccount();
     if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
       this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`

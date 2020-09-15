@@ -5,6 +5,7 @@ import { TicketStatus } from '../model/ticket-status';
 import { TicketChart } from '../model/ticket-chart';
 import { Tickets } from '../model/tickets';
 import { Accounts } from '../model/accounts';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,10 +27,10 @@ export class DashboardComponent implements OnInit {
   reOpen = [];
   agent: string;
   readonly base_url = 'http://147.139.130.49:8080';
-  urlFoto:string = ""
+  urlFoto: string = ""
 
   customer: string;
-  constructor(private apiService: ApiService, private auth: AuthService, private authservice: AuthService) {
+  constructor(private apiService: ApiService, private auth: AuthService, private authservice: AuthService,private route:ActivatedRoute) {
     this.account = this.authservice.getAccount();
     console.log("Ini profile");
 
@@ -263,9 +264,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
+  ngOnInit() {}
     
-  }
+
 
   date: Date = new Date();
 

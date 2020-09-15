@@ -22,6 +22,8 @@ import { environment } from '../environments/environment';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive'
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { from } from 'rxjs';
+import { ToastModule } from 'primeng/toast';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { from } from 'rxjs';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    ToastModule
   ],
   providers: [
     {

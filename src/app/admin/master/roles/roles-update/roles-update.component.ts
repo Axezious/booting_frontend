@@ -7,21 +7,22 @@ import { AuthService } from '../../../../service/auth.service';
 
 import { Roles } from '../../../../model/roles';
 import { MessageService } from 'primeng/api';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
-  selector: 'app-roles-update',
-  templateUrl: './roles-update.component.html',
-  styleUrls: ['./roles-update.component.scss'],
-  providers: [MessageService]
+	selector: 'app-roles-update',
+	templateUrl: './roles-update.component.html',
+	styleUrls: ['./roles-update.component.scss'],
+	providers: [MessageService]
 })
 export class RolesUpdateComponent implements OnInit {
 
-    role: Roles;
+	role: Roles;
 	temp: Roles;
 
-	constructor(private apiService: ApiService, private authService: AuthService, 
-				private activatedRoute: ActivatedRoute, private messageService: MessageService,
-				private router:Router) {
+	constructor(private apiService: ApiService, private authService: AuthService,
+		private activatedRoute: ActivatedRoute,private refresh:RefreshProfileService, private messageService: MessageService,
+		private router: Router) {
 		this.role = new Roles();
 		this.temp = new Roles();
 		console.log(this.role);
@@ -32,23 +33,21 @@ export class RolesUpdateComponent implements OnInit {
 		})
 	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  iniFungsi() {
-  	localStorage.setItem('coba', 'coba');
-  }
+	iniFungsi() {
+		localStorage.setItem('coba', 'coba');
+	}
 
-  async updateRole() {
+	async updateRole() {
 		this.role.id = this.temp.id;
 		this.role.createdBy = this.temp.createdBy;
 		this.role.updatedBy = this.authService.getAccount().idUser.name;
 		this.apiService.updateRoles(this.role).subscribe(role => {
 			console.log(this.role);
-			this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
-			setTimeout(() => {
-				this.router.navigateByUrl('admin/roles/view');
-			}, 1000);
+			this.refresh.callRefreshPhoto();
+			this.router.navigateByUrl('admin/roles/view');
 		}, err => {
 			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Update Gagal' });
 		});

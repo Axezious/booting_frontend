@@ -340,7 +340,7 @@ export class ApiService {
   }
 
   insertPhotoProfile(data:any): Observable<any> {
-    return this.http.put<any>(`${this.base_url}/users/update`, data,
+    return this.http.put<any>(`${this.base_url}/users/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 }

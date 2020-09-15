@@ -6,6 +6,7 @@ import { Roles } from 'src/app/model/roles';
 import { LoginComponent } from 'src/app/user-pages/login/login.component';
 import { saveAs } from "file-saver"
 import { ApiService } from 'src/app/service/api.service';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,7 +23,7 @@ export class SidebarComponent implements OnInit {
   urlFoto:string = ""
   
   
-  constructor(private auth: AuthService, private apiservice: ApiService) {
+  constructor(private auth: AuthService, private apiservice: ApiService,private profileService:RefreshProfileService) {
     // this.account = auth.getAccount();
     this.account.idUser = new Users();
     this.account.idUser.idRole = new Roles();
@@ -32,14 +33,18 @@ export class SidebarComponent implements OnInit {
   // downloadReport() {
   //   this.apiservice.getReport();
   // }
-
-  ngOnInit() {
-    const body = document.querySelector('body');
+  getPhotoProfile(){
     this.account = this.auth.getAccount();
     if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
       this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
     }
-    
+  }
+  ngOnInit() {
+    this.getPhotoProfile();
+    this.profileService.profile.subscribe(data=>{
+      this.getPhotoProfile(); 
+    })
+    const body = document.querySelector('body');
     console.log(localStorage.getItem('idPhoto'));
     this.role = this.auth.getAccount().idUser.idRole.code;
     // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu

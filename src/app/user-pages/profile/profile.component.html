@@ -1,7 +1,20 @@
+<p-blockUI [blocked]="blocked">
+    <div class="d-flex justify-content-center">
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                Please wait...
+            </div>
+        </div>
+    </div>
+</p-blockUI>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <div class="row flex-lg-nowrap">
-
         <div class="col">
             <div class="row">
                 <div class="col mb-3">
@@ -18,8 +31,10 @@
                                             </div>
                                             <div *ngIf="account.idUser.idPhoto.id !=' '"
                                                 class="d-flex justify-content-center align-items-center rounded">
-                                                <img src="{{urlFoto}}" height="100" width="200" alt="image" *ngIf="!imageUrl" >
-                                                <img [src]="imageUrl" *ngIf="imageUrl" height="100" width="200" alt="image">
+                                                <img src="{{urlFoto}}" height="100" width="200" alt="image"
+                                                    *ngIf="!imageUrl">
+                                                <img [src]="imageUrl" *ngIf="imageUrl" height="100" width="200"
+                                                    alt="image">
 
                                             </div>
                                         </div>
@@ -35,7 +50,7 @@
                                                     <span>Change Photo</span>
                                                 </button>
                                                 <span style="color:red;" *ngIf="message">{{message}}</span>
-                                                <input #fileInput #file  style="display: none;" #attachments type="file"
+                                                <input #fileInput #file style="display: none;" #attachments type="file"
                                                     accept='image/*' (change)="onFileChanged($event)">
                                             </div>
                                         </div>
@@ -58,8 +73,10 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Full Name</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="{{account.idUser.name}}">
+                                                                <input [(ngModel)]="tempAccount.idUser.name"
+                                                                    class="form-control" type="text" name="name"
+                                                                    placeholder="{{account.idUser.name}}"
+                                                                    name="contact">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -69,7 +86,7 @@
                                                                 <label>Company</label>
                                                                 <input class="form-control" type="text"
                                                                     placeholder="{{account.idUser.idCompany.name}}"
-                                                                    disabled>
+                                                                    name="company" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -79,7 +96,7 @@
                                                                 <label>Role</label>
                                                                 <input class="form-control" type="text"
                                                                     placeholder="{{account.idUser.idRole.name}}"
-                                                                    disabled>
+                                                                    name="role" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -87,8 +104,10 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Address</label>
-                                                                <input class="form-control" type="text"
-                                                                    placeholder="{{account.idUser.address}}">
+                                                                <input [(ngModel)]="tempAccount.idUser.address"
+                                                                    class="form-control" type="text"
+                                                                    placeholder="{{account.idUser.address}}"
+                                                                    name="address">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -96,8 +115,10 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Contact</label>
-                                                                <input class="form-control" type="text"
-                                                                    placeholder="{{account.idUser.contact}}">
+                                                                <input [(ngModel)]="tempAccount.idUser.contact"
+                                                                    class="form-control" type="text"
+                                                                    placeholder="{{account.idUser.contact}}"
+                                                                    name="contact">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,7 +126,8 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col d-flex justify-content-end">
-                                                    <button (click)="saveChanges()" class="btn btn-primary" type="submit">Save Changes</button>
+                                                    <button (click)="saveChanges()" class="btn btn-primary"
+                                                        type="submit">Save Changes</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -117,7 +139,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+<p-toast [baseZIndex]="100" class="custom-toast" key="tc"></p-toast>

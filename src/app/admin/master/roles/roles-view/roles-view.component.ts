@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 
 import { Roles } from '../../../../model/roles';
 import { RolesService } from '../../../../service/master/roles.service';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-roles-view',
@@ -23,7 +24,7 @@ export class RolesViewComponent implements OnInit {
   selectedDel:Roles[] = [];
 
   constructor(private service:RolesService, private apiService:ApiService, 
-              private messageService:MessageService, private activatedRoute: ActivatedRoute) { 
+              private messageService:MessageService,private refresh:RefreshProfileService, private activatedRoute: ActivatedRoute) { 
   	this.roles$ = service.roles$;
   	this.total$ = service.total$;
 
@@ -42,7 +43,9 @@ export class RolesViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messageService.add({ key: 'tc', sticky: true, severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+    this.refresh.profile.subscribe(data =>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+    })
   }
 
   async deleteRole(role:Roles) {

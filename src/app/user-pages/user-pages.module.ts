@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ToastModule } from 'primeng/toast';
+import {BlockUIModule} from 'primeng/blockui';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,7 +22,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,ToastModule,BlockUIModule
   ]
 })
 export class UserPagesModule { }
