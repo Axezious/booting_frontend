@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { InsertComponent } from './insert/insert.component';
 import { ViewComponent } from './view/view.component';
 import { UpdateComponent } from './update/update.component';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 const routes:Routes = [
 	{ path: 'view', component: ViewComponent },
@@ -21,7 +23,7 @@ const routes:Routes = [
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, NgbModule,
-    RouterModule.forChild(routes)
+    ToastModule, CheckboxModule, RouterModule.forChild(routes)
   ]
 })
 export class AgentRelationsModule { }

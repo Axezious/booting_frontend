@@ -1,4 +1,7 @@
 <div class="page-header">
+  <button type="button" routerLink="../view" class="mr-auto btn btn-gradient-success btn-sm">Back</button>
+</div>
+<div class="page-header">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="../view">Users</a></li>
@@ -41,10 +44,12 @@
                 <label for="inputAddress">Address</label>
                 <textarea type="text" name="address" [(ngModel)]="user.address" class="form-control" rows="4" id="inputAddress"></textarea> 
               </div>
-              <button type="submit" (click)="updateUsers()" class="btn btn-gradient-primary mt-3">Update</button>
+              <button type="submit" (click)="updateUser()" class="btn btn-gradient-primary mt-3">Update</button>
               <!-- <button class="btn btn-light">Cancel</button> -->
             </form>
           </div>
         </div>
       </div>    
 </div>
+
+<p-toast position="top-right" key="tc" [baseZIndex]="9999" class="custom-toast"></p-toast>

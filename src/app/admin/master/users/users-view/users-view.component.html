@@ -11,9 +11,11 @@
 								Search: <input class="form-control ml-2" name="searchTerm" type="text"
 									[(ngModel)]="service.searchTerm" />
 								<span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
-								<button type="button" routerLink="../insert" id="insertaccounts1"
-									class="ml-auto btn btn-gradient-success btn-sm"
-									routerLink="../insert">insert</button>
+								<div class="ml-auto btn-group" role="group">
+									<button type="button" id="deleteuser" [ngStyle]="{'visibility': selectedDel.length == 0 ? 'hidden' : 'visible'}" class="mr-2 btn btn-gradient-danger btn-sm" (click)="showConfirm()">Delete</button>
+									<button type="button" routerLink="../insert" id="insertuser"
+									class="btn btn-gradient-success btn-sm">Insert</button>	
+								</div>
 							</div>
 
 							<!-- <div></div> -->
@@ -35,7 +37,10 @@
 								</thead>
 								<tbody>
 									<tr *ngFor="let user of users$ | async; index as i">
-										<th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
+										<th scope="row">
+									    	<p-checkbox name="checkbox" [value]="user" [(ngModel)]="selectedDel" ></p-checkbox>
+									    	{{ (i + 1) + ((service.page -1) * service.pageSize) }}
+									    </th>
 										<td>
 											<ngb-highlight [result]="user.nip" [term]="service.searchTerm">
 											</ngb-highlight>
@@ -64,8 +69,6 @@
 											<div class="btn-group" role="group" style="align-content: center;">
 												<button type="button" routerLink="../update" [queryParams]="user"
 													class="btn btn-outline-primary btn-sm">Update</button>
-												<button type="button" (click)="deleteUser(user)"
-													class="btn btn-outline-danger btn-sm">Delete</button>
 											</div>
 										</td>
 									</tr>
@@ -92,3 +95,35 @@
 		</div>
 	</div>
 </div>
+
+<p-toast position="top-center" key="sc" (onClose)="onReject()" [baseZIndex]="7000">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column mr-auto" style="flex: 1">
+            <div class="p-text-center" style="text-align: center;">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="col-12">
+            	<div class="row">
+            		<div class="ml-auto">
+            			<button type="button" pButton class="btn btn-danger" (click)="onConfirm()">Yes</button>
+            		</div>
+                 	<div class="ml-2 mr-auto">
+            			<button type="button" pButton class="btn btn-secondary" (click)="onReject()">No</button>
+            		</div>
+ 
+            	</div>
+            	              
+           <!--      <div class="col-6">
+                    <button type="button" pButton label="Yes" class="btn btn-secondary"></button>
+                </div>
+                <div class="col-6">
+                    <button type="button" pButton label="No" class="btn btn-danger"></button>
+                </div> -->
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-toast position="top-right" key="tc" [baseZIndex]="9999" class="custom-toast"></p-toast>

@@ -17,6 +17,7 @@ export class ViewComponent implements OnInit {
 
   agentRelations$: Observable<AgentRelations[]>;
   total$: Observable<number>;
+  selectedDel:AgentRelations[] = [];
 
   constructor(private service:AgentRelationsService) { 
   	this.agentRelations$ = service.agentRelations$;

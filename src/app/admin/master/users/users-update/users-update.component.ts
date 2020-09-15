@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
+import { MessageService } from 'primeng/api';
 
 import { Users } from '../../../../model/users';
 import { Roles } from '../../../../model/roles';
@@ -12,7 +14,8 @@ import { UsersViewComponent } from '../users-view/users-view.component';
 @Component({
   selector: 'app-users-update',
   templateUrl: './users-update.component.html',
-  styleUrls: ['./users-update.component.scss']
+  styleUrls: ['./users-update.component.scss'],
+  providers: [MessageService]
 })
 export class UsersUpdateComponent implements OnInit {
 
@@ -21,7 +24,9 @@ export class UsersUpdateComponent implements OnInit {
   roles:Roles[] = [];
   companies:Companies[] = [];
 
-  constructor(private apiService:ApiService, private authService:AuthService, private activatedRoute:ActivatedRoute) { 
+  constructor(private apiService:ApiService, private authService:AuthService, 
+              private activatedRoute:ActivatedRoute, private messageService: MessageService,
+              private router:Router) { 
   	this.user = new Users();
 
   	this.user.idRole = new Roles();
@@ -75,14 +80,20 @@ export class UsersUpdateComponent implements OnInit {
     })
   }
 
-  async updateCompany() {
+  async updateUser() {
   	this.user.id = this.temp.id;
   	this.user.createdBy = this.temp.createdBy;
   	this.user.updatedBy = this.authService.getAccount().idUser.name;
   	console.log(this.user);
   	this.apiService.updateUsers(this.user).subscribe(user =>{
   		console.log(this.user);
-  	})
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+      setTimeout(() => {
+        this.router.navigateByUrl('admin/roles/view');
+      }, 2000);
+    }, err => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Update Gagal' });
+  	});
   }
 
 }

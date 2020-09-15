@@ -7,6 +7,8 @@ import { UsersViewComponent } from './users-view/users-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersInsertComponent } from './users-insert/users-insert.component';
 import { UsersUpdateComponent } from './users-update/users-update.component';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 const routes :Routes = [
   {path : 'insert', component: UsersInsertComponent},
@@ -20,7 +22,9 @@ const routes :Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule, 
+    NgbModule,
+    ToastModule,
+    CheckboxModule, 
     RouterModule.forChild(routes)
   ]
 })

@@ -43,7 +43,9 @@ export class UpdateComponent implements OnInit {
 		this.apiService.updateCompanies(this.company).subscribe(company => {
 			console.log(this.company);
 			this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-			this.router.navigateByUrl('admin/companies/view');
+			setTimeout(() => {
+				this.router.navigateByUrl('admin/companies/view');
+			}, 1000);
 		}, err => {
 			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
 		});

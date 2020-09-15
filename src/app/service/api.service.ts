@@ -130,22 +130,22 @@ export class ApiService {
 
   //CRUD Roles
   viewRoles(): Observable<Roles[]> {
-    return this.http.get<Roles[]>(`${this.base_url}/roles/all`,
+    return this.http.get<Roles[]>(`${this.base_url}/roles/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   insertRoles(data: Roles): Observable<Roles> {
-    return this.http.post<Roles>(`${this.base_url}/roles/insert`, data,
+    return this.http.post<Roles>(`${this.base_url}/roles/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deleteRoles(role: Roles) {
-    return this.http.delete<Roles>(`${this.base_url}/roles/delete/${role.id}`,
+    return this.http.delete<Roles>(`${this.base_url}/roles/${role.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateRoles(data: Roles): Observable<Roles> {
-    return this.http.put<Roles>(`${this.base_url}/roles/update`, data,
+    return this.http.put<Roles>(`${this.base_url}/roles/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -173,27 +173,27 @@ export class ApiService {
 
   //CRUD Users
   viewUsers(): Observable<Users[]> {
-    return this.http.get<Users[]>(`${this.base_url}/users/all`,
+    return this.http.get<Users[]>(`${this.base_url}/users/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   insertUsers(data: Users): Observable<Users> {
-    return this.http.post<Users>(`${this.base_url}/users/insert`, data,
+    return this.http.post<Users>(`${this.base_url}/users/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deleteUsers(user: Users) {
-    return this.http.delete<Users>(`${this.base_url}/users/delete/${user.id}`,
+    return this.http.delete<Users>(`${this.base_url}/users/${user.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateUsers(data: Users): Observable<Users> {
-    return this.http.put<Users>(`${this.base_url}/users/update`, data,
+    return this.http.put<Users>(`${this.base_url}/users/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getUserByNip(nip: string): Observable<Users> {
-    return this.http.get<Users>(`${this.base_url}/users/get-users/${nip}`,
+    return this.http.get<Users>(`${this.base_url}/users/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -225,38 +225,38 @@ export class ApiService {
 
   // CRUD TICKET
   insertTicket(data: Tickets): Observable<Tickets> {
-    return this.http.post<Tickets>(`${this.base_url}/tickets/insert`, data,
+    return this.http.post<Tickets>(`${this.base_url}/tickets/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateStatusTicket(data: Tickets): Observable<Tickets> {
     console.log(data);
-    return this.http.put<Tickets>(`${this.base_url}/tickets/update`, data,
+    return this.http.put<Tickets>(`${this.base_url}/tickets/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getTicketByCode(code: string): Observable<TicketHeader> {
-    return this.http.get<TicketHeader>(`${this.base_url}/tickets/get-ticket/${code}`,
+    return this.http.get<TicketHeader>(`${this.base_url}/tickets/${code}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getListTicket(): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getListTicketByAgent(nip: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${nip}`,
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/agent/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getListTicketByCompany(name: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-company/${name}`,
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/client/${name}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getListTicketByCustomer(nip: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-customer/${nip}`,
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/customer/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 

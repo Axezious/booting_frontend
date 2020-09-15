@@ -1,3 +1,6 @@
+<div class="page-header mb-5">
+  <button type="button" routerLink="../list-ticket" class="mr-auto btn btn-gradient-success btn-sm">Back</button>
+</div>
 <div class="page-header d-flex flex-wrap" style="margin-top: -20px;">
     <h3 class="page-title" style="padding-bottom: 15px;">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
@@ -132,7 +135,7 @@
 </div> -->
 
 <div class="row" *ngFor="let data of items | async">
-    <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto':data.user.name==account.idUser.name}">
+    <div class="col-md-11 grid-margin stretch-card" [ngClass]="{'ml-auto': data.user.name == account.idUser.name}">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -169,7 +172,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" [ngStyle]="{'display': ticketHdr.idTicket.idStatus.name == 'Close' ? 'none' : 'flex'}">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">

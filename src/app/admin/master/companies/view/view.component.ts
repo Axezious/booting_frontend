@@ -19,8 +19,7 @@ export class ViewComponent implements OnInit {
 
   companies$:Observable<Companies[]>;
   total$:Observable<number>;
-  param:Companies = new Companies();
-  selectedDel:Companies[] = []
+  selectedDel:Companies[] = [];
 
   constructor(private service:CompaniesService, private apiService:ApiService, private messageService: MessageService) { 
   	this.companies$ = service.companies$;
@@ -40,8 +39,6 @@ export class ViewComponent implements OnInit {
       this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     })
   }
-
-
 
   deleteAll() {
     console.log(this.selectedDel);

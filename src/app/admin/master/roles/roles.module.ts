@@ -6,7 +6,8 @@ import { RolesViewComponent } from './roles-view/roles-view.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 const routes :Routes = [
   {path : 'insert', component: RolesInsertComponent},
@@ -22,6 +23,7 @@ const routes :Routes = [
     ReactiveFormsModule,
     NgbModule, 
     ToastModule,
+    CheckboxModule,
     RouterModule.forChild(routes)
   ]
 })
