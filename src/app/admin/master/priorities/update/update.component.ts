@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
@@ -18,7 +18,7 @@ export class UpdateComponent implements OnInit {
   priority: Priorities;
   temp: Priorities;
 
-  constructor(private apiService: ApiService, private authService: AuthService, private activatedRoute: ActivatedRoute, private messageService: MessageService) {
+  constructor(private apiService: ApiService, private authService: AuthService, private activatedRoute: ActivatedRoute, private messageService: MessageService, private router:Router) {
     this.priority = new Priorities();
     this.temp = new Priorities();
 
@@ -40,10 +40,12 @@ export class UpdateComponent implements OnInit {
 
     this.apiService.updatePriorities(this.priority).subscribe(priority => {
       console.log(this.priority);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' }), err => {
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      setTimeout(() => {
+        this.router.navigateByUrl('admin/priorities/view');
+      }, 500)
+    }, err => {
         this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
-      }
-    })
+    });
   }
-
 }

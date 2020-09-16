@@ -48,17 +48,17 @@ export class ApiService {
   }
 
   insertClassifications(data: Classifications): Observable<Classifications> {
-    return this.http.post<Classifications>(`${this.base_url}/classifications/insert`, data,
+    return this.http.post<Classifications>(`${this.base_url}/classifications/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deleteClassifications(classification: Classifications) {
-    return this.http.delete<Classifications>(`${this.base_url}/classifications/delete/${classification.id}`,
+    return this.http.delete<Classifications>(`${this.base_url}/classifications/${classification.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateClassifications(data: Classifications): Observable<Classifications> {
-    return this.http.put<Classifications>(`${this.base_url}/classifications/update`, data,
+    return this.http.put<Classifications>(`${this.base_url}/classifications/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -92,17 +92,17 @@ export class ApiService {
   }
 
   insertPriorities(data: Priorities): Observable<Priorities> {
-    return this.http.post<Priorities>(`${this.base_url}/priorities/insert`, data,
+    return this.http.post<Priorities>(`${this.base_url}/priorities/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deletePriorities(priority: Priorities) {
-    return this.http.delete<Priorities>(`${this.base_url}/priorities/delete/${priority.id}`,
+    return this.http.delete<Priorities>(`${this.base_url}/priorities/${priority.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updatePriorities(data: Priorities): Observable<Priorities> {
-    return this.http.put<Priorities>(`${this.base_url}/priorities/update`, data,
+    return this.http.put<Priorities>(`${this.base_url}/priorities/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -114,17 +114,17 @@ export class ApiService {
   }
 
   insertProducts(data: Products): Observable<Products> {
-    return this.http.post<Products>(`${this.base_url}/products/insert`, data,
+    return this.http.post<Products>(`${this.base_url}/products/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deleteProducts(product: Products) {
-    return this.http.delete<Products>(`${this.base_url}/products/delete/${product.id}`,
+    return this.http.delete<Products>(`${this.base_url}/products/${product.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateProducts(data: Products): Observable<Products> {
-    return this.http.put<Products>(`${this.base_url}/products/update`, data,
+    return this.http.put<Products>(`${this.base_url}/products/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
