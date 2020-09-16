@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item nav-profile">
-      <a href="javascript:;" class="nav-link">
+      <a routerLink="/user-pages/edit-profile" class="nav-link">
         <div *ngIf="account.idUser.idPhoto.id !=' '" class="nav-profile-image">
           <img [src]="urlFoto" alt="profile">
           <span class="login-status online"></span> <!--change to offline or busy as needed-->              

@@ -17,6 +17,7 @@ import { FireService } from 'src/app/service/fire.service';
 import { async } from '@angular/core/testing';
 import { formatDate } from '@angular/common';
 import { MessageService } from 'primeng/api';
+import { ClientProducts } from 'src/app/model/client-products';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class InsertTicketComponent implements OnInit {
   fileList: File[] = [];
   listOfFiles: any[] = [];
   itemValue = '';
-  products: Products[];
+  products: ClientProducts[];
   priorities: Priorities[];
   classifications: Classifications[];
   productSelected: string;
@@ -115,18 +116,19 @@ export class InsertTicketComponent implements OnInit {
     this.ticketDtl.idTickets = new Tickets();
     this.ticketDtl.idTickets.idCustomer = new Users();
     this.ticketDtl.idTickets.idStatus = new Status();
-    this.account = this.auth.getAccount();
+    this.account = this.auth.getAccount();    
     
-    apiService.viewProducts().subscribe( datas => {
+    apiService.viewCLientProductByCompanyname(this.account.idUser.idCompany).subscribe( datas => {
       console.log(datas)
+      console.log('client product');
       this.products = datas;
       this.productSelected = this.products[0].id
     })
-
+    
     apiService.viewPriorities().subscribe( datas => {
       console.log(datas)
       this.priorities = datas;
-      this.prioritySelected = this.priorities[0].id
+      this.prioritySelected = this.priorities[0].code
     })
 
     apiService.viewClassifications().subscribe( datas => {

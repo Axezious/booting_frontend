@@ -43,7 +43,7 @@ export class ApiService {
 
   //CRUD Classifications
   viewClassifications(): Observable<Classifications[]> {
-    return this.http.get<Classifications[]>(`${this.base_url}/classifications/all`,
+    return this.http.get<Classifications[]>(`${this.base_url}/classifications/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -87,7 +87,7 @@ export class ApiService {
 
   //CRUD Priorities
   viewPriorities(): Observable<Priorities[]> {
-    return this.http.get<Priorities[]>(`${this.base_url}/priorities/all`,
+    return this.http.get<Priorities[]>(`${this.base_url}/priorities/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -109,7 +109,7 @@ export class ApiService {
 
   //CRUD Products
   viewProducts(): Observable<Products[]> {
-    return this.http.get<Products[]>(`${this.base_url}/products/all`,
+    return this.http.get<Products[]>(`${this.base_url}/products/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -152,7 +152,7 @@ export class ApiService {
 
   //CRUD Status
   viewStatus(): Observable<Status[]> {
-    return this.http.get<Status[]>(`${this.base_url}/status/all`,
+    return this.http.get<Status[]>(`${this.base_url}/status/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -332,11 +332,20 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  //CLIENT PRODUCT
   viewClientProduct(): Observable<ClientProducts[]> {
-    return this.http.get<ClientProducts[]>(`${this.base_url}/client-products/all`,
-      {
-        headers: { Authorization: `Bearer ${this.authService.getToken()}` }
-      })
+    return this.http.get<ClientProducts[]>(`${this.base_url}/client-products/`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  insertClientProduct(data: ClientProducts): Observable<ClientProducts> {
+    return this.http.post<ClientProducts>(`${this.base_url}/client-products/`, data,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  viewCLientProductByCompanyname(data: Companies): Observable<ClientProducts[]> {
+    return this.http.get<ClientProducts[]>(`${this.base_url}/client-products/${data.name}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   insertPhotoProfile(data:any): Observable<any> {

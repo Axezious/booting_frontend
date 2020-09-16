@@ -15,6 +15,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <div class="row flex-lg-nowrap">
+
         <div class="col">
             <div class="row">
                 <div class="col mb-3">
@@ -49,6 +50,7 @@
                                                     <i class="fa fa-fw fa-camera"></i>
                                                     <span>Change Photo</span>
                                                 </button>
+                                                <button (click)="changePass();" class="btn btn-primary flex-nowrap" type="submit">Change Password</button>
                                                 <span style="color:red;" *ngIf="message">{{message}}</span>
                                                 <input #fileInput #file style="display: none;" #attachments type="file"
                                                     accept='image/*' (change)="onFileChanged($event)">
@@ -139,6 +141,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

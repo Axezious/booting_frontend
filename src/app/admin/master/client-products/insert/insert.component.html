@@ -1,35 +1,36 @@
-<div class="row">
-    <div class="col-md-12 grid-margin stretch-card mx-auto">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="text-align: center;">CLIENT PRODUCTS</h4>
-            <form class="forms-sample mt-5">
-              <div class="form-group">
-                <label for="inputIDCompany">ID Company</label>
-                <select id="inputIDCompany" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputIDProduct">ID Product</label>
-                <select id="inputIDProduct" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="totalUrgent">Total Urgent</label>
-                <input type="text" class="form-control" id="totalUrgent" placeholder="insert value..">
-              </div>
-              <div class="form-group">
-                <label for="totalMedium">Total Medium</label>
-                <input type="text" class="form-control" id="totalMedium" placeholder="insert value..">
-              </div>
-              <button type="submit" class="btn btn-gradient-primary mt-3">Submit</button>
-            </form>
-          </div>
-        </div>
-    </div>
+<div class="page-header">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="../view">Client Product</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Insert</li>
+    </ol>
+  </nav>
 </div>
-<p-toast [baseZIndex]="100" class="custom-toast" key="tc"></p-toast>
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title" style="text-align: center;">CLIENT PRODUCT</h4>
+        <div class="forms-sample mt-5">
+          <div class="form-group">
+            <label for="products">Company</label>
+            <select [(ngModel)]="companySelected" class="form-control">
+              <option *ngFor="let company of companiesArr" [value]="company.name">
+                {{company.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="products">Product</label>
+            <select [(ngModel)]="productSelected" class="form-control">
+              <option *ngFor="let product of productsArr" [value]="product.code">
+                {{product.name}}
+              </option>
+            </select>
+          </div>
+          <button type="Insert" (click)="submit()" class="btn btn-gradient-primary mt-3">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
