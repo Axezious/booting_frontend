@@ -6,6 +6,7 @@ import { AuthService } from '../../../../service/auth.service';
 
 import { Priorities } from '../../../../model/priorities';
 import { MessageService } from 'primeng/api';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-update',
@@ -18,7 +19,9 @@ export class UpdateComponent implements OnInit {
   priority: Priorities;
   temp: Priorities;
 
-  constructor(private apiService: ApiService, private authService: AuthService, private activatedRoute: ActivatedRoute, private messageService: MessageService, private router:Router) {
+  constructor(private apiService: ApiService, private authService: AuthService, 
+    private activatedRoute: ActivatedRoute, private messageService: MessageService, 
+    private router: Router, private refresh:RefreshProfileService) {
     this.priority = new Priorities();
     this.temp = new Priorities();
 
@@ -41,11 +44,11 @@ export class UpdateComponent implements OnInit {
     this.apiService.updatePriorities(this.priority).subscribe(priority => {
       console.log(this.priority);
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-      setTimeout(() => {
-        this.router.navigateByUrl('admin/priorities/view');
-      }, 500)
+      this.refresh.callRefreshPhoto();
+      this.router.navigateByUrl('admin/priorities/view');
+
     }, err => {
-        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     });
   }
 }

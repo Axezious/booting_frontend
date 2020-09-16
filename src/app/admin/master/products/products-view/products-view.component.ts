@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 
 import { Products } from '../../../../model/products';
 import { ProductsService } from '../../../../service/master/products.service';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-products-view',
@@ -22,12 +23,16 @@ export class ProductViewComponent implements OnInit {
   param:Products = new Products();
   selectedDel:Products[] = [];
 
-  constructor(private service:ProductsService, private apiService:ApiService, private messageService: MessageService) { 
+  constructor(private service:ProductsService, private apiService:ApiService, 
+    private messageService: MessageService,private refresh:RefreshProfileService) { 
   	this.products$ = service.products$;
   	this.total$ = service.total$;
   }
 
   ngOnInit() {
+    this.refresh.profile.subscribe(data=>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+    })
   }
 
   async deleteProduct(product:Products) {

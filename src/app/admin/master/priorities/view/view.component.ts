@@ -6,6 +6,7 @@ import {MessageService} from 'primeng/api';
 
 import {Priorities} from '../../../../model/priorities';
 import {PrioritiesService} from '../../../../service/master/priorities.service';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-view',
@@ -21,12 +22,16 @@ export class ViewComponent implements OnInit {
   total$ :Observable<number>;
   selectedDel:Priorities[] = [];
 
-  constructor(private service:PrioritiesService, private apiService:ApiService, private messageService: MessageService) { 
+  constructor(private service:PrioritiesService, private apiService:ApiService, 
+    private messageService: MessageService, private refresh:RefreshProfileService) { 
   	this.priorities$ = service.priorities$;
   	this.total$ = service.total$;
   }
 
   ngOnInit() {
+    this.refresh.profile.subscribe(data=>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+    })
   }
 
   async deletePriority(priority:Priorities) {

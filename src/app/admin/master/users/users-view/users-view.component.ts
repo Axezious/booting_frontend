@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 
 import { Users } from '../../../../model/users';
 import { UsersService } from '../../../../service/master/users.service';
+import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-users-view',
@@ -24,12 +25,15 @@ export class UsersViewComponent implements OnInit {
   total$:Observable<number>;
   selectedDel:Users[] = [];
 
-  constructor(private service: UsersService, private apiService:ApiService, private messageService:MessageService) {
+  constructor(private service: UsersService, private apiService:ApiService, private messageService:MessageService, private refresh:RefreshProfileService) {
     this.users$ = service.users$;
     this.total$ = service.total$;
   }
 
   ngOnInit() {
+    this.refresh.profile.subscribe(data =>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+    })
   }
 
   async deleteUser(user:Users) {
