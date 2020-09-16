@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
-import { AgentRelations } from '../model/agent-relations';
 import { ApiService } from './api.service';
 
+import { Users } from '../model/users';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
 interface SearchResult {
-  agentRelations: AgentRelations[];
+  agents: Users[];
   total: number;
 }
 
@@ -22,11 +22,11 @@ interface State {
 })
 export class ListAgentsService {
 
-  agentRelations: AgentRelations[] = [];
+  agents: Users[] = [];
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _agentRelations$ = new BehaviorSubject<AgentRelations[]>([]);
+  private _agents$ = new BehaviorSubject<Users[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -36,15 +36,15 @@ export class ListAgentsService {
   };
 
   constructor(private apiService: ApiService) {
-    this.viewAgentRelations();
+    this.viewAgents();
     
   }
 
-  async viewAgentRelations() {
+  async viewAgents() {
 
-    this.apiService.viewAgentRelation().subscribe(agentRelations => {
-      console.log(agentRelations);
-      this.agentRelations = agentRelations;
+    this.apiService.viewAgent().subscribe(agents => {
+      console.log(agents);
+      this.agents = agents;
 
       this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -53,7 +53,7 @@ export class ListAgentsService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      this._agentRelations$.next(result.agentRelations);
+      this._agents$.next(result.agents);
       this._total$.next(result.total);
     });
 
@@ -62,15 +62,15 @@ export class ListAgentsService {
     })
   }
 
-  matches(agentRelation: AgentRelations, term: string) {
-    if (agentRelation.idAgent != null && agentRelation.idCompany != null){
-      return agentRelation.idAgent.name.toLowerCase().includes(term.toLowerCase())
-        || agentRelation.idCompany.name.toLowerCase().includes(term.toLowerCase());    
+  matches(agent: Users, term: string) {
+    if (agent != null){
+      return agent.name.toLowerCase().includes(term.toLowerCase())
+        || agent.nip.toLowerCase().includes(term.toLowerCase());    
     }  
   
   }
 
-  get agentRelations$() { return this._agentRelations$.asObservable(); }
+  get agents$() { return this._agents$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -90,13 +90,13 @@ export class ListAgentsService {
     const {pageSize, page, searchTerm} = this._state;
 
     // 1. filter
-    let agentRelations = this.agentRelations;
-    agentRelations = agentRelations.filter(agentRelation => this.matches(agentRelation, searchTerm,));
-    const total = agentRelations.length;
+    let agents = this.agents;
+    agents = agents.filter(agent => this.matches(agent, searchTerm,));
+    const total = agents.length;
 
     // 2. paginate
-    agentRelations = agentRelations.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({agentRelations, total});
+    agents = agents.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    return of({agents, total});
   }
 
 }

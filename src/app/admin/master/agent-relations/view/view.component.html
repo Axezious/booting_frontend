@@ -40,17 +40,15 @@
 											</ngb-highlight>
 										</td>
 										<td>
-											<ngb-highlight [result]="agentR.startDate" [term]="service.searchTerm">
+											<ngb-highlight [result]="agentR.startDate | date : 'longDate'"  [term]="service.searchTerm">
                                             </ngb-highlight>
 										</td>
 										<td>
-											<ngb-highlight [result]="agentR.endDate" [term]="service.searchTerm">
+											<ngb-highlight [result]="agentR.endDate | date : 'longDate'" [term]="service.searchTerm">
                                             </ngb-highlight>
                                         </td>
                                         <td>
-                                            <button type="button" routerLink="../dtl-agent-relations"
-                                                [queryParams]="ticket"
-                                                class="btn btn-outline-primary btn-sm">Detail</button>
+                                        	<button type="button" (click)="openMediumModal(mediumModalContent, agentR.idCompany.id)" class="btn btn-outline-primary btn-sm">Info</button>	
                                         </td>
 									</tr>
 								</tbody>
@@ -75,3 +73,94 @@
 		</div>
 	</div>
 </div>
+
+<ng-template #mediumModalContent let-modal class="modal fade" id="exampleModal-2" aria-labelledby="exampleModalLabel-2">
+  <div class="modal-content" style="background-color: white">
+    <div class="modal-header">
+      <!-- <h5 class="modal-title" id="exampleModalLabel-2">Agent : {{agentModals$[0].agent}}</h5> -->
+      <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+      	<h3 class="mx-auto mb-4">Handled Ticket</h3>
+		<div class="col-lg-11 grid-margin mx-auto">
+			<form>
+			  <!-- <div class="d-flex justify-content-between"> -->
+				  <div class="form-group form-inline">
+					 Search: <input class="form-control ml-2" name="searchTerm" type="text" [(ngModel)]="service2.searchTerm"/>
+					 <span class="ml-3" *ngIf="service2.loading$ | async">Loading...</span>
+				  </div>
+
+				  <!-- <div></div> -->
+			  <!-- </div> -->
+			</form>
+			<div class="table-responsive">
+				<table class="table table-striped" style="text-align: center;">
+				  <thead>
+				  <tr>
+				    <th scope="col">No</th>
+				    <th scope="col">Customer</th>
+				    <th scope="col">Total</th>
+				    <th scope="col">Open</th>
+				    <th scope="col">Close</th>
+				    <th scope="col">Reopen</th>
+				  </tr>
+				  </thead>
+				  <tbody>
+				  <tr *ngFor="let agentModal of agentModals$ | async; index as i">
+				    <th scope="row">{{ (i + 1) + ((service2.page -1) * service2.pageSize) }}</th>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.customer" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.total | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.open | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.close | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+				    <td>
+				    	<ngb-highlight [result]="agentModal.reopen | number" [term]="service2.searchTerm"></ngb-highlight>
+				    </td>
+					<!-- <td>
+						<ngb-highlight [result]="agentRelation.idCompany.name" [term]="service.searchTerm"></ngb-highlight>
+					</td>
+					<td>
+					  <div class="template-demo">
+		                <button type="button" routerLink="../update" class="btn btn-primary btn-rounded btn-sm" (click)="openMediumModal(mediumModalContent)">
+		                	<i class="mdi mdi-information-variant"></i>
+		                </button>
+		                <button type="button" routerLink="../update" class="btn btn-secondary btn-rounded btn-sm">
+		                	<i class="mdi mdi-printer"></i>
+		                </button>
+		              </div>
+					</td> -->
+				  </tr>
+				  </tbody>
+				</table>
+			</div>
+
+			<div id="pagination" class="d-flex flex-wrap justify-content-between p-2">
+			    <ngb-pagination
+			      [collectionSize]="(total2$ | async)!" [(page)]="service2.page" [pageSize]="service2.pageSize">
+			    </ngb-pagination>
+
+			    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service2.pageSize">
+			      <option [ngValue]="5">5 items per page</option>
+			      <option [ngValue]="10">10 items per page</option>
+			      <option [ngValue]="15">15 items per page</option>
+			    </select>
+			 </div>
+		</div>
+	  </div>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modal.close()">Submit</button>
+      <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+    </div> -->
+  </div>
+</ng-template>

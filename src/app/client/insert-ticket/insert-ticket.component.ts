@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Accounts } from 'src/app/model/accounts';
 import { TicketsDtl } from 'src/app/model/tickets-dtl';
 import { AuthService } from 'src/app/service/auth.service';
@@ -109,14 +110,14 @@ export class InsertTicketComponent implements OnInit {
 
   fileLength: number;
 
-  constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService,private messageService:MessageService) {
+  constructor(private auth: AuthService, private apiService: ApiService, private fire: FireService,private messageService:MessageService, private router:Router) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
     this.ticketDtl.idTickets = new Tickets();
     this.ticketDtl.idTickets.idCustomer = new Users();
     this.ticketDtl.idTickets.idStatus = new Status();
-    this.account = this.auth.getAccount();    
+    this.account = this.auth.getAccount();
     
     apiService.viewCLientProductByCompanyname(this.account.idUser.idCompany).subscribe( datas => {
       console.log(datas)
@@ -124,7 +125,7 @@ export class InsertTicketComponent implements OnInit {
       this.products = datas;
       this.productSelected = this.products[0].id
     })
-    
+
     apiService.viewPriorities().subscribe( datas => {
       console.log(datas)
       this.priorities = datas;
@@ -181,6 +182,9 @@ export class InsertTicketComponent implements OnInit {
       this.uploadFiles(this.ticketDtl.idTickets.code);
       console.log(this.ticketDtl); 
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      setTimeout(() => {
+        this.router.navigateByUrl('client/list-ticket');
+      }, 2000);
 		}, err => {
 			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
 		});

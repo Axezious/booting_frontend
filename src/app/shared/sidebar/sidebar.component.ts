@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
   getPhotoProfile(){
     this.account = this.auth.getAccount();
     if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
-      this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
+      this.urlFoto = `${this.base_url}/photo/files/${this.account.idUser.idPhoto.id}`
     }
   }
   ngOnInit() {

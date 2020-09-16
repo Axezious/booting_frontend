@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   ticketOpen: number = 0;
   ticketClose: number = 0;
   ticketReOpen: number = 0;
-  ticketChart: TicketChart[];
+  ticketChart: TicketChart[] = [];
   tickets: Tickets[];
   ticketsHelper = [];
   account: Accounts;
@@ -37,8 +37,8 @@ export class DashboardComponent implements OnInit {
     console.log(this.account);
     console.log(this.account.idUser.idRole.code);
     this.AllDashboard();
-    this.getChart();
-    this.getChartCilent();
+    
+    // this.getChartCilent();
 
 
   }
@@ -50,143 +50,71 @@ export class DashboardComponent implements OnInit {
   async AllDashboard() {
     if (this.account.idUser.idRole.code == "ADM" || this.account.idUser.idRole.code == "SPA") {
       console.log("admin");
-      this.getDashboardAdmin();
+      await this.getDashboardAdmin();
+      await this.getChartAdmin();
     }
     else if (this.account.idUser.idRole.code == "CTM") {
       console.log("Customer");
-      this.getDashboardCustomer();
+      await this.getDashboardCustomer();
     }
     else if (this.account.idUser.idRole.code == "AGT") {
       console.log("Agent");
-      this.getDashboardAgent();
+      await this.getDashboardAgent();
+      await this.getChartAgent();
     }
     else {
       console.log("Client");
-      this.getDashboardClient();
+      await this.getDashboardClient();
+      await this.getChartCilent();
     }
   }
 
   async getDashboardAdmin() {
     this.apiService.dashboardAdmin().subscribe(result => {
-      // console.log("Admin");
       console.log(result);
       this.ticketStatus = result;
       this.ticketOpen = this.ticketStatus.ticketOpen
       this.ticketClose = this.ticketStatus.ticketClose
       this.ticketReOpen = this.ticketStatus.ticketReopen
     });
-    this.getRecentTickets();
+    this.getRecentTicketsAdmin();
   }
 
-  getDashboardClient() {
+  async getDashboardClient() {
     let client: string = this.account.idUser.idCompany.name
     this.apiService.dashboardClient(client).subscribe(result => {
-      this.tickets = result;
-      // console.log("Client");
-      // var countfiltered = this.tickets.filter(function (element) {
-      //   return element.idStatus.name == 'Open';
-      // }).length menghitung total item yang di filter sesuai kondisi
-      for (let i = 0; i < this.tickets.length; i++) {
-        if (this.tickets[i].idStatus.name == "Open") {
-          this.ticketOpen++;
-        }
-        else if (this.tickets[i].idStatus.name == "Close") {
-          this.ticketClose++;
-        }
-        else {
-          this.ticketReOpen++;
-        }
-      }
-      console.log(this.tickets);
+      this.ticketStatus = result;
+      this.ticketOpen = this.ticketStatus.ticketOpen
+      this.ticketClose = this.ticketStatus.ticketClose
+      this.ticketReOpen = this.ticketStatus.ticketReopen
     });
-    this.apiService.dashboardClient(client).subscribe(data => {
-      this.tickets = data;
-      if (this.tickets.length < 5) {
-        for (let i = 0; i < this.tickets.length; i++) {
-          this.ticketsHelper.push(this.tickets[i])
-        }
-        console.log(this.ticketsHelper);
-
-      } else {
-        for (let i = 0; i < 5; i++) {
-          this.ticketsHelper.push(this.tickets[i]);
-        }
-        console.log(this.ticketsHelper);
-      }
-    })
+    this.getRecentTicketsClient();
   }
 
   async getDashboardAgent() {
     let agent = this.account.idUser.nip
     console.log(agent);
     this.apiService.dashboardAgent(agent).subscribe(result => {
-      this.tickets = result;
-      // console.log("agent");
-      console.log(result);
-      for (let i = 0; i < this.tickets.length; i++) {
-        if (this.tickets[i].idStatus.name == "Open") {
-          this.ticketOpen++;
-        }
-        else if (this.tickets[i].idStatus.name == "Close") {
-          this.ticketClose++;
-        }
-        else {
-          this.ticketReOpen++;
-        }
-      }
+      this.ticketStatus = result;
+      this.ticketOpen = this.ticketStatus.ticketOpen
+      this.ticketClose = this.ticketStatus.ticketClose
+      this.ticketReOpen = this.ticketStatus.ticketReopen
     });
-    this.apiService.dashboardAgent(agent).subscribe(data => {
-      this.tickets = data;
-      if (this.tickets.length < 5) {
-        for (let i = 0; i < this.tickets.length; i++) {
-          this.ticketsHelper.push(this.tickets[i])
-        }
-        console.log(this.ticketsHelper);
-
-      } else {
-        for (let i = 0; i < 5; i++) {
-          this.ticketsHelper.push(this.tickets[i]);
-        }
-        console.log(this.ticketsHelper);
-      }
-    })
+    this.getRecentTicketsAgent();
   }
 
   async getDashboardCustomer() {
     let customer = this.account.idUser.nip
     this.apiService.dashboardCustomer(customer).subscribe(result => {
-      this.tickets = result;
-      // console.log("customer");
-      console.log(result);
-      for (let i = 0; i < this.tickets.length; i++) {
-        if (this.tickets[i].idStatus.name == "Open") {
-          this.ticketOpen++;
-        }
-        else if (this.tickets[i].idStatus.name == "Close") {
-          this.ticketClose++;
-        }
-        else {
-          this.ticketReOpen++;
-        }
-      }
+      this.ticketStatus = result;
+      this.ticketOpen = this.ticketStatus.ticketOpen
+      this.ticketClose = this.ticketStatus.ticketClose
+      this.ticketReOpen = this.ticketStatus.ticketReopen
     });
-    this.apiService.dashboardCustomer(customer).subscribe(data => {
-      this.tickets = data;
-      if (this.tickets.length < 5) {
-        for (let i = 0; i < this.tickets.length; i++) {
-          this.ticketsHelper.push(this.tickets[i])
-        }
-        console.log(this.ticketsHelper);
-      } else {
-        for (let i = 0; i < 5; i++) {
-          this.ticketsHelper.push(this.tickets[i]);
-        }
-        console.log(this.ticketsHelper);
-      }
-    })
+    this.getRecentTicketsCustomer();
   }
 
-  getRecentTickets() {
+  getRecentTicketsAdmin() {
     this.apiService.recentAdmin().subscribe(data => {
       this.tickets = data;
       if (this.tickets.length < 5) {
@@ -203,21 +131,94 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+  getRecentTicketsClient() {
+    this.apiService.recentClient(this.account.idUser.idCompany.name).subscribe(data => {
+      this.tickets = data;
+      if (this.tickets.length < 5) {
+        for (let i = 0; i < this.tickets.length; i++) {
+          this.ticketsHelper.push(this.tickets[i])
+        }
+        console.log(this.ticketsHelper);
+
+      } else {
+        for (let i = 0; i < 5; i++) {
+          this.ticketsHelper.push(this.tickets[i]);
+        }
+        console.log(this.ticketsHelper);
+      }
+    })
+  }
+
+  getRecentTicketsAgent() {
+    this.apiService.recentAgent(this.account.idUser.nip).subscribe(data => {
+      this.tickets = data;
+      if (this.tickets.length < 5) {
+        for (let i = 0; i < this.tickets.length; i++) {
+          this.ticketsHelper.push(this.tickets[i])
+        }
+        console.log(this.ticketsHelper);
+
+      } else {
+        for (let i = 0; i < 5; i++) {
+          this.ticketsHelper.push(this.tickets[i]);
+        }
+        console.log(this.ticketsHelper);
+      }
+    })
+  }
+
+  getRecentTicketsCustomer() {
+    this.apiService.recentCustomer(this.account.idUser.nip).subscribe(data => {
+      this.tickets = data;
+      if (this.tickets.length < 5) {
+        for (let i = 0; i < this.tickets.length; i++) {
+          this.ticketsHelper.push(this.tickets[i])
+        }
+        console.log(this.ticketsHelper);
+
+      } else {
+        for (let i = 0; i < 5; i++) {
+          this.ticketsHelper.push(this.tickets[i]);
+        }
+        console.log(this.ticketsHelper);
+      }
+    })
+  }
+
   getChartCilent() {
-    let data = { 'name': `${this.account.idUser.idCompany.name}`, 'year': "2020" }
+    let data = this.account.idUser.idCompany.name
     this.apiService.getChartClient(data).subscribe(result => {
       console.log(result);
-
+      this.ticketChart = result;
+      this.setChart(this.ticketChart);
     })
-    console.log(data.year);
+  }
+
+  getChartAgent(){
+    let data = this.account.idUser.nip
+    this.apiService.getChartAgent(data).subscribe(result => {
+      console.log(result);
+      this.ticketChart = result;
+      this.setChart(this.ticketChart);
+    })
+  }
+
+  getChartAdmin(){
+    let year = new Date().getFullYear();
+    this.apiService.getChart(year.toString()).subscribe(result => {
+      console.log(result);
+      this.ticketChart = result;
+      this.setChart(this.ticketChart);
+    })
   }
 
 
-  getChart() {
-    let a: string = "2020"
-    this.apiService.getChart(a).subscribe((result: TicketChart[]) => {
-      console.log(result);
-      result.forEach(x => {
+  setChart(ticketChart:TicketChart[]) {
+    // let a: string = "2020"
+    // this.apiService.getChart(a).subscribe((result: TicketChart[]) => {
+      // console.log(result);
+      ticketChart.forEach(x => {
         if (x.name == 'Open') {
           this.open.push(x.january);
           this.open.push(x.february);
@@ -261,7 +262,7 @@ export class DashboardComponent implements OnInit {
           this.reOpen.push(x.december);
         }
       });
-    })
+    // })
   }
 
   ngOnInit() {}

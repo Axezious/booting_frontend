@@ -21,21 +21,21 @@
 							  <tr>
 							    <th scope="col">No</th>
 							    <th scope="col">Agent</th>
-							    <th scope="col">Client</th>
+							    <th scope="col">NIP</th>
 							    <!-- <th scope="col">Tickets</th> -->
 							    <!-- <th scope="col">Start Date</th>
 							    <th scope="col">End Date</th> -->
-							    <th scope="col">Actions</th>
+							    <th scope="col">Download Report</th>
 							  </tr>
 							  </thead>
 							  <tbody>
-							  <tr *ngFor="let agentRelation of agentRelations$ | async; index as i">
+							  <tr *ngFor="let agent of agents$ | async; index as i">
 							    <th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
 							    <td>
-							    	<ngb-highlight [result]="agentRelation.idAgent.name" [term]="service.searchTerm"></ngb-highlight>
+							    	<ngb-highlight [result]="agent.name" [term]="service.searchTerm"></ngb-highlight>
 							    </td>
     							<td>
-    								<ngb-highlight [result]="agentRelation.idCompany.name" [term]="service.searchTerm"></ngb-highlight>
+    								<ngb-highlight [result]="agent.nip" [term]="service.searchTerm"></ngb-highlight>
     							</td>
     							<!-- <td>
     								<ngb-highlight [result]="agentRelation.startDate | date:'mediumDate'" [term]="service.searchTerm"></ngb-highlight>
@@ -52,10 +52,10 @@
     							</td> -->
     							<td>
     							  <div class="template-demo">
-					                <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="openMediumModal(mediumModalContent, agentRelation.idCompany.id)">
+					                <!-- <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="openMediumModal(mediumModalContent, agentRelation.idCompany.id)">
 					                	<i class="mdi mdi-information-variant"></i>
-					                </button>
-					                <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="downloadReport(agentRelation.idAgent.nip)">
+					                </button> -->
+					                <button type="button" class="btn btn-primary btn-rounded btn-sm" (click)="downloadReport(agent.nip)">
 					                	<i class="mdi mdi-printer"></i>
 					                </button>
 					              </div>

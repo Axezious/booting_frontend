@@ -157,17 +157,17 @@ export class ApiService {
   }
 
   insertStatus(data: Status): Observable<Status> {
-    return this.http.post<Status>(`${this.base_url}/status/insert`, data,
+    return this.http.post<Status>(`${this.base_url}/status/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   deleteStatus(status: Status) {
-    return this.http.delete<Status>(`${this.base_url}/status/delete/${status.id}`,
+    return this.http.delete<Status>(`${this.base_url}/status/${status.id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   updateStatus(data: Status): Observable<Status> {
-    return this.http.put<Status>(`${this.base_url}/status/update`, data,
+    return this.http.put<Status>(`${this.base_url}/status/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -199,27 +199,42 @@ export class ApiService {
 
   //Crud dashboard Admin
   dashboardAdmin(): Observable<TicketStatus> {
-    return this.http.get<TicketStatus>(`${this.base_url}/tickets/all-status`,
+    return this.http.get<TicketStatus>(`${this.base_url}/tickets/status`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
   //Crud dashboard Client
-  dashboardClient(data: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-company/${data}`,
+  dashboardClient(data: string): Observable<TicketStatus> {
+    return this.http.get<TicketStatus>(`${this.base_url}/tickets/status/client/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
   //Crud dashboard Agent
-  dashboardAgent(data: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-agent/${data}`,
+  dashboardAgent(data: string): Observable<TicketStatus> {
+    return this.http.get<TicketStatus>(`${this.base_url}/tickets/status/agent/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
   //Crud dashboard Customer
-  dashboardCustomer(data: string): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all-customer/${data}`,
+  dashboardCustomer(data: string): Observable<TicketStatus> {
+    return this.http.get<TicketStatus>(`${this.base_url}/tickets/status/customer/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
   //CRUD dashboardRecentAdmin
   recentAdmin(): Observable<Tickets[]> {
-    return this.http.get<Tickets[]>(`${this.base_url}/tickets/all`,
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  recentAgent(nip:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/agent/${nip}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  recentClient(company:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/client/${company}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  recentCustomer(nip:string): Observable<Tickets[]> {
+    return this.http.get<Tickets[]>(`${this.base_url}/tickets/customer/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -275,13 +290,18 @@ export class ApiService {
     return this.http.put<any>(`${this.base_url}/accounts/update`, data);;
   }
 
-  getChart(data: string): Observable<TicketChart[]> {
-    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
+  getChart(year: string): Observable<TicketChart[]> {
+    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${year}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
-  getChartClient(data: {}): Observable<TicketChart[]> {
-    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/${data}`,
+  getChartClient(company : string): Observable<TicketChart[]> {
+    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/client/${company}`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
+  getChartAgent(nip : string): Observable<TicketChart[]> {
+    return this.http.get<TicketChart[]>(`${this.base_url}/tickets/charts/agent/${nip}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -300,24 +320,24 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
   getPhoto(data: string) {// photo/profile/files/id
-    return this.http.get<String>(`${this.base_url}/photo-profile/files/${data}`,
+    return this.http.get<String>(`${this.base_url}/photo/files/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   // AGENT
   viewAgent(): Observable<Users[]> {
-    return this.http.get<Users[]>(`${this.base_url}/users/all-agent`,
+    return this.http.get<Users[]>(`${this.base_url}/users/agent`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   getAgentModal(id:string):Observable<AgentModal[]> {
-    return this.http.get<AgentModal[]>(`${this.base_url}/tickets/list-agent/${id}`,
+    return this.http.get<AgentModal[]>(`${this.base_url}/tickets/relation/${id}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
   // AGENT RELATION
   viewAgentRelation(): Observable<AgentRelations[]> {
-    return this.http.get<AgentRelations[]>(`${this.base_url}/agent-relations/all`,
+    return this.http.get<AgentRelations[]>(`${this.base_url}/agent-relations/`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 

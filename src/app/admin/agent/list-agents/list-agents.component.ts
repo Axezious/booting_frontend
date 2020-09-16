@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AgentRelations } from '../../../model/agent-relations';
+import { Users } from '../../../model/users';
 import { AgentModal } from '../../../model/agent-modal';
 import { Companies } from '../../../model/companies';
 import { AgentModalService } from '../../../service/agent-modal.service';
@@ -20,13 +21,13 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class ListAgentsComponent implements OnInit {
 
-  agentRelations$: Observable<AgentRelations[]>;
+  agents$: Observable<Users[]>;
   agentModals$: Observable<AgentModal[]>;
   total$: Observable<number>;
   total2$: Observable<number>;
 
   constructor(private service: ListAgentsService, private modalService: NgbModal, private service2: AgentModalService, private apiservice: ApiService) {
-    this.agentRelations$ = service.agentRelations$;
+    this.agents$ = service.agents$;
     this.total$ = service.total$;
   }
 

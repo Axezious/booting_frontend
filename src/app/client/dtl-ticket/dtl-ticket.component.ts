@@ -19,11 +19,15 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Tickets } from 'src/app/model/tickets';
 import { tick } from '@angular/core/testing';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dtl-ticket',
   templateUrl: './dtl-ticket.component.html',
   styleUrls: ['./dtl-ticket.component.scss'],
+  providers: [
+    MessageService
+  ]
 })
 
 export class DtlTicketComponent implements OnInit {
@@ -59,7 +63,9 @@ export class DtlTicketComponent implements OnInit {
   })
   labelCloseButton = ""
 
-  constructor(private auth: AuthService, private fire: FireService, private route: ActivatedRoute, public db: AngularFireDatabase, private api: ApiService) {
+  constructor(private auth: AuthService, private fire: FireService, 
+              private route: ActivatedRoute, public db: AngularFireDatabase, 
+              private api: ApiService, private messageService:MessageService) {
     this.account.idUser = new Users();
     this.account.idUser.idCompany = new Companies();
     this.account.idUser.idRole = new Roles();
@@ -194,8 +200,23 @@ export class DtlTicketComponent implements OnInit {
     // console.log(tickets);
     this.api.updateStatusTicket(tickets).subscribe(res => {
       console.log(res);
+      this.messageService.clear('sc');
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Ticket\'s Status Success' });
     })
     
+  }
+
+  showConfirm() {
+        this.messageService.clear();
+        this.messageService.add({key: 'sc', sticky: true, severity:'warn', summary:'Are you sure about this?', detail:'Confirm to proceed'});
+    }
+
+  onConfirm() {
+        this.messageService.clear('sc');
+  }
+
+  onReject() {
+      this.messageService.clear('sc');
   }
   
 }
