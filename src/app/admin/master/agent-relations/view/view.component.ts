@@ -26,7 +26,7 @@ export class ViewComponent implements OnInit {
   total2$: Observable<number>;
 
   constructor(private service:AgentRelationsService, private modalService: NgbModal, private service2: AgentModalService) { 
-  	this.agentRelations$ = service.agentRelations$;
+    this.agentRelations$ = service.agentRelations$;
   	this.total$ = service.total$;
   }
 

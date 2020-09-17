@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ToastModule } from 'primeng/toast';
 import { UpdateCustomerComponent } from './update-customer/update-customer.component';
-
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
     UpdateCustomerComponent,
   ],
   imports: [
-    CommonModule, NgbModule, FormsModule,
+    CommonModule, NgbModule, FormsModule, CheckboxModule,
     RouterModule.forChild(routes),ToastModule,
     QuillModule.forRoot({
       modules: {

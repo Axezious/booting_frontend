@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
+import { UpdateSuccessService } from '../../../../service/update-success.service';
 
 import { Companies } from '../../../../model/companies';
 import { MessageService } from 'primeng/api';
@@ -21,7 +22,7 @@ export class UpdateComponent implements OnInit {
 
 	constructor(private apiService: ApiService, private authService: AuthService, 
 				private activatedRoute: ActivatedRoute, private messageService: MessageService,
-				private router:Router) {
+				private router:Router, private updateToast:UpdateSuccessService) {
 		this.company = new Companies();
 		this.temp = new Companies();
 		console.log(this.company);
@@ -42,12 +43,11 @@ export class UpdateComponent implements OnInit {
 		console.log(this.company);
 		this.apiService.updateCompanies(this.company).subscribe(company => {
 			console.log(this.company);
-			this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-			setTimeout(() => {
-				this.router.navigateByUrl('admin/companies/view');
-			}, 1000);
+			this.updateToast.callUpdateToast();
+			this.router.navigateByUrl('admin/companies/view');
+
 		}, err => {
-			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+			this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
 		});
 	}
 

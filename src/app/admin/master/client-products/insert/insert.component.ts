@@ -10,7 +10,7 @@ import { Roles } from 'src/app/model/roles';
 import { Users } from 'src/app/model/users';
 import { ApiService } from 'src/app/service/api.service';
 import { AuthService } from 'src/app/service/auth.service';
-import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
+import { InsertSuccessService } from 'src/app/service/insert-success.service';
 
 @Component({
   selector: 'app-insert',
@@ -29,7 +29,9 @@ export class InsertComponent implements OnInit {
   productSelected: string;
   clientProducts: ClientProducts = new ClientProducts();
 
-  constructor(private auth: AuthService, private apiService: ApiService, private router: Router, private refresh:RefreshProfileService, private messageService: MessageService) {
+  constructor(private auth: AuthService, private apiService: ApiService, 
+              private router: Router, private insertToast:InsertSuccessService, 
+              private messageService: MessageService) {
     this.accountTemp.idUser = new Users();
     this.accountTemp.idUser.idCompany = new Companies();
     this.accountTemp.idUser.idRole = new Roles();
@@ -61,11 +63,10 @@ export class InsertComponent implements OnInit {
     console.log(this.clientProducts)
     this.apiService.insertClientProduct(this.clientProducts).subscribe(data => {
       console.log(data)
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Insert client-product success.' });
-      this.refresh.callRefreshPhoto();
+      this.insertToast.callInsertToast();
       this.router.navigateByUrl('/admin/client-products/view')
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     })
   }
 }

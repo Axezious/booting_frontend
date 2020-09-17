@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ViewClientComponent } from './view-client/view-client.component';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 const routes:Routes = [
   {path: 'insert', component: InsertClientAccountComponent},
@@ -15,7 +17,7 @@ const routes:Routes = [
   declarations: [InsertClientAccountComponent, ViewClientComponent],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, NgbModule, 
-    RouterModule.forChild(routes)
+    ToastModule, CheckboxModule, RouterModule.forChild(routes)
   ],
   exports: [InsertClientAccountComponent],
   bootstrap: [InsertClientAccountComponent],

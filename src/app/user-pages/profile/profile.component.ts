@@ -122,7 +122,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.account = this.authService.getAccount();
     if (this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined) {
-      this.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
+      this.urlFoto = `${this.base_url}/photo/files/${this.account.idUser.idPhoto.id}`
     }
     console.log(this.urlFoto);
 

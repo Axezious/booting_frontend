@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { ApiService } from 'src/app/service/api.service';
+import { MessageService } from 'primeng/api';
+import { InsertSuccessService } from 'src/app/service/insert-success.service';
 import { Accounts } from 'src/app/model/accounts';
 import { Companies } from 'src/app/model/companies';
 import { Users } from 'src/app/model/users';
@@ -11,7 +14,8 @@ import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-insert-client-account',
   templateUrl: './insert-client-account.component.html',
-  styleUrls: ['./insert-client-account.component.scss']
+  styleUrls: ['./insert-client-account.component.scss'],
+  providers: [MessageService]
 })
 export class InsertClientAccountComponent implements OnInit {
 
@@ -31,7 +35,9 @@ export class InsertClientAccountComponent implements OnInit {
     return new Date();
   }
 
-  constructor(private auth: AuthService, private apiService: ApiService) {
+  constructor(private auth: AuthService, private apiService: ApiService,
+              private messageService:MessageService, private insertToast:InsertSuccessService,
+              private router:Router) {
     this.accountTemp.idUser = new Users();
     this.accountTemp.idUser.idCompany = new Companies();
     this.accountTemp.idUser.idRole = new Roles();
@@ -62,6 +68,7 @@ export class InsertClientAccountComponent implements OnInit {
   }
 
   async submit() {
+    let counter:number = 0;
 
     this.agentRelation.idAgent.nip = this.account.idUser.nip;
     this.agentRelation.idCompany.name = this.account.idUser.idCompany.name;
@@ -83,12 +90,20 @@ export class InsertClientAccountComponent implements OnInit {
 
       this.apiService.insertAgentRelation(this.agentRelation).subscribe(data => {
         console.log(data);
+        counter++;
+      }, err => {
+          this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Delete Data Failed' });
       })
+      counter++;
+      this.insertToast.callInsertToast();
+      this.router.navigateByUrl('admin/client-account/insert')
+    }, err => {
+        this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Delete Data Failed' });
     })
 
-    this.apiService.insertAgentRelation(this.agentRelation).subscribe(data => {
-      console.log(data);
-    })
+    // this.apiService.insertAgentRelation(this.agentRelation).subscribe(data => {
+    //   console.log(data);
+    // })
 
     this.account = new Accounts();
     this.account.idUser = new Users();

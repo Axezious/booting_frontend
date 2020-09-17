@@ -44,6 +44,7 @@ export class AgentModalService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
+
       this._agentModals$.next(result.agentModal);
       this._total$.next(result.total);
     });
@@ -53,6 +54,8 @@ export class AgentModalService {
   }
 
   async viewAgentModal(id:string) {
+    this.agentModals = [];
+    this._agentModals$.next(this.agentModals);
 
     this.apiService.getAgentModal(id).subscribe(agentModals => {
       console.log(agentModals);
@@ -66,6 +69,7 @@ export class AgentModalService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
+
       this._agentModals$.next(result.agentModal);
       this._total$.next(result.total);
     });

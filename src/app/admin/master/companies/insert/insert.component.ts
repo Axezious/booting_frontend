@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
+import { InsertSuccessService } from '../../../../service/insert-success.service';
 
 import { Companies } from '../../../../model/companies';
 import { MessageService } from 'primeng/api';
@@ -18,7 +19,8 @@ export class InsertComponent implements OnInit {
   company: Companies;
 
   constructor(private apiService: ApiService, private authService: AuthService,
-              private messageService:MessageService, private router:Router) {
+              private messageService:MessageService, private router:Router,
+              private insertToast:InsertSuccessService) {
     
     this.company = new Companies();
   }
@@ -30,12 +32,11 @@ export class InsertComponent implements OnInit {
     this.company.createdBy = this.authService.getAccount().idUser.name;
     this.apiService.insertCompanies(this.company).subscribe(company => {
       console.log(company);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-      setTimeout(() => {
+        this.insertToast.callInsertToast();
         this.router.navigateByUrl('admin/companies/view');
-      }, 1000);
+      
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     });
   }
 

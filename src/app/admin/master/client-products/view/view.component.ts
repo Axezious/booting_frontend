@@ -51,7 +51,7 @@ export class ViewComponent implements OnInit {
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
       this.service.viewClientProducts();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     })
     }
   }

@@ -66,7 +66,8 @@ export class ProductsService {
 
   matches(product: Products, term: string) {
   return product.code.toLowerCase().includes(term.toLowerCase())
-  	|| product.name.toLowerCase().includes(term.toLowerCase());
+  	|| product.name.toLowerCase().includes(term.toLowerCase())
+    || product.description.toLowerCase().includes(term.toLowerCase());
    //  || classification.name.toLowerCase().includes(term.toLowerCase());
   }
 

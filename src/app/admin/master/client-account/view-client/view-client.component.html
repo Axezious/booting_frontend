@@ -11,8 +11,11 @@
 								Search: <input class="form-control ml-2" name="searchTerm" type="text"
 									[(ngModel)]="service.searchTerm" />
 								<span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
-								<button type="button" routerLink="../insert" id="insertclient1"
-									class="ml-auto btn btn-gradient-success btn-sm">insert</button>
+								<div class="ml-auto btn-group" role="group">
+									<button type="button" id="deletecompany" [ngStyle]="{'visibility': selectedDel.length == 0 ? 'hidden' : 'visible'}" class="mr-2 btn btn-gradient-danger btn-sm" (click)="showConfirm()">Delete</button>
+								<button type="button" routerLink="../insert" id="insertcompany"
+									class="btn btn-gradient-success btn-sm">Insert</button>	
+								</div>
 							</div>
 
 							<!-- <div></div> -->
@@ -31,7 +34,10 @@
 								</thead>
 								<tbody>
 									<tr *ngFor="let user of users$ | async; index as i">
-										<th scope="row">{{ (i + 1) + ((service.page -1) * service.pageSize) }}</th>
+										<th scope="row">
+											<p-checkbox name="checkbox" [value]="user" [(ngModel)]="selectedDel" ></p-checkbox>
+											{{ (i + 1) + ((service.page -1) * service.pageSize) }}
+										</th>
 										<td>
 											<ngb-highlight [result]="user.nip" [term]="service.searchTerm">
 											</ngb-highlight>
@@ -47,8 +53,6 @@
 											<div class="btn-group" role="group" style="align-content: center;">
 												<button type="button" routerLink="../update-client" [queryParams]="user"
 													class="btn btn-outline-primary btn-sm">Update</button>
-												<button type="button" (click)="deleteCustomer(user)"
-													class="btn btn-outline-danger btn-sm">Delete</button>
 											</div>
 										</td>
 									</tr>
