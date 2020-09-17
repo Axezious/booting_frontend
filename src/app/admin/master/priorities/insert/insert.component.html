@@ -15,13 +15,15 @@
         <form class="forms-sample mt-5">
           <div class="form-group">
             <label for="inputPriorityCode">Code</label>
-            <input type="text" name="code" [(ngModel)]="priorities.code" class="form-control" id="inputPriorityCode" placeholder="Priority code">
+            <span style="color: red;"> *</span>
+            <input type="text" name="code" (ngModelChange)="validasi = 0" [(ngModel)]="priorities.code" class="form-control" id="inputPriorityCode" placeholder="Priority code">
+            <p style="color: red;" *ngIf="validasi == 1">Priorities code is required</p>
           </div>
           <div class="form-group">
             <label for="inputPriorityName">Name</label>
             <input type="text" name="name" [(ngModel)]="priorities.name" class="form-control" id="inputPriorityName" placeholder="Priority name">
           </div>
-          <button type="submit" (click)="insertPriorities()" class="btn btn-gradient-primary mt-3">Insert</button>
+          <button type="submit" (click)="insertPriorities()" class="btn btn-gradient-primary mt-3">Submit</button>
         </form>
       </div>
     </div>

@@ -98,6 +98,7 @@ export class InsertClientAccountComponent implements OnInit {
       this.insertToast.callInsertToast();
       this.router.navigateByUrl('admin/client-account/insert')
     }, err => {
+      console.log(err.error);
         this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Delete Data Failed' });
     })
 

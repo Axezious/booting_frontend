@@ -18,25 +18,41 @@ import { InsertSuccessService } from 'src/app/service/insert-success.service';
 export class ProductsInsertComponent implements OnInit {
 
   product: Products;
+  validasi = 0;
+  code : string = ''
 
   constructor(private apiService: ApiService, private authService: AuthService,
-    private messageService: MessageService, private router: Router, private insertToast:InsertSuccessService) {
+    private messageService: MessageService, private router: Router, private insertToast: InsertSuccessService) {
     this.product = new Products();
+    console.log(this.product.code);
+    
   }
 
   ngOnInit() {
   }
 
   async insertProduct() {
-    this.product.createdBy = this.authService.getAccount().idUser.name;
-    this.apiService.insertProducts(this.product).subscribe(product => {
-      console.log(product);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil Nih' });   
-      this.insertToast.callInsertToast();
-      this.router.navigateByUrl('admin/products/view');      
-    }, err => {
-      this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
-    });
+    if(this.product.code==null || this.product.code==undefined || this.product.code==''){
+      return this.validasi = 1;
+    }
+    else {
+      this.product.createdBy = this.authService.getAccount().idUser.name;
+      this.apiService.insertProducts(this.product).subscribe(product => {
+        console.log(product);
+        this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Succeed' });
+        this.insertToast.callInsertToast();
+        this.router.navigateByUrl('admin/products/view');
+      }, err => {
+        console.log(err.error);
+        
+        if (err.error == "duplicate key value violates unique constraint") {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'The code was already exist.Please try another one!' });
+        }
+        else {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Failed' });
+        }
+      });
+    }   
   }
 
 }

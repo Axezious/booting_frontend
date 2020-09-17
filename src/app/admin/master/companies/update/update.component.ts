@@ -19,10 +19,11 @@ export class UpdateComponent implements OnInit {
 
 	company: Companies;
 	temp: Companies;
+	validasi = 0;
 
-	constructor(private apiService: ApiService, private authService: AuthService, 
-				private activatedRoute: ActivatedRoute, private messageService: MessageService,
-				private router:Router, private updateToast:UpdateSuccessService) {
+	constructor(private apiService: ApiService, private authService: AuthService,
+		private activatedRoute: ActivatedRoute, private messageService: MessageService,
+		private router: Router, private updateToast: UpdateSuccessService) {
 		this.company = new Companies();
 		this.temp = new Companies();
 		console.log(this.company);
@@ -37,18 +38,23 @@ export class UpdateComponent implements OnInit {
 	}
 
 	async updateCompany() {
-		this.company.id = this.temp.id;
-		this.company.createdBy = this.temp.createdBy;
-		this.company.updatedBy = this.authService.getAccount().idUser.name;
-		console.log(this.company);
-		this.apiService.updateCompanies(this.company).subscribe(company => {
+		if (this.company.name==null || this.company.name==undefined || this.company.name=="") {
+			return this.validasi = 1;
+		}
+		else {
+			this.company.id = this.temp.id;
+			this.company.createdBy = this.temp.createdBy;
+			this.company.updatedBy = this.authService.getAccount().idUser.name;
 			console.log(this.company);
-			this.updateToast.callUpdateToast();
-			this.router.navigateByUrl('admin/companies/view');
+			this.apiService.updateCompanies(this.company).subscribe(company => {
+				console.log(this.company);
+				this.updateToast.callUpdateToast();
+				this.router.navigateByUrl('admin/companies/view');
+			}, err => {
+				this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Failed' });
+			});
+		}
 
-		}, err => {
-			this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
-		});
 	}
 
 }

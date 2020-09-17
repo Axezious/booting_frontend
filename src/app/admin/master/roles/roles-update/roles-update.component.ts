@@ -20,9 +20,10 @@ export class RolesUpdateComponent implements OnInit {
 
 	role: Roles;
 	temp: Roles;
+	validasi = 0;
 
 	constructor(private apiService: ApiService, private authService: AuthService,
-		private activatedRoute: ActivatedRoute,private updateToast:UpdateSuccessService, private messageService: MessageService,
+		private activatedRoute: ActivatedRoute, private updateToast: UpdateSuccessService, private messageService: MessageService,
 		private router: Router) {
 		this.role = new Roles();
 		this.temp = new Roles();
@@ -42,16 +43,22 @@ export class RolesUpdateComponent implements OnInit {
 	}
 
 	async updateRole() {
-		this.role.id = this.temp.id;
-		this.role.createdBy = this.temp.createdBy;
-		this.role.updatedBy = this.authService.getAccount().idUser.name;
-		this.apiService.updateRoles(this.role).subscribe(role => {
-			console.log(this.role);
-			this.updateToast.callUpdateToast();
-			this.router.navigateByUrl('admin/roles/view');
-		}, err => {
-			this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Update Gagal' });
-		});
+		if (this.role.code==null || this.role.code==undefined || this.role.code=="") {
+			return this.validasi = 1 ;
+		}
+		else {
+			this.role.id = this.temp.id;
+			this.role.createdBy = this.temp.createdBy;
+			this.role.updatedBy = this.authService.getAccount().idUser.name;
+			this.apiService.updateRoles(this.role).subscribe(role => {
+				console.log(this.role);
+				this.updateToast.callUpdateToast();
+				this.router.navigateByUrl('admin/roles/view');
+			}, err => {
+				this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Failed' });
+			});
+		}
+
 
 	}
 

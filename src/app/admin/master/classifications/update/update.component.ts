@@ -18,6 +18,7 @@ export class UpdateComponent implements OnInit {
 
 	classification: Classifications;
 	temp: Classifications;
+	validasi = 0;
 
 	constructor(private apiService: ApiService, private authService: AuthService, 
 		private activatedRoute: ActivatedRoute,private messeageService:MessageService, private updateToast:UpdateSuccessService,
@@ -35,19 +36,23 @@ export class UpdateComponent implements OnInit {
 
 	}
 	async updateClassification() {
-		this.classification.id = this.temp.id;
-		this.classification.createdBy = this.temp.createdBy;
-		this.classification.updatedBy = this.authService.getAccount().idUser.name;
-		console.log(this.classification);
-		this.apiService.updateClassifications(this.classification).subscribe(classification => {
-			console.log(classification);
-			this.updateToast.callUpdateToast();
-			// this.messeageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-			// this.refresh.callRefreshPhoto();
-			this.router.navigateByUrl('admin/classifications/view');
-		}, err => {
-			this.messeageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
-		});
+		if(this.classification.code==null || this.classification.code==undefined || this.classification.code==""){
+		return this.validasi = 1;
+		}
+		else {
+			this.classification.id = this.temp.id;
+			this.classification.createdBy = this.temp.createdBy;
+			this.classification.updatedBy = this.authService.getAccount().idUser.name;
+			console.log(this.classification);
+			this.apiService.updateClassifications(this.classification).subscribe(classification => {
+				console.log(classification);
+				this.updateToast.callUpdateToast();
+				this.router.navigateByUrl('admin/classifications/view');
+			}, err => {
+				this.messeageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'The code was already exist.Please try another one!' });
+			});
+		}
+		
 		
 	}
 }

@@ -51,7 +51,7 @@ export class ViewComponent implements OnInit {
       this.deleteToast.callDeleteToastSuccess("Priorities");
       this.service.viewPriorities();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' })
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Failed' })
     })
   }
 
@@ -60,10 +60,10 @@ export class ViewComponent implements OnInit {
     for (let i = 0; i < this.selectedDel.length; i++ ) {
       this.apiService.deletePriorities(this.selectedDel[i]).subscribe(product =>{
       console.log(product);
-      this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: 'Delete Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: 'Deleted' });
       this.service.viewPriorities();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Delete Gagal' });
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Failed' });
     })
     }
   }

@@ -13,6 +13,8 @@
 								<span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
 								<div class="ml-auto btn-group" role="group">
 									<button type="button" id="deletecompany" [ngStyle]="{'visibility': selectedDel.length == 0 ? 'hidden' : 'visible'}" class="mr-2 btn btn-gradient-danger btn-sm" (click)="showConfirm()">Delete</button>
+									<!-- <button type="button" routerLink="../insert" id="insertcompany"
+									class="btn btn-gradient-success btn-sm">Add</button>	 -->
 								
 								</div>
 							</div>

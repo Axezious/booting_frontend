@@ -47,10 +47,10 @@ export class ViewComponent implements OnInit {
   async deleteClassification(classification:Classifications) {
     this.apiService.deleteClassifications(classification).subscribe(classification =>{
       console.log(classification);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'info', detail: 'Delete Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'info', detail: 'Deleted' });
       this.service.viewClassifications();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal'});
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Failed'});
     })
   }
 
@@ -59,10 +59,10 @@ export class ViewComponent implements OnInit {
     for (let i = 0; i < this.selectedDel.length; i++ ) {
       this.apiService.deleteClassifications(this.selectedDel[i]).subscribe(company =>{
       console.log(company);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Deleted' });
       this.service.viewClassifications();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Failed' });
     })
     }
   }

@@ -15,13 +15,15 @@
         <form class="forms-sample mt-5">
           <div class="form-group">
             <label for="inputClassificationCode">Code</label>
-            <input type="text" name="code" [(ngModel)]="classification.code" class="form-control" id="inputClassificationCode" placeholder="Classification code">
+            <span style="color: red;" > *</span>
+            <input type="text" name="code"(ngModelChange)="validasi = 0" [(ngModel)]="classification.code" class="form-control" id="inputClassificationCode" placeholder="Classification code">
+            <p *ngIf="validasi == 1" style="color: red;">Classification code is required</p>
           </div>
           <div class="form-group">
             <label for="inputClassificationName">Name</label>
             <input type="text" name="name" [(ngModel)]="classification.name" class="form-control" id="inputClassificationName" placeholder="Classification name">
           </div>
-          <button type="submit" (click)="insertClassification()" class="btn btn-gradient-primary mt-3">Insert</button>
+          <button type="submit" (click)="insertClassification()" class="btn btn-gradient-primary mt-3">Submit</button>
         </form>
       </div>
     </div>

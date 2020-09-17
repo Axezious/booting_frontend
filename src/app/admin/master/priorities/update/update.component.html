@@ -16,7 +16,9 @@
         <form class="forms-sample mt-5">
           <div class="form-group">
             <label for="inputPriorityCode">Code</label>
-            <input type="text" name="code" [(ngModel)]="priority.code" class="form-control" id="inputPriorityCode" placeholder="Priority code">
+            <span style="color: red;"> *</span>
+            <input type="text" name="code" (ngModelChange)="validasi = 0" [(ngModel)]="priority.code" class="form-control" id="inputPriorityCode" placeholder="Priority code">
+            <p style="color: red;" *ngIf="validasi == 1">Priority code is required</p>
           </div>
           <div class="form-group">
             <label for="inputPriorityName">Name</label>

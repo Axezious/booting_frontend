@@ -53,10 +53,10 @@ export class ProductViewComponent implements OnInit {
   async deleteProduct(product:Products) {
     this.apiService.deleteProducts(product).subscribe(product =>{
       console.log(product);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Berhasil Dihapus' });
       this.service.viewProducts();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Gagal' });
     })
   }
 
@@ -65,10 +65,10 @@ export class ProductViewComponent implements OnInit {
     for (let i = 0; i < this.selectedDel.length; i++ ) {
       this.apiService.deleteProducts(this.selectedDel[i]).subscribe(product =>{
       console.log(product);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Deleted' });
       this.service.viewProducts();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Failed' });
     })
     }
   }

@@ -9,7 +9,9 @@
         <form class="forms-sample mt-5">
           <div class="form-group">
             <label for="inputCompanyName">Code</label>
-            <input type="text" name="code" [(ngModel)]="role.code" class="form-control" id="inputRoleCode" placeholder="Role code">
+            <span style="color: red;"> *</span>
+            <input type="text" name="code" (ngModelChange)="validasi = 0" [(ngModel)]="role.code" class="form-control" id="inputRoleCode" placeholder="Role code">
+            <p *ngIf="validasi == 1" style="color: red;">Role code is required</p>
           </div>
           <div class="form-group">
             <label for="inputCompanyName">Name</label>

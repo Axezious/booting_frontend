@@ -9,7 +9,9 @@
         <form class="forms-sample mt-5">
           <div class="form-group">
             <label for="inputCompanyName">Name</label>
-            <input type="text" name="name" [(ngModel)]="company.name" class="form-control" id="inputCompanyName" placeholder="Company name">
+            <span style="color: red;"> *</span>
+            <input type="text" name="name" (ngModelChange)="validasi = 0" [(ngModel)]="company.name" class="form-control" id="inputCompanyName" placeholder="Company name">
+            <p *ngIf="validasi == 1" style="color: red;">Company name is required</p>
           </div>
           <button type="submit" (click)="updateCompany()" class="btn btn-gradient-primary mt-3">Update</button>
         </form>

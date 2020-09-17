@@ -17,10 +17,11 @@ export class ProductsUpdateComponent implements OnInit {
 
 	product: Products;
 	temp: Products;
+	validasi = 0;
 
 	constructor(private apiService: ApiService, private authService: AuthService,
 		private activatedRoute: ActivatedRoute, private messeageService: MessageService,
-		private router: Router, private refresh: RefreshProfileService, private updateToast:UpdateSuccessService) {
+		private router: Router, private refresh: RefreshProfileService, private updateToast: UpdateSuccessService) {
 		this.product = new Products();
 		this.temp = new Products();
 		this.activatedRoute.queryParams.subscribe((data) => {
@@ -35,17 +36,23 @@ export class ProductsUpdateComponent implements OnInit {
 
 	}
 	async updateProduct() {
-		this.product.id = this.temp.id;
-		this.product.createdBy = this.temp.createdBy;
-		this.product.updatedBy = this.authService.getAccount().idUser.name;
-		console.log(this.product);
-		this.apiService.updateProducts(this.product).subscribe(product => {
-			console.log(product);
-			this.updateToast.callUpdateToast();
-			this.router.navigateByUrl('admin/products/view');
-		}, err => {
-			this.messeageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
-		});
+		if (this.product.code == null || this.product.code == undefined || this.product.code == '') {
+			return this.validasi = 1;
+		}
+		else {
+			this.product.id = this.temp.id;
+			this.product.createdBy = this.temp.createdBy;
+			this.product.updatedBy = this.authService.getAccount().idUser.name;
+			console.log(this.product);
+			this.apiService.updateProducts(this.product).subscribe(product => {
+				console.log(product);
+				this.updateToast.callUpdateToast();
+				this.router.navigateByUrl('admin/products/view');
+			}, err => {
+				this.messeageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'The code was already exist.Please try another one!' });
+			});
+		}
+
 
 	}
 }

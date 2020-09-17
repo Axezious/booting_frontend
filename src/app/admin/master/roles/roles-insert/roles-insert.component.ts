@@ -13,29 +13,40 @@ import { MessageService } from 'primeng/api';
   selector: 'app-roles-insert',
   templateUrl: './roles-insert.component.html',
   styleUrls: ['./roles-insert.component.scss'],
-  providers:[MessageService]
+  providers: [MessageService]
 })
 export class RolesInsertComponent implements OnInit {
 
-  roles:Roles;
+  roles: Roles;
+  validasi = 0;
 
-  constructor(private apiService:ApiService, private authService:AuthService, 
-              private messageService:MessageService, private router:Router, private insertToast:InsertSuccessService) { 
-  	this.roles = new Roles();
+  constructor(private apiService: ApiService, private authService: AuthService,
+    private messageService: MessageService, private router: Router, private insertToast: InsertSuccessService) {
+    this.roles = new Roles();
   }
 
   ngOnInit() {
   }
 
   async insertRoles() {
-    this.roles.createdBy = this.authService.getAccount().idUser.name;
-  	this.apiService.insertRoles(this.roles).subscribe(roles => {
-  		console.log(roles);
-      this.insertToast.callInsertToast();
-			this.router.navigateByUrl('admin/roles/view');
-		}, err => {
-			this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
-		});
+    if (this.roles.code == null || this.roles.code == undefined || this.roles.code == '') {
+      return this.validasi = 1;
+    }
+    else {
+      this.roles.createdBy = this.authService.getAccount().idUser.name;
+      this.apiService.insertRoles(this.roles).subscribe(roles => {
+        console.log(roles);
+        this.insertToast.callInsertToast();
+        this.router.navigateByUrl('admin/roles/view');
+      }, err => {
+        if (err.error == "duplicate key value violates unique constraint") {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'The code was already exist.Please try another one!' });
+        }
+        else {
+          this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Failed' });
+        }
+      });
+    }
   }
 
 }
