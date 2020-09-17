@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
     this.getPhotoProfile();
     this.profileService.profile.subscribe(data =>{
       this.getPhotoProfile();
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Photo Profile Berhasil' });
+      this.messageService.add({ key: 'pc', severity: 'info', summary: 'Info', detail: 'Photo Profile Berhasil' });
     })
     
   }

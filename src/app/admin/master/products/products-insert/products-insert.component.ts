@@ -32,7 +32,7 @@ export class ProductsInsertComponent implements OnInit {
       console.log(product);
       this.refresh.callRefreshPhoto();
       this.router.navigateByUrl('admin/products/view');
-
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil Nih' });
     }, err => {
       this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     });

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { InsertComponent } from './insert/insert.component';
 import { ViewComponent } from './view/view.component';
 import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 const routes:Routes = [
 	{ path: 'view', component: ViewComponent },
@@ -18,7 +19,7 @@ const routes:Routes = [
   declarations: [InsertComponent, ViewComponent],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, NgbModule, ToastModule,
-    RouterModule.forChild(routes)
+    CheckboxModule, RouterModule.forChild(routes)
   ]
 })
 export class ClientProductsModule { }
