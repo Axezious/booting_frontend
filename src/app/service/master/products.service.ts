@@ -48,6 +48,14 @@ export class ProductsService {
       console.log(products);
       this.products = products;
 
+      for (let index = 0; index < this.products.length; index++) {
+        if(this.products[index].active){
+          this.products[index].active = 'Active'
+        } else {
+          this.products[index].active = 'Non-Active'
+        }
+      }
+
       this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -66,7 +74,7 @@ export class ProductsService {
 
   matches(product: Products, term: string) {
   return product.code.toLowerCase().includes(term.toLowerCase())
-  	|| product.name.toLowerCase().includes(term.toLowerCase())
+    || product.name.toLowerCase().includes(term.toLowerCase())
     || product.description.toLowerCase().includes(term.toLowerCase());
    //  || classification.name.toLowerCase().includes(term.toLowerCase());
   }

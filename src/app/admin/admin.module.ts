@@ -12,7 +12,7 @@ import { ListAgentsComponent } from './agent/list-agents/list-agents.component';
 
 @NgModule({
   declarations: [
-    ListAgentsComponent
+    ListAgentsComponent,
   ],
   imports: [
     CommonModule,

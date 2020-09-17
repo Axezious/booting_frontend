@@ -68,6 +68,14 @@ export class CompaniesService {
       console.log(companies);
       this.companies = companies;
 
+      for (let index = 0; index < this.companies.length; index++) {
+        if(this.companies[index].active){
+          this.companies[index].active = 'Active'
+        } else {
+          this.companies[index].active = 'Non-Active'
+        }
+      }
+
       this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),

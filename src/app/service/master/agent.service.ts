@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Users } from 'src/app/model/users';
-import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
-import { ApiService } from '../api.service';
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
+import { Subject } from 'rxjs/internal/Subject';
+import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 import { Accounts } from 'src/app/model/accounts';
+import { Users } from 'src/app/model/users';
+import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
-import { tap, debounceTime, switchMap, delay } from 'rxjs/operators';
 
 interface SearchResult {
   users: Users[];
@@ -20,7 +23,7 @@ interface State {
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService {
+export class AgentService {
 
   accountTemp: Accounts = new Accounts();
   users: Users[] = [];
@@ -39,11 +42,11 @@ export class ClientService {
   constructor(private apiService: ApiService, private authService: AuthService) {
     this.accountTemp.idUser = new Users();
     this.accountTemp = authService.getAccount();  
-    this.viewClient();
+    this.viewAgent();
   }
 
-  async viewClient() {
-    this.apiService.viewClient().subscribe(data => {
+  async viewAgent() {
+    this.apiService.viewAgent().subscribe(data => {
       console.log(data);
       this.users = data;
 
@@ -102,5 +105,4 @@ export class ClientService {
     users = users.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({users, total});
   }
-
 }

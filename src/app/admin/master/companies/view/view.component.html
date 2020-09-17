@@ -13,8 +13,7 @@
 								<span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
 								<div class="ml-auto btn-group" role="group">
 									<button type="button" id="deletecompany" [ngStyle]="{'visibility': selectedDel.length == 0 ? 'hidden' : 'visible'}" class="mr-2 btn btn-gradient-danger btn-sm" (click)="showConfirm()">Delete</button>
-								<button type="button" routerLink="../insert" id="insertcompany"
-									class="btn btn-gradient-success btn-sm">Insert</button>	
+								
 								</div>
 							</div>
 
@@ -27,6 +26,7 @@
 									<tr>
 										<th scope="col">No</th>
 										<th scope="col">Name</th>
+										<th scope="col">Status</th>
 										<th scope="col">Actions</th>
 									</tr>
 								</thead>
@@ -41,11 +41,13 @@
 											</ngb-highlight>
 										</td>
 										<td>
+											<ngb-highlight [result]="company.active" [term]="service.searchTerm">
+											</ngb-highlight>
+										</td>
+										<td>
 											<div class="btn-group" role="group" style="align-content: center;">
 												<button type="button" routerLink="../update" [queryParams]="company"
 													class="btn btn-outline-primary btn-sm">Update</button>
-												<button type="button" (click)="showConfirm(company)"
-													class="btn btn-outline-danger btn-sm">Delete</button>
 											</div>
 										</td>
 									</tr>

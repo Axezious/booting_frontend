@@ -24,14 +24,14 @@ export class ViewClientComponent implements OnInit {
   selectedDel:Users[] = [];
 
   constructor(private service:ClientService, private apiService:ApiService, 
-              private authService:AuthService, private messageService:MessageService) {
-    this.users$ = service.users$;
-    this.total$ = service.total$;
-    
-    this.accountTemp.idUser = new Users();
-    this.accountTemp.idUser.idCompany = new Companies();
-    this.accountTemp = authService.getAccount();
-  }
+    private authService:AuthService, private messageService:MessageService) {
+this.users$ = service.users$;
+this.total$ = service.total$;
+
+this.accountTemp.idUser = new Users();
+this.accountTemp.idUser.idCompany = new Companies();
+this.accountTemp = authService.getAccount();
+}
 
   ngOnInit() {
   }

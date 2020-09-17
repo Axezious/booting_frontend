@@ -12,5 +12,4 @@ export class Users extends BaseModel {
     contact: string;
     address: string;
     idPhoto:PhotoProfile;
-    // profilePicture:
 }

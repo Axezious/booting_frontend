@@ -324,6 +324,11 @@ export class ApiService {
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
+  viewCustomerAdminSide(): Observable<Users[]> {
+    return this.http.get<Users[]>(`${this.base_url}/users/customer/`,
+      { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
+  }
+
   // AGENT
   viewAgent(): Observable<Users[]> {
     return this.http.get<Users[]>(`${this.base_url}/users/agent`,

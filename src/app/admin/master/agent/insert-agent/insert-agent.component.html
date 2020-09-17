@@ -1,0 +1,52 @@
+<div class="page-header">
+    <button type="button" routerLink="../view" class="mr-auto btn btn-gradient-success btn-sm">Back</button>
+</div>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align: center;">Agent</h4>
+                <form class="forms-sample mt-5">
+                    <div class="form-group">
+                        <label for="inputEmail">E-Mail</label>
+                        <input type="text" name="email" [(ngModel)]="agent.email" class="form-control" id="inputEmail"
+                            placeholder="E-mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNIP">NIP</label>
+                        <input type="text" name="nip" [(ngModel)]="agent.idUser.nip" class="form-control" id="inputNIP"
+                            placeholder="NIP">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" name="name" [(ngModel)]="agent.idUser.name" class="form-control" id="inputName"
+                            placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCompanyName">Company</label>
+                        <input type="text" name="companyName" [(ngModel)]="agent.idUser.idCompany.name" class="form-control"
+                            id="inputCompanyName" placeholder="{{agent.idUser.idCompany.name}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRole">Role</label>
+                        <input type="text" name="rolename" [(ngModel)]="agent.idUser.idRole.name" class="form-control"
+                            id="inputrolename" placeholder="{{agent.idUser.idRole.name}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputContact">Contact</label>
+                        <input type="text" name="contact" [(ngModel)]="agent.idUser.contact" class="form-control"
+                            id="inputContact" placeholder="Contact">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <textarea type="text" name="address" [(ngModel)]="agent.idUser.address" class="form-control" rows="4"
+                            id="inputAddress"></textarea>
+                    </div>
+                    <button type="submit" (click)="insertAgent()" class="btn btn-gradient-primary mt-3">Insert</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast [baseZIndex]="100" class="custom-toast" key="tc"></p-toast>

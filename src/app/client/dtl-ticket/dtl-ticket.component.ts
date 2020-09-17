@@ -129,7 +129,7 @@ export class DtlTicketComponent implements OnInit {
     thread.user.id = this.auth.getAccount().idUser.id;
     thread.user.name = this.auth.getAccount().idUser.name;
     if(this.account.idUser.idPhoto != null || this.account.idUser.idPhoto != undefined){
-      thread.urlFoto = `${this.base_url}/photo-profile/files/${this.account.idUser.idPhoto.id}`
+      thread.urlFoto = `${this.base_url}/photo/files/${this.account.idUser.idPhoto.id}`
     }
     this.fire.insertFireDtl(thread, this.fileList);
     this.attachment.nativeElement.value = '';

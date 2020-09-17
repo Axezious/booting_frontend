@@ -28,7 +28,8 @@
 							    <th scope="col">No</th>
 							    <th scope="col">Name</th>
 							    <th scope="col">Code</th>
-                                <th scope="col">Description</th>
+								<th scope="col">Description</th>
+								<th scope="col">Status</th>
                                 <th scope="col">Action</th>
                               </tr>
 							  </thead>
@@ -45,8 +46,11 @@
     								<ngb-highlight [result]="product.code" [term]="service.searchTerm"></ngb-highlight>
                                 </td>
                                 <td>
-    								<ngb-highlight [result]="product.descriptions" [term]="service.searchTerm"></ngb-highlight>
-    							</td>
+    								<ngb-highlight [result]="product.description" [term]="service.searchTerm"></ngb-highlight>
+								</td>
+								<td>
+    								<ngb-highlight [result]="product.active" [term]="service.searchTerm"></ngb-highlight>
+                                </td>
     							<td>
 									<div class="btn-group" role="group" style="align-content: center;">
 										<button type="button" routerLink="../update" [queryParams]="product" class="btn btn-outline-primary btn-sm">Update</button>
@@ -92,11 +96,9 @@
                  	<div class="ml-2 mr-auto">
             			<button type="button" pButton class="btn btn-secondary" (click)="onReject()">No</button>
             		</div>
- 
             	</div>
             </div>
         </div>
     </ng-template>
 </p-toast>
-
 <p-toast position="top-right" key="tc" [baseZIndex]="9999" class="custom-toast"></p-toast>

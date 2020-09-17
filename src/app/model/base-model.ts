@@ -4,5 +4,5 @@ export class BaseModel {
     createdAt: Date;
     updatedBy: string;
     updatedAt: Date;
-    active: boolean;
+    active: any;
 }

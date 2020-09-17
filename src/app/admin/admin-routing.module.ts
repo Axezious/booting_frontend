@@ -14,7 +14,9 @@ const routes: Routes = [
   { path: 'client-products', loadChildren: () => import('./master/client-products/client-products.module').then(m => m.ClientProductsModule) },
   { path: 'companies', loadChildren: () => import('./master/companies/companies.module').then(m => m.CompaniesModule) },
   { path: 'priorities', loadChildren: () => import('./master/priorities/priorities.module').then(m => m.PrioritiesModule) },
-  { path: 'client-account', loadChildren: () => import('./master/client-account/client-account.module').then(m => m.ClientAccountModule) },  
+  { path: 'client-account', loadChildren: () => import('./master/client-account/client-account.module').then(m => m.ClientAccountModule) },
+  { path: 'agent', loadChildren: () => import('./master/agent/agent.module').then(m => m.AgentModule) },
+  { path: 'customer', loadChildren: () => import('./master/customer/customer.module').then(m => m.CustomerModule) },
   { path: 'list-agents', component: ListAgentsComponent },
 ];
 
