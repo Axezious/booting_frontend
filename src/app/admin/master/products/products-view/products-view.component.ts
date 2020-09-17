@@ -1,4 +1,5 @@
 import { Component, QueryList, ViewChildren, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ApiService } from '../../../../service/api.service';
@@ -10,8 +11,8 @@ import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
   selector: 'app-products-view',
-    templateUrl: './products-view.component.html',
-    styleUrls: ['./products-view.component.scss'],
+  templateUrl: './products-view.component.html',
+  styleUrls: ['./products-view.component.scss'],
   providers: [
   	ProductsService, MessageService
   ]
@@ -24,15 +25,29 @@ export class ProductViewComponent implements OnInit {
   selectedDel:Products[] = [];
 
   constructor(private service:ProductsService, private apiService:ApiService, 
-    private messageService: MessageService,private refresh:RefreshProfileService) { 
+    private messageService: MessageService,private refresh:RefreshProfileService, private activatedRoute: ActivatedRoute) { 
   	this.products$ = service.products$;
-  	this.total$ = service.total$;
+    this.total$ = service.total$;
+    
+    window.addEventListener('storage', (event) => {
+      if (event.key == 'coba') {
+        console.log('Hello');
+        localStorage.removeItem('coba');
+      }
+    })
   }
 
   ngOnInit() {
-    this.refresh.profile.subscribe(data=>{
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-    })
+    // this.refresh.profile.subscribe(data=>{
+    //   this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+    // })
+
+    if (this.activatedRoute.snapshot.queryParamMap.get('updateFlag') == 'true') {
+      console.log(this.activatedRoute.snapshot.queryParamMap.get('updateFlag'));
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+      
+    }
+    this.showConfirm();
   }
 
   async deleteProduct(product:Products) {

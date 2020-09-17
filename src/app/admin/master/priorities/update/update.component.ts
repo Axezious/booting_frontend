@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ApiService } from '../../../../service/api.service';
 import { AuthService } from '../../../../service/auth.service';
-
 import { Priorities } from '../../../../model/priorities';
 import { MessageService } from 'primeng/api';
 import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-update',
@@ -21,7 +20,7 @@ export class UpdateComponent implements OnInit {
 
   constructor(private apiService: ApiService, private authService: AuthService, 
     private activatedRoute: ActivatedRoute, private messageService: MessageService, 
-    private router: Router, private refresh:RefreshProfileService) {
+    private router: Router, private refresh:RefreshProfileService, private updateToast:NotificationService) {
     this.priority = new Priorities();
     this.temp = new Priorities();
 
@@ -43,10 +42,10 @@ export class UpdateComponent implements OnInit {
 
     this.apiService.updatePriorities(this.priority).subscribe(priority => {
       console.log(this.priority);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
-      this.refresh.callRefreshPhoto();
+      // this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      // this.refresh.callRefreshPhoto();
+      this.updateToast.callUpdateToastSuccess("Priorities");
       this.router.navigateByUrl('admin/priorities/view');
-
     }, err => {
       this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
     });

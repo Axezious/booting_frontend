@@ -5,7 +5,7 @@ import { AuthService } from '../../../../service/auth.service';
 import { Products } from '../../../../model/products';
 import { MessageService } from 'primeng/api';
 import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
-
+import { UpdateSuccessService } from 'src/app/service/update-success.service';
 
 @Component({
 	selector: 'app-products-update',
@@ -20,7 +20,7 @@ export class ProductsUpdateComponent implements OnInit {
 
 	constructor(private apiService: ApiService, private authService: AuthService,
 		private activatedRoute: ActivatedRoute, private messeageService: MessageService,
-		private router: Router, private refresh: RefreshProfileService) {
+		private router: Router, private refresh: RefreshProfileService, private updateToast:UpdateSuccessService) {
 		this.product = new Products();
 		this.temp = new Products();
 		this.activatedRoute.queryParams.subscribe((data) => {
@@ -41,11 +41,10 @@ export class ProductsUpdateComponent implements OnInit {
 		console.log(this.product);
 		this.apiService.updateProducts(this.product).subscribe(product => {
 			console.log(product);
-			this.refresh.callRefreshPhoto();
+			this.updateToast.callUpdateToast();
 			this.router.navigateByUrl('admin/products/view');
-
 		}, err => {
-			this.messeageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+			this.messeageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
 		});
 
 	}

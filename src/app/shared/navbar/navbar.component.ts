@@ -8,6 +8,7 @@ import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 import { MessageService } from 'primeng/api';
 import { InsertSuccessService } from '../../service/insert-success.service';
 import { UpdateSuccessService } from '../../service/update-success.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class NavbarComponent implements OnInit {
   constructor(config: NgbDropdownConfig,private auth: AuthService,
      private api: ApiService, private router: Router,private route:ActivatedRoute,
      private profileService:RefreshProfileService,private messageService:MessageService,
-     private insertToast:InsertSuccessService, private updateToast:UpdateSuccessService) {
+     private insertToast:InsertSuccessService, private updateToast:UpdateSuccessService,
+     private toast:NotificationService) {
     config.placement = 'bottom-right';
     this.account = auth.getAccount();
   }
@@ -44,6 +46,17 @@ export class NavbarComponent implements OnInit {
     this.updateToast.toast.subscribe(data =>{
       console.log(data + '2');
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Data Success' });
+    })
+    this.toast.toastInsertSuccess.subscribe(data =>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Add ${data} Success Coy!` });
+    })
+    this.toast.toastUpdateSuccess.subscribe(data =>{
+      console.log(data + '2');
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Update ${data} Success Coy!` });
+    })
+    this.toast.toastDeleteSuccess.subscribe(data =>{
+      console.log(data + '2');
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Delete ${data} Success Coy!` });
     })
     
   }

@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 
 import { Classifications } from '../../../../model/classifications';
 import { ClassificationsService } from '../../../../service/master/classifications.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -21,18 +22,32 @@ export class ViewComponent implements OnInit {
   total$:Observable<number>;
   selectedDel:Classifications[] = []
 
-  constructor(private service:ClassificationsService, private apiService:ApiService, private messageService: MessageService) { 
+  constructor(private service:ClassificationsService, private apiService:ApiService, private messageService: MessageService, private activatedRoute: ActivatedRoute) { 
   	this.classifications$ = service.classifications$;
-  	this.total$ = service.total$;
+    this.total$ = service.total$;
+    
+
+    window.addEventListener('storage', (event) => {
+      if (event.key == 'coba') {
+        console.log('Hello');
+        localStorage.removeItem('coba');
+      }
+    })
   }
 
   ngOnInit() {
+    if (this.activatedRoute.snapshot.queryParamMap.get('updateFlag') == 'true') {
+      console.log(this.activatedRoute.snapshot.queryParamMap.get('updateFlag'));
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+      
+    }
+    this.showConfirm();
   }
 
   async deleteClassification(classification:Classifications) {
     this.apiService.deleteClassifications(classification).subscribe(classification =>{
       console.log(classification);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'info', detail: 'Transaksi Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'info', detail: 'Delete Berhasil' });
       this.service.viewClassifications();
     }, err => {
       this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal'});
