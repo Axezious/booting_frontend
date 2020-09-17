@@ -17,6 +17,12 @@ export class NotificationService {
   private deleteSuccess = new Subject<any>();
   toastDeleteSuccess = this.deleteSuccess.asObservable();
 
+  private forgotPassSuccess = new Subject<any>();
+  toastForgotPassSuccess = this.forgotPassSuccess.asObservable();
+
+  private changePassSuccess = new Subject<any>();
+  toastChangePassSuccess = this.changePassSuccess.asObservable();
+
   private insertFail = new Subject<any>();
   toastInsertFail = this.insertFail.asObservable();
 
@@ -25,6 +31,12 @@ export class NotificationService {
 
   private deleteFail = new Subject<any>();
   toastDeleteFail = this.deleteFail.asObservable();
+
+  private forgotPassFail = new Subject<any>();
+  toastForgotPassFail = this.forgotPassFail.asObservable();
+
+  private changePassFail = new Subject<any>();
+  toastChangePassFail = this.changePassFail.asObservable();
   
   callInsertToastSuccess(messsage: string) {
     this.insertSuccess.next(messsage);
@@ -38,6 +50,14 @@ export class NotificationService {
     this.deleteSuccess.next(message);
   }
 
+  callForgotPassSuccess(message: string) {
+    this.forgotPassSuccess.next(message);
+  }
+
+  callChangePassSuccess(message: string) {
+    this.changePassSuccess.next(message);
+  }  
+
   callInsertToastFail(messsage: string) {
     this.insertFail.next(messsage);
   }
@@ -48,5 +68,13 @@ export class NotificationService {
 
   callDeleteToastFail(messsage: string) {
     this.deleteFail.next(messsage);
+  }
+
+  callForgotPassFail(message: string) {
+    this.forgotPassFail.next(message);
+  }
+
+  callChangePassFail(message: string) {
+    this.changePassFail.next(message);
   }
 }

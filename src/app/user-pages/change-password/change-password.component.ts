@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Accounts } from '../../model/accounts';
 
 import { ApiService } from '../../service/api.service';
+import { AuthService } from '../../service/auth.service';
+import { NotificationService } from '../../service/notification.service';
 
 @Component({
   selector: 'app-change-password',
@@ -20,10 +24,13 @@ export class ChangePasswordComponent implements OnInit {
   pass2:string;
 
   oldPass:string;
+  email:string;
 
-  constructor(private apiService:ApiService) { }
+  constructor(private apiService:ApiService, private notif:NotificationService,
+              private router:Router, private authService:AuthService) { }
 
   ngOnInit() {
+    this.email = this.authService.getAccount().email;
   }
 
   oldPassword() {
@@ -55,7 +62,12 @@ export class ChangePasswordComponent implements OnInit {
 
   		
   		this.apiService.changePassword(changePass).subscribe(result => {
-  			console.log(result);	
+  			console.log(result);
+        this.notif.callChangePassSuccess('');
+        this.router.navigateByUrl('user-pages/edit-profile');
+      }, err => {
+        this.notif.callChangePassFail('');
+        this.router.navigateByUrl('user-pages/edit-profile');	
   		})
   	}
 

@@ -44,21 +44,23 @@ export class NavbarComponent implements OnInit {
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Add Data Success' });
     })
     this.updateToast.toast.subscribe(data =>{
-      console.log(data + '2');
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Data Success' });
     })
     this.toast.toastInsertSuccess.subscribe(data =>{
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Add ${data} Success Coy!` });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Add Data Success` });
     })
     this.toast.toastUpdateSuccess.subscribe(data =>{
-      console.log(data + '2');
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Update ${data} Success Coy!` });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Update Data Success` });
     })
     this.toast.toastDeleteSuccess.subscribe(data =>{
-      console.log(data + '2');
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Delete ${data} Success Coy!` });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Delete Data Success` });
     })
-    
+    this.toast.toastChangePassSuccess.subscribe(data =>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: `Your Password has been Changed` });
+    })
+    this.toast.toastChangePassFail.subscribe(data =>{
+      this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Request Failed' });
+    })
   }
 
 

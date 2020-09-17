@@ -45,10 +45,10 @@ export class ViewComponent implements OnInit {
     for (let i = 0; i < this.selectedDel.length; i++ ) {
       this.apiService.deleteCompanies(this.selectedDel[i]).subscribe(company =>{
       console.log(company);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Delete Data Success' });
       this.service.viewCompanies();
     }, err => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });
+      this.messageService.add({ key: 'tc', sticky: true, severity: 'error', summary: 'Info', detail: 'Delete Data Failed' });
     })
     }
   }
