@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Accounts } from 'src/app/model/accounts';
 import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 import { MessageService } from 'primeng/api';
+import { InsertSuccessService } from '../../service/insert-success.service';
+import { UpdateSuccessService } from '../../service/update-success.service';
 
 
 @Component({
@@ -22,7 +24,9 @@ export class NavbarComponent implements OnInit {
   urlFoto:string = ""
   
   constructor(config: NgbDropdownConfig,private auth: AuthService,
-     private api: ApiService, private router: Router,private route:ActivatedRoute,private profileService:RefreshProfileService,private messageService:MessageService) {
+     private api: ApiService, private router: Router,private route:ActivatedRoute,
+     private profileService:RefreshProfileService,private messageService:MessageService,
+     private insertToast:InsertSuccessService, private updateToast:UpdateSuccessService) {
     config.placement = 'bottom-right';
     this.account = auth.getAccount();
   }
@@ -30,8 +34,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.getPhotoProfile();
     this.profileService.profile.subscribe(data =>{
+      console.log(data);
       this.getPhotoProfile();
-      this.messageService.add({ key: 'pc', severity: 'info', summary: 'Info', detail: 'Photo Profile Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Photo Profile Berhasil' });
+    })
+    this.insertToast.toast.subscribe(data =>{
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Add Data Success' });
+    })
+    this.updateToast.toast.subscribe(data =>{
+      console.log(data + '2');
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Data Success' });
     })
     
   }

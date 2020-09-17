@@ -7,6 +7,7 @@ import { AuthService } from '../../../../service/auth.service';
 
 import { Roles } from '../../../../model/roles';
 import { MessageService } from 'primeng/api';
+import { UpdateSuccessService } from 'src/app/service/update-success.service';
 import { RefreshProfileService } from 'src/app/service/refresh-profile.service';
 
 @Component({
@@ -21,8 +22,8 @@ export class RolesUpdateComponent implements OnInit {
 	temp: Roles;
 
 	constructor(private apiService: ApiService, private authService: AuthService,
-		private activatedRoute: ActivatedRoute,private refresh:RefreshProfileService, private messageService: MessageService,
-		private router: Router) {
+		private activatedRoute: ActivatedRoute,private updateToast:UpdateSuccessService, private messageService: MessageService,
+		private router: Router, private refresh:RefreshProfileService) {
 		this.role = new Roles();
 		this.temp = new Roles();
 		console.log(this.role);
@@ -46,7 +47,7 @@ export class RolesUpdateComponent implements OnInit {
 		this.role.updatedBy = this.authService.getAccount().idUser.name;
 		this.apiService.updateRoles(this.role).subscribe(role => {
 			console.log(this.role);
-			this.refresh.callRefreshPhoto();
+			this.updateToast.callUpdateToast();
 			this.router.navigateByUrl('admin/roles/view');
 		}, err => {
 			this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Update Gagal' });

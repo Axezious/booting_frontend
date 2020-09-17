@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 import { Classifications } from '../../model/classifications';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
 
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
@@ -37,7 +38,7 @@ export class ClassificationsService {
     searchTerm: ''
   };
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private authService:AuthService) {
     this.viewClassifications();
 
   }

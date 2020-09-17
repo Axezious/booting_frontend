@@ -28,10 +28,7 @@ export class RolesViewComponent implements OnInit {
   	this.roles$ = service.roles$;
   	this.total$ = service.total$;
 
-    if (this.activatedRoute.snapshot.queryParamMap.get('updateFlag') == 'true') {
-      console.log(this.activatedRoute.snapshot.queryParamMap.get('updateFlag'));
-      
-    }
+    
 
     window.addEventListener('storage', (event) => {
       if (event.key == 'coba') {
@@ -43,9 +40,15 @@ export class RolesViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refresh.profile.subscribe(data =>{
+    // this.refresh.profile.subscribe(data =>{
+    //   this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
+    // })
+    if (this.activatedRoute.snapshot.queryParamMap.get('updateFlag') == 'true') {
+      console.log(this.activatedRoute.snapshot.queryParamMap.get('updateFlag'));
       this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Update Berhasil' });
-    })
+      
+    }
+    this.showConfirm();
   }
 
   async deleteRole(role:Roles) {

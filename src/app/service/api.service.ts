@@ -278,7 +278,7 @@ export class ApiService {
 
   // CRUD ACCOUNT
   insertAccount(data: Accounts): Observable<Accounts> {
-    return this.http.post<Accounts>(`${this.base_url}/accounts/insert`, data,
+    return this.http.post<Accounts>(`${this.base_url}/accounts/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
@@ -287,7 +287,7 @@ export class ApiService {
   }
 
   changePassword(data: any): Observable<any> {
-    return this.http.put<any>(`${this.base_url}/accounts/update`, data);;
+    return this.http.put<any>(`${this.base_url}/accounts/`, data);;
   }
 
   getChart(year: string): Observable<TicketChart[]> {
@@ -342,7 +342,7 @@ export class ApiService {
   }
 
   insertAgentRelation(data: AgentRelations): Observable<AgentRelations> {
-    return this.http.post<AgentRelations>(`${this.base_url}/agent-relations/insert`, data,
+    return this.http.post<AgentRelations>(`${this.base_url}/agent-relations/`, data,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 
