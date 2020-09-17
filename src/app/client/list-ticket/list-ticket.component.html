@@ -15,7 +15,7 @@
                                             Search: <input class="form-control ml-2" name="searchTerm" type="text"
                                                 [(ngModel)]="service.searchTerm" />
                                             <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
-                                            <button type="button" routerLink="../insert-ticket" id="insert"
+                                            <button [ngStyle]="{'visibility': role == 'ADM' || role == 'AGT' ? 'hidden' : 'visible'}" type="button" routerLink="../insert-ticket" id="insert"
                                                 class="ml-auto btn btn-gradient-success btn-sm">insert</button>
                                         </div>
                                     </form>

@@ -30,7 +30,7 @@ import { AgentModal } from '../model/agent-modal';
 export class ApiService {
 
   readonly base_url = 'http://147.139.130.49:8080'
-  // readonly base_url2 = 'http://052a843eb7a1.ngrok.io'
+  readonly base_url2 = 'http://052a843eb7a1.ngrok.io'
   // readonly base_url = 'http://localhost:8080'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -309,14 +309,14 @@ export class ApiService {
     let headers_object = new HttpHeaders()
       .set("Authorization", "Bearer " + this.authService.getToken())
       .set("Content-Type", "application/pdf");
-    this.http.get(this.base_url + `/report/totalTicketAgent/${nip}`, { headers: headers_object, responseType: 'blob' }).subscribe(res => {
+    this.http.get(this.base_url2 + `/report/totalTicketAgent/${nip}`, { headers: headers_object, responseType: 'blob' }).subscribe(res => {
       const blob = new Blob([res], { type: 'application/octet-stream' })
       saveAs(blob, "repot" + ".pdf");
     })
   }
   // CUSTOMER
   viewCustomer(data: string): Observable<Users[]> {
-    return this.http.get<Users[]>(`${this.base_url}/users/all-customer/${data}`,
+    return this.http.get<Users[]>(`${this.base_url}/users/customer/${data}`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
   getPhoto(data: string) {// photo/profile/files/id
@@ -348,7 +348,7 @@ export class ApiService {
 
   // CLIENT
   viewClient(): Observable<Users[]> {
-    return this.http.get<Users[]>(`${this.base_url}/users/all-clients`,
+    return this.http.get<Users[]>(`${this.base_url}/users/client`,
       { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
   }
 

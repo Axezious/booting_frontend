@@ -57,7 +57,7 @@
                             <div class="form-group">
                                 <label for="products">Products</label>
                                 <select [(ngModel)]="productSelected" class="form-control">
-                                    <option *ngFor="let product of products" [value]="product.id">
+                                    <option *ngFor="let product of products" [value]="product.idProduct.code">
                                         {{product.idProduct.name}}
                                     </option>
                                 </select>

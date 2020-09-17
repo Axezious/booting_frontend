@@ -49,7 +49,7 @@ export class ViewComponent implements OnInit {
     for (let i = 0; i < this.selectedDel.length; i++ ) {
       this.apiService.deletePriorities(this.selectedDel[i]).subscribe(product =>{
       console.log(product);
-      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Transaksi Berhasil' });
+      this.messageService.add({ key: 'tc', severity: 'info', summary: 'Info', detail: 'Delete Berhasil' });
       this.service.viewPriorities();
     }, err => {
       this.messageService.add({ key: 'tc', severity: 'error', summary: 'Info', detail: 'Transaksi Gagal' });

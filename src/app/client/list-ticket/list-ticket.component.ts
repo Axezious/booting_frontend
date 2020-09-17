@@ -7,6 +7,9 @@ import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { Tickets } from '../../model/tickets';
 import { ListTicketsService } from '../../service/list-ticket.service';
+import { Accounts } from 'src/app/model/accounts';
+import { Users } from 'src/app/model/users';
+import { Roles } from 'src/app/model/roles';
 
 @Component({
   selector: 'app-list-ticket',
@@ -21,11 +24,14 @@ export class ListTicketComponent implements OnInit {
   tickets$:Observable<Tickets[]>;
   ticketsFilter$:Observable<Tickets[]>;
   total$:Observable<number>;
+  role: string;
+  accountTemp: Accounts = new Accounts();
 
-  constructor(private apiService:ApiService, private service:ListTicketsService) { 
+  constructor(private apiService:ApiService, private service:ListTicketsService, private authService: AuthService) { 
   	this.tickets$ = service.tickets$;
     this.ticketsFilter$ = service.ticketsFilter$;
     this.total$ = service.total$;
+    this.role = authService.getAccount().idUser.idRole.code;
   }
 
   ngOnInit() {

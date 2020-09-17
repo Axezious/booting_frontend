@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
     this.user = this.account.idUser
     this.tempAccount = new Accounts();
     this.tempAccount.idUser = new Users();
+    this.tempAccount = this.account;
   }
 
   onFileChanged(event: any){

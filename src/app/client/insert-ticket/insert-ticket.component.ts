@@ -123,7 +123,7 @@ export class InsertTicketComponent implements OnInit {
       console.log(datas)
       console.log('client product');
       this.products = datas;
-      this.productSelected = this.products[0].id
+      this.productSelected = this.products[0].idProduct.code
     })
 
     apiService.viewPriorities().subscribe( datas => {
@@ -135,7 +135,7 @@ export class InsertTicketComponent implements OnInit {
     apiService.viewClassifications().subscribe( datas => {
       console.log(datas);
       this.classifications = datas;
-      this.classificationSelected = this.classifications[0].id
+      this.classificationSelected = this.classifications[0].code
     })
     
     apiService.viewStatus().subscribe( datas => {
@@ -170,7 +170,6 @@ export class InsertTicketComponent implements OnInit {
 
     this.ticketDtl.idTickets.idCustomer = this.account.idUser;
     this.ticketDtl.date = new Date();
-    console.log(this.ticketDtl.date);
     
 
     // this.uploadFiles();
