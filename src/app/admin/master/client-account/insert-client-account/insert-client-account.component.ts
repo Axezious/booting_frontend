@@ -70,7 +70,7 @@ export class InsertClientAccountComponent implements OnInit {
   async submit() {
     let counter:number = 0;
 
-    this.agentRelation.idAgent.nip = this.account.idUser.nip;
+    this.agentRelation.idAgent.nip = this.agentSelected;
     this.agentRelation.idCompany.name = this.account.idUser.idCompany.name;
 
     // console.log(this.account);
@@ -80,7 +80,7 @@ export class InsertClientAccountComponent implements OnInit {
     // console.log("end date " + this.convertDate(this.endDate));
 
     this.agentRelation.startDate = this.convertDate(this.startDate);
-    this.agentRelation.endDate = this.convertDate(this.startDate);
+    this.agentRelation.endDate = this.convertDate(this.endDate);
     console.log(this.agentRelation);
 
 
